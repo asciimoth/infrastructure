@@ -1,0 +1,19 @@
+{
+    "*": {
+        "autosave": 1
+    },
+    "*.nix": {
+        "tabsize": 2
+    },
+    "colorscheme" : "simple",
+    "colorcolumn": 100,
+    "diffgutter": true,
+    "infobar": false,
+    "mkparents": true,
+    "savecursor": true,
+    "tabstospaces": true,
+    "autoclose": true,
+    "diff": true,
+    "backup": false,
+    "autosave": 0
+}

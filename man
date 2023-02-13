@@ -1,0 +1,52 @@
+0) Mount usb key
+  $ lsblk
+  $ mkdir -p /usb
+  $ mount /dev/<partition name> /usb
+1) [If not already created] Create new partition table
+  $ fdisk
+2) [If not already created] Create boot (UEFI) partition and format it 
+  $ fdisk
+  $ mkfs.fat -F 32 /dev/<boot partition name ex sda1>
+3) Connect to interntet (wifi)
+  $ nmtui
+4) Create tmpfs for working with secrets
+  $ mkdir -p /secrets
+  $ mount -t tmpfs tmpfs /secrets
+5) Create key
+  $ dd if=/dev/urandom bs=1 count=4096 > /secrets/key.lek
+6) Encrypt key with password (interactive)
+  $ openssl enc -aes-256-cbc -pbkdf2 -in /secrets/key.lek -out /secrets/key.enc
+  6.1) Decrypt
+    $ openssl enc -aes-256-cbc -d -pbkdf2 -in /secrets/key.enc -out /secrets/key.lek
+7) Generate random names
+  $ openssl -rand -base64 33
+8) Move encrypted key to usb
+  $ cp /secrets/key.enc /key/<path key on usb>
+9) Calculate hashes of path and content of encrypted key file and add em to config
+  $ echo "/key/<path to key on usb>" | b3sum
+  $ b3sum /key/<path to key on usb>
+10) Wipe partition
+  $ wipefs -a /dev/<partition ex sdb1>
+11) Setup luks partition
+  $ cryptsetup luksFormat /dev/<partition ex sdb1> /secrets/key.lek
+  $ cryptsetup luksAddKey /dev/<partition ex sdb1> /secrets/key.lek
+  $ cryptsetup luksOpen /dev/<partition ex sdb1> crypted --key-file /key/key.lek
+12) Set up fs
+  $ mkfs.ext4 /dev/mapper/crypted
+13) Mount root
+  $ mount /dev/mapper/crypted /mnt
+14) Mount UEFI/boot partition
+  $ mount /dec/<partition> /mnt/boot
+15) Copy config from usb key
+  $ cp -r /usb/mynixos /mnt/etc/mynixos
+16) Generate system config
+  $ nixos-generate-config --root /mnt
+17) Copy new configuration.nix and hardware-configuration.nix to config
+  $ cp /mnt/etc/nixos/*configuration.nix /mnt/etc/mynixos/configs/MothsLaptop/
+18) Uncomment rows in /mnt/etc/mynixos/configs/MothsLaptop/default.nix
+19) Install from config
+  $ nixos-install --root /mnt --flake /mnt/etc/mynixos#MothsLaptop
+20) Shutdown system
+  $ shutdown now
+21) Change booting queue in bios
+22) Load to new sytem
