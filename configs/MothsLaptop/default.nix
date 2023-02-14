@@ -96,6 +96,7 @@
 
     tmate
     thefuck
+    perl
 
     alejandra # nix formatter
 
