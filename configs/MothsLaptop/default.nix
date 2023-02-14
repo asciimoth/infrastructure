@@ -19,7 +19,7 @@
     # Generic. Include the results of the hardware scan.
     ./configuration.nix
   ];
-  
+
   # Pin nixpkgs
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
@@ -82,6 +82,7 @@
   environment.systemPackages = with pkgs; [
     htop
     micro
+    nano
     age
     rage
     tomb
@@ -90,6 +91,9 @@
     cryptsetup
     neofetch
     pulseaudio
+
+    tmate
+    thefuck
 
     alejandra # nix formatter
 
@@ -100,15 +104,14 @@
   programs.ssh.askPassword = ""; # Ask with CLI but not GUI dialog
 
   console = {
-  	earlySetup = true;
-  	packages = with pkgs; [ terminus_font ];
-  	font = "ter-u16n";
+    earlySetup = true;
+    packages = with pkgs; [terminus_font];
+    font = "ter-u16n";
   };
 
+  nixpkgs.config.allowUnfree = true; # Forgive me Stallman
 
-  nixpkgs.config.allowUnfree = true;
-
-  home-manager.users.root = { pkgs, ... }: {
+  home-manager.users.root = {pkgs, ...}: {
     home.file.".config/micro/settings.json".source = ./micro/settings.json;
     home.file.".config/micro/bindings.json".source = ./micro/bindings.json;
   };
@@ -122,13 +125,13 @@
     enableDefaultFonts = true;
     fontDir.enable = true; #Will force recompile some programs
     fonts = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" ]; })
+      (nerdfonts.override {fonts = ["FiraCode" "FiraMono"];})
     ];
     fontconfig = {
       defaultFonts = {
-        serif = [ "FiraCode Nerd Font Mono" ];
-        sansSerif = [ "FiraCode Nerd Font Mono" ];
-        monospace = [ "FiraCode Nerd Font Mono" ];
+        serif = ["FiraCode Nerd Font Mono"];
+        sansSerif = ["FiraCode Nerd Font Mono"];
+        monospace = ["FiraCode Nerd Font Mono"];
       };
     };
   };

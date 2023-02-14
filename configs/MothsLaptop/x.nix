@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ./xmonad
+    ./awesome
   ];
 
   services.xserver = {
@@ -16,13 +16,6 @@
     libinput.enable = true;
     layout = "us,ru";
     xkbOptions = "grp:shifts_toggle";
-    #windowManager.awesome = {
-    #	enable = true;
-    #	luaModules = with pkgs.luaPackages; [
-    #		luarocks # package manager
-    #		luadbi-mysql
-    #	];
-    #};
     displayManager = {
       lightdm.enable = lib.mkForce false;
       startx.enable = true;
@@ -32,21 +25,18 @@
       #};
     };
     videoDrivers = [
-      "nvidia"
-      "ati_ufree"
-      "amdgpu"
+      #"nvidia"
+      #"ati_ufree"
+      #"amdgpu"
     ];
   };
 
   environment.etc.wallaper.source = ./GreyDot.png;
 
   home-manager.users.moth.xsession = {
-  	enable = true;
-  	scriptPath = ".xinitrc";
+    enable = true;
+    scriptPath = ".xinitrc";
   };
-  #home-manager.users.moth.home.file.".config/awesome".source = "./awesome";
-
-  #environment.shellAliases.initx = "xinit -- -xkbdir /etc/X11/xkb";
 
   hardware.opengl = {
     enable = true;

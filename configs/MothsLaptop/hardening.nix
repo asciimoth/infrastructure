@@ -22,7 +22,7 @@
   };
 
   #nix.settings.allowed-users = lib.mkForce [ "root" ];
-  
+
   system.autoUpgrade.enable = lib.mkForce false;
 
   environment = {
@@ -114,6 +114,6 @@
       "net.ipv4.conf.all.send_redirects" = false;
       "net.ipv4.conf.default.send_redirects" = false;
     };
-    blacklistedKernelModules = [ "snd_pcsp" ];
+    blacklistedKernelModules = ["snd_pcsp"];
   };
 }

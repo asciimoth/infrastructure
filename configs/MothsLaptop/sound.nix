@@ -1,9 +1,12 @@
-{ config, pkgs, lib, inputs, ... }: 
-
-let
-  mutespeaker = pkgs.writeShellScriptBin "mutespeaker" (builtins.readFile ./mutespeaker.sh);
-in
 {
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
+  mutespeaker = pkgs.writeShellScriptBin "mutespeaker" (builtins.readFile ./mutespeaker.sh);
+in {
   sound.enable = true;
   services.pipewire = {
     enable = true;
@@ -17,13 +20,13 @@ in
 
   systemd.user.services.mutespeaker = {
     enable = true;
-    wantedBy = [ "default.target" ]; 
-    after = [ "network.target" ];
+    wantedBy = ["default.target"];
+    after = ["network.target"];
     #description = "";
     path = with pkgs; [
-    	pulseaudio
-    	mutespeaker
-    	bash
+      pulseaudio
+      mutespeaker
+      bash
     ];
     #environment = {};
     serviceConfig = {

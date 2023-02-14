@@ -6,9 +6,9 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-  	autorandr
+    autorandr
   ];
-  
+
   services.upower.enable = true;
 
   powerManagement = {
