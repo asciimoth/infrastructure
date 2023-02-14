@@ -16,6 +16,8 @@
     ./power.nix
     ./x.nix
 
+    ../../names
+
     # Generic. Include the results of the hardware scan.
     ./configuration.nix
   ];
