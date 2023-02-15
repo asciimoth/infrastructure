@@ -30,5 +30,7 @@
     	editor = nano
     [init]
     	defaultBranch = master
+    [pull]
+      rebase = false
   '';
 }
