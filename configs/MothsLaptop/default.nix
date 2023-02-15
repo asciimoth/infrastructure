@@ -4,7 +4,9 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  constants = import ./constants.nix;
+in {
   imports = [
     ./hm.nix
     #./initrd.nix
@@ -158,6 +160,10 @@
   };
 
   hardware.enableRedistributableFirmware = true;
+
+  environment.variables = {
+    CONFIGROOT = "${constants.ConfigRoot}";
+  };
 
   networking = {
     usePredictableInterfaceNames = true;

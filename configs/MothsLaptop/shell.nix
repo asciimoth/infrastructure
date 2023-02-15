@@ -5,6 +5,13 @@
   inputs,
   ...
 }: let
+  printfiles = pkgs.writeShellScriptBin "printfiles" ''
+  if [ -d "$1" ] ; then
+    tree $1 -fxainF -L 3 --prune --noreport | grep -v '/$' | grep -v '>' | tr -d '*'
+  else
+     echo $1
+  fi
+  '';
   getscript = pkgs.writeShellScriptBin "getscript" ''
     INPUT=$1
     OUTPUT=$INPUT
@@ -165,5 +172,6 @@ in {
     x9
     x10
     getscript
+    printfiles
   ];
 }

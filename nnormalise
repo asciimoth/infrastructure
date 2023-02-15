@@ -1,0 +1,8 @@
+#!/nix/store/4xw8n979xpivdc46a9ndcvyhwgif00hz-bash-5.1-p16/bin/bash
+printfiles $1 | while read file
+do
+  #echo "<$file>"
+  OUTPUT=$(normalisenamesfile $file)
+  echo "$OUTPUT" > $file
+done
+
