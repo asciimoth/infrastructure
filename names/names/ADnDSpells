@@ -1,348 +1,342 @@
-    AcidArrow
-    AcidFog
-    AcidSplash
-    AirWalk
-    AlignWeapon
-    AlterSelf
-    AnalyzeDweomer
-    AnimalGrowth
-    AnimalMessenger
-    AnimalShapes
-    AnimalTrance
-    AnimateDead
-    AnimateObjects
-    AnimatePlants
-    AnimateRope
-    AntilifeShell
-    AntimagicField
-    AntiplantShell
-    ArcaneEye
-    ArcaneLock
-    ArcaneMark
-    ArcaneSight
-    ArcaneSight
-    AstralProjection
-    BalefulPolymorph
-    BearsEndurance
-    BestowCurse
-    BlackTentacles
-    BladeBarrier
-    BlessWater
-    BlessWeapon
-    BreakEnchantment
-    BullsStrength
-    BullsStrength Mass
-    BurningHands
-    CallLightning
-    CallLightning Storm
-    CalmAnimals
-    CalmEmotions
-    CatsGrace
-    CatsGrace, Mass
-    CauseFear
-    ChainLightning
-    ChaosHammer
-    CharmAnimal
-    CharmMonster
-    CharmMonster, Mass
-    CharmPerson
-    ChillMetal
-    ChillTouch
-    CircleOfDeath
-    ClenchedFist
-    CloakOfChaos
-    Cloudkill
-    ColorSpray
-    CommandPlants
-    CommandUndead
-    CommuneWithNature
-    ComprehendLanguages
-    ConeOfCold
-    ContactOtherPlane
-    ContinualFlame
-    ControlPlants
-    ControlUndead
-    ControlWater
-    ControlWeather
-    ControlWinds
-    CreateFoodAndWater
-    CreateGreaterUndead
-    CreateUndead
-    CreateWater
-    CreepingDoom
-    CrushingDespair
-    CrushingHand
-    CureCriticalWounds
-    CureCriticalWounds, Mass
-    CureLightWounds
-    CureLightWounds, Mass
-    CureMinorWounds
-    CureModerateWounds
-    CureModerateWounds, Mass
-    CureSeriousWounds
-    CureSeriousWounds, Mass
-    CurseWater
-    DancingLights
-    DazeMonster
-    DeathKnell
-    DeathWard
-    DeathWatch
-    DeepSlumber
-    DeeperDarkness
-    DelayPoison
-    DetectChaos
-    DetectEvil
-    DetectGood
-    DetectLaw
-    DetectMagic
-    DetectPoison
-    DetectScrying
-    DetectThoughts
-    DetectUndead
-    DimensionDoor
-    DimensionalAnchor
-    DimensionalLock
-    DiminishPlants
-    DiscernLies
-    DiscernLocation
-    DisguiseSelf
-    DispelChaos
-    DispelEvil
-    DispelGood
-    DispelLaw
-    DispelMagic
-    DispelMagic, Greater
-    DisruptUndead
-    DivineFavor
-    DivinePowern
-    EnlargePerson
-    EnlargePerson, Mass
-    EntropicShield
-    EtherealJaunt
-    ExpeditiousRetreat
-    ExplosiveRunes
-    FaerieFire
-    FalseLife
-    FalseVision
-    FeatherFall
-    FindЕhePath
-    FindTraps
-    FingerOfDeath
-    FireSeeds
-    FireShield
-    FireStorm
-    FireTrap
-    FlameArrow
-    FlameBlade
-    FlameStrike
-    FlamingSphere
-    FleshToStone
-    FloatingDisk
-    FogCloud
-    ForcefulHand
-    FoxsCunning
-    FoxsCunning, Mass
-    FreedomOfMovement
-    FreezingSphere
-    GaseousForm
-    GentleRepose
-    GhostSound
-    GhoulTouch
-    GiantVermin
-    GoodHope
-    GraspingHand
-    GustOfWind
-    HallucinatoryTerrain
-    HaltUndead
-    HealMount
-    HeatMetal
-    HelpingHand
-    HeroesFeast
-    HoldAnimal
-    HoldMonster
-    HoldMonster, Mass
-    HoldPerson
-    HoldPerson, Mass
-    HoldPortal
-    HolyAura
-    HolySmite
-    HolySword
-    HolyWord
-    HorridWilting
-    HypnoticPattern
-    IceStorm
-    IllusoryScript
-    IllusoryWall
-    InsectPlague
-    InstantSummons
-    InterposingHand
-    IronBody
-    IronWood
-    KeenEdge
-    KnowDirection
-    LegendLore
-    LightningBolt
-    LimitedWish
-    LocateCreature
-    LocateObject
-    MageArmor
-    MageHand
-    MagicAura
-    MagicFang
-    MagicFang, Greater
-    MagicJar
-    MagicMissile
-    MagicMouth
-    MagicStone
-    MagicVestment
-    MagicWeapon
-    MagicWeapon, Greater
-    MajorCreation
-    MajorImage
-    MakeWhole
-    MarkOfJustice
-    MeldIntoStone
-    MeteorSwarm
-    MindBlank
-    MindFog
-    MinorCreation
-    MinorImage
-    MirageArcana
-    MirrorImage
-    MnemonicEnhancer
-    ModifyMemory
-    MomentOfPrescience
-    MoveEarth
-    NeutralizePoison
-    ObscureObject
-    ObscuringMist
-    OverlandFlight
-    OwlsWisdom
-    OwlsWisdom, Mass
-    PermanentImage
-    PersistentImage
-    PhantasmalKiller
-    PhantomSteed
-    PhantomTrap
-    PhaseDoor
-    PlanarAlly
-    PlanarAlly, Greater
-    PlanarAlly, Lesser
-    PlanarBinding
-    PlanarBinding, Greater
-    PlanarBinding, Lesser
-    PlaneShift
-    PlantGrowth
-    PolarRay
-    PrismaticSphere
-    PrismaticSpray
-    PrismaticWall
-    ProduceFlame
-    ProgrammedImage
-    ProjectImage
-    PryingEyes
-    PryingEyes, Greater
-    RainbowPattern
-    RaiseDead
-    ReadMagic
-    ReduceAnimal
-    ReducePerson
-    ReducePerson, Mass
-    RemoveBlindness
-    RemoveDeafness
-    RemoveCurse
-    RemoveDisease
-    RemoveFear
-    RemoveParalysis
-    RepelVermin
-    RepelWood
-    ResilientSphere
-    ResistEnergy
-    ReverseGravity
-    RighteousMight
-    RopeTrick
-    RustingGrasp
-    ScorchingRay
-    SculptSound
-    SearingLight
-    SecretChest
-    SecretPage
-    SecureShelter
-    ShadowWalk
-    ShieldOfFaith
-    ShieldOfLaw
-    ShieldOther
-    ShockingGrasp
-    ShrinkItem
-    SilentImage
-    SleetStorm
-    SolidFog
-    SongOfDiscord
-    SoulBind
-    SoundBurst
-    SpectralHand
-    SpellImmunity
-    SpellImmunity, Greater
-    SpellResistance
-    SpellTurning
-    SpiderClimb
-    SpikeGrowth
-    SpikeStones
-    SpiritualWeapon
-    StinkingCloud
-    StoneShape
-    StoneSkin
-    StoneTell
-    StoneToFlesh
-    StormOfVengeance
-    SummonInstrument
-    SummonMonster I
-    SummonSwarm
-    SunBeam
-    SymbolOfDeath
-    SymbolOfFear
-    SymbolOfInsanity
-    SymbolOfPain
-    SymbolOfPersuasion
-    SymbolOfSleep
-    SymbolOfStunning
-    SymbolOfWeakness
-    TelekineticSphere
-    TelepathicBond
-    TeleportObject
-    TeleportationCircle
-    TemporalStasis
-    TimeStop
-    TinyHut
-    TouchOfFatigue
-    TouchOfIdiocy
-    Transformation
-    TransportViaPlants
-    TrapTheSoul
-    TreeShape
-    TreeStride
-    TrueResurrection
-    TrueSeeing
-    TrueStrike
-    UnholyAura
-    UnholyBlight
-    UnseenServant
-    VampiricTouch
-    WallOfFire
-    WallOfForce
-    WallOfIce
-    WallOfIron
-    WallOfStone
-    WallOfThorns
-    WarpWood
-    WaterBreathing
-    WaterWalk
-    WavesOfExhaustion
-    WavesOfFatigue
-    WindWalk
-    WindWall
-    WoodShape
-    WordOfChaos
-    WordOfRecall
-    ZoneOfSilence
-    ZoneOfTruth
+AcidArrow
+AcidFog
+AcidSplash
+AirWalk
+AlignWeapon
+AlterSelf
+AnalyzeDweomer
+AnimalGrowth
+AnimalMessenger
+AnimalShapes
+AnimalTrance
+AnimateDead
+AnimateObjects
+AnimatePlants
+AnimateRope
+AntilifeShell
+AntimagicField
+AntiplantShell
+ArcaneEye
+ArcaneLock
+ArcaneMark
+ArcaneSight
+AstralProjection
+BalefulPolymorph
+BearsEndurance
+BestowCurse
+BlackTentacles
+BladeBarrier
+BlessWater
+BlessWeapon
+BreakEnchantment
+BullsStrength
+BurningHands
+CallLightning
+CalmAnimals
+CalmEmotions
+CatsGrace
+CatsGrace,
+CauseFear
+ChainLightning
+ChaosHammer
+CharmAnimal
+CharmMonster
+CharmMonster,
+CharmPerson
+ChillMetal
+ChillTouch
+CircleOfDeath
+ClenchedFist
+CloakOfChaos
+Cloudkill
+ColorSpray
+CommandPlants
+CommandUndead
+CommuneWithNature
+ComprehendLanguages
+ConeOfCold
+ContactOtherPlane
+ContinualFlame
+ControlPlants
+ControlUndead
+ControlWater
+ControlWeather
+ControlWinds
+CreateFoodAndWater
+CreateGreaterUndead
+CreateUndead
+CreateWater
+CreepingDoom
+CrushingDespair
+CrushingHand
+CureCriticalWounds
+CureCriticalWounds,
+CureLightWounds
+CureLightWounds,
+CureMinorWounds
+CureModerateWounds
+CureModerateWounds,
+CureSeriousWounds
+CureSeriousWounds,
+CurseWater
+DancingLights
+DazeMonster
+DeathKnell
+DeathWard
+DeathWatch
+DeepSlumber
+DeeperDarkness
+DelayPoison
+DetectChaos
+DetectEvil
+DetectGood
+DetectLaw
+DetectMagic
+DetectPoison
+DetectScrying
+DetectThoughts
+DetectUndead
+DimensionDoor
+DimensionalAnchor
+DimensionalLock
+DiminishPlants
+DiscernLies
+DiscernLocation
+DisguiseSelf
+DispelChaos
+DispelEvil
+DispelGood
+DispelLaw
+DispelMagic
+DispelMagic,
+DisruptUndead
+DivineFavor
+DivinePowern
+EnlargePerson
+EnlargePerson,
+EntropicShield
+EtherealJaunt
+ExpeditiousRetreat
+ExplosiveRunes
+FaerieFire
+FalseLife
+FalseVision
+FeatherFall
+FindTraps
+FingerOfDeath
+FireSeeds
+FireShield
+FireStorm
+FireTrap
+FlameArrow
+FlameBlade
+FlameStrike
+FlamingSphere
+FleshToStone
+FloatingDisk
+FogCloud
+ForcefulHand
+FoxsCunning
+FoxsCunning,
+FreedomOfMovement
+FreezingSphere
+GaseousForm
+GentleRepose
+GhostSound
+GhoulTouch
+GiantVermin
+GoodHope
+GraspingHand
+GustOfWind
+HallucinatoryTerrain
+HaltUndead
+HealMount
+HeatMetal
+HelpingHand
+HeroesFeast
+HoldAnimal
+HoldMonster
+HoldMonster,
+HoldPerson
+HoldPerson,
+HoldPortal
+HolyAura
+HolySmite
+HolySword
+HolyWord
+HorridWilting
+HypnoticPattern
+IceStorm
+IllusoryScript
+IllusoryWall
+InsectPlague
+InstantSummons
+InterposingHand
+IronBody
+IronWood
+KeenEdge
+KnowDirection
+LegendLore
+LightningBolt
+LimitedWish
+LocateCreature
+LocateObject
+MageArmor
+MageHand
+MagicAura
+MagicFang
+MagicFang,
+MagicJar
+MagicMissile
+MagicMouth
+MagicStone
+MagicVestment
+MagicWeapon
+MagicWeapon,
+MajorCreation
+MajorImage
+MakeWhole
+MarkOfJustice
+MeldIntoStone
+MeteorSwarm
+MindBlank
+MindFog
+MinorCreation
+MinorImage
+MirageArcana
+MirrorImage
+MnemonicEnhancer
+ModifyMemory
+MomentOfPrescience
+MoveEarth
+NeutralizePoison
+ObscureObject
+ObscuringMist
+OverlandFlight
+OwlsWisdom
+OwlsWisdom,
+PermanentImage
+PersistentImage
+PhantasmalKiller
+PhantomSteed
+PhantomTrap
+PhaseDoor
+PlanarAlly
+PlanarAlly,
+PlanarBinding
+PlanarBinding,
+PlaneShift
+PlantGrowth
+PolarRay
+PrismaticSphere
+PrismaticSpray
+PrismaticWall
+ProduceFlame
+ProgrammedImage
+ProjectImage
+PryingEyes
+PryingEyes,
+RainbowPattern
+RaiseDead
+ReadMagic
+ReduceAnimal
+ReducePerson
+ReducePerson,
+RemoveBlindness
+RemoveDeafness
+RemoveCurse
+RemoveDisease
+RemoveFear
+RemoveParalysis
+RepelVermin
+RepelWood
+ResilientSphere
+ResistEnergy
+ReverseGravity
+RighteousMight
+RopeTrick
+RustingGrasp
+ScorchingRay
+SculptSound
+SearingLight
+SecretChest
+SecretPage
+SecureShelter
+ShadowWalk
+ShieldOfFaith
+ShieldOfLaw
+ShieldOther
+ShockingGrasp
+ShrinkItem
+SilentImage
+SleetStorm
+SolidFog
+SongOfDiscord
+SoulBind
+SoundBurst
+SpectralHand
+SpellImmunity
+SpellImmunity,
+SpellResistance
+SpellTurning
+SpiderClimb
+SpikeGrowth
+SpikeStones
+SpiritualWeapon
+StinkingCloud
+StoneShape
+StoneSkin
+StoneTell
+StoneToFlesh
+StormOfVengeance
+SummonInstrument
+SummonMonster
+SummonSwarm
+SunBeam
+SymbolOfDeath
+SymbolOfFear
+SymbolOfInsanity
+SymbolOfPain
+SymbolOfPersuasion
+SymbolOfSleep
+SymbolOfStunning
+SymbolOfWeakness
+TelekineticSphere
+TelepathicBond
+TeleportObject
+TeleportationCircle
+TemporalStasis
+TimeStop
+TinyHut
+TouchOfFatigue
+TouchOfIdiocy
+Transformation
+TransportViaPlants
+TrapTheSoul
+TreeShape
+TreeStride
+TrueResurrection
+TrueSeeing
+TrueStrike
+UnholyAura
+UnholyBlight
+UnseenServant
+VampiricTouch
+WallOfFire
+WallOfForce
+WallOfIce
+WallOfIron
+WallOfStone
+WallOfThorns
+WarpWood
+WaterBreathing
+WaterWalk
+WavesOfExhaustion
+WavesOfFatigue
+WindWalk
+WindWall
+WoodShape
+WordOfChaos
+WordOfRecall
+ZoneOfSilence
+ZoneOfTruth
