@@ -18,6 +18,8 @@ in {
     ./power.nix
     ./x.nix
 
+    #./ssh.nix
+
     ../../names
 
     # Generic. Include the results of the hardware scan.

@@ -116,4 +116,6 @@
     };
     blacklistedKernelModules = ["snd_pcsp"];
   };
+
+  networking.firewall.logRefusedConnections = true;
 }
