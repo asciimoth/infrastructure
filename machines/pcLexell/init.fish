@@ -68,11 +68,11 @@ end
 
 function __print_greeting
   # TODO
-  #echo "Greeting"
+  echo "Greeting"
 end
 
 function fish_greeting
-  echo $ONCECALL
+  #echo $ONCECALL
   call_once __print_greeting
 end
 

@@ -20,6 +20,7 @@
     #home.file.".config/awesome".source = ../awesome;
     xsession.windowManager.command = ''
       export AWESOME_THEMES_PATH="/home/moth/.config/awesome/themes"
+      export ONCECALL="/tmp/oncecall-moth"
       picom -b
       ${pkgs.awesome}/bin/awesome;
     '';
