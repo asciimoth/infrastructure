@@ -27,15 +27,33 @@
     nixpkgs-wayland,
   } @ inputs: {
     nixosConfigurations = {
+      # Old Moth`s PC 
       MothsLaptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configs/MothsLaptop
+          ./machines/MothsLaptop
           home-manager.nixosModules.home-manager
           nur.nixosModules.nur
           agenix.nixosModule
         ];
-        specialArgs.inputs = inputs;
+        specialArgs = { 
+          inputs = inputs;
+          hostname = "MothsLaptop";
+        };
+      };
+      # Current Moth`s PC (Thinkpad P1 Laptop currently)
+      pcLexell = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./machines/pcLexell
+          home-manager.nixosModules.home-manager
+          nur.nixosModules.nur
+          agenix.nixosModule
+        ];
+        specialArgs = { 
+          inputs = inputs;
+          hostname = "pcLexell";
+        };
       };
     };
   };
