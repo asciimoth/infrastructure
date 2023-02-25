@@ -74,7 +74,11 @@ in {
           "networkmanager"
           #"vboxusers"
         ];
-        password = "${constants.MainUser}";
+        # Warning: security issue
+        # Note: This is a temporal solution used only as long as config is under development
+        # TODO Use imperative user password managment in production
+        #password = "${constants.MainUser}";
+        hashedPassword = "$5$SALTSALT$k4y1u90hZBQ3yYjQXwA/VHNnOKIO9.mzeiShw5uEyo9";
       };
     };
     users.root.hashedPassword = null;
@@ -126,6 +130,8 @@ in {
     imhex
 
     gping
+
+    go
 
     alejandra # nix formatter
 
