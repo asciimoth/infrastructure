@@ -6,7 +6,6 @@
 #
 # You should have received a copy of the CC0 legalcode along with this
 # work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
-
 {
   config,
   pkgs,
@@ -15,7 +14,7 @@
   ...
 }: let
   normalisenamesfile = pkgs.writeShellScriptBin "normalisenamesfile" ''
-    perl -nle 'print if m{^[[:ascii:]]+$}' $1 | awk '{$1=$1};1' | cut -d ' ' -f1 | cut -d '-' -f1 | uniq -i  
+    perl -nle 'print if m{^[[:ascii:]]+$}' $1 | awk '{$1=$1};1' | cut -d ' ' -f1 | cut -d '-' -f1 | uniq -i
   '';
   nnormalise = pkgs.writeShellScriptBin "nnormalise" ''
     printfiles $1 | while read file

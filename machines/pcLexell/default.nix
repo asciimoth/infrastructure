@@ -6,7 +6,6 @@
 #
 # You should have received a copy of the CC0 legalcode along with this
 # work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
-
 {
   config,
   pkgs,
@@ -164,7 +163,7 @@ in {
     home.file.".config/micro/bindings.json".source = ./micro/bindings.json;
   };
 
-  home-manager.users."${constants.MainUser}" = { pkgs, ... }: {
+  home-manager.users."${constants.MainUser}" = {pkgs, ...}: {
     home.file.".config/micro/settings.json".source = ./micro/settings.json;
     home.file.".config/micro/bindings.json".source = ./micro/bindings.json;
   };

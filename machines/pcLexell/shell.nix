@@ -6,7 +6,6 @@
 #
 # You should have received a copy of the CC0 legalcode along with this
 # work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
-
 {
   config,
   pkgs,
@@ -15,11 +14,11 @@
   ...
 }: let
   printfiles = pkgs.writeShellScriptBin "printfiles" ''
-  if [ -d "$1" ] ; then
-    tree $1 -fxainF -L 3 --prune --noreport | grep -v '/$' | grep -v '>' | tr -d '*'
-  else
-     echo $1
-  fi
+    if [ -d "$1" ] ; then
+      tree $1 -fxainF -L 3 --prune --noreport | grep -v '/$' | grep -v '>' | tr -d '*'
+    else
+       echo $1
+    fi
   '';
   getscript = pkgs.writeShellScriptBin "getscript" ''
     INPUT=$1

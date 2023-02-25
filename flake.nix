@@ -6,7 +6,6 @@
 #
 # You should have received a copy of the CC0 legalcode along with this
 # work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
-
 {
   description = "Moth's NixOs configuration(s)";
   inputs = {
@@ -36,7 +35,7 @@
     nixpkgs-wayland,
   } @ inputs: {
     nixosConfigurations = {
-      # Old Moth`s PC 
+      # Old Moth`s PC
       #MothsLaptop = nixpkgs.lib.nixosSystem {
       #  system = "x86_64-linux";
       #  modules = [
@@ -45,7 +44,7 @@
       #    nur.nixosModules.nur
       #    agenix.nixosModules
       #  ];
-      #  specialArgs = { 
+      #  specialArgs = {
       #    inputs = inputs;
       #    hostname = "MothsLaptop";
       #  };
@@ -59,7 +58,7 @@
           nur.nixosModules.nur
           #agenix.nixosModules
         ];
-        specialArgs = { 
+        specialArgs = {
           inputs = inputs;
           hostname = "pcLexell";
         };
