@@ -104,6 +104,7 @@ in {
     enable = true;
     dockerCompat = true;
     defaultNetwork.dnsname.enable = true;
+    #defaultNetwork.settings.dns_enabled = true;
   };
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -187,7 +188,7 @@ in {
     enable = true;
     priority = 1000;
     algorithm = "zstd";
-    numDevices = 1;
+    #numDevices = 1;
     swapDevices = 1;
     memoryPercent = 50;
   };
