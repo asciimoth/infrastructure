@@ -1,3 +1,5 @@
+Installtion instruction for cases when initrd.nix enabled
+
 0) Mount usb key
   $ lsblk
   $ mkdir -p /usb
