@@ -1,3 +1,12 @@
+# Infrastructure config by DomesticMoth
+#
+# To the extent possible under law, the person who associated CC0 with
+# this work has waived all copyright and related or neighboring rights
+# to it.
+#
+# You should have received a copy of the CC0 legalcode along with this
+# work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
+
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
