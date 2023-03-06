@@ -17,6 +17,23 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+awpwkb = require("awpwkb")
+
+kb = awpwkb.init({
+    default_layout = "en",
+})
+
+--kb:connect_signal("on_layout_change", function (kb, layout)
+--    naughty.notify({
+--        preset = naughty.config.presets.normal,
+--        title = "layout " .. layout.name,
+--        text = "",
+--        timeout = 1,
+--        position = "bottom_right",
+--        opacity = 0.2,
+--        -- max_heigth = 1,
+--    })
+--end)
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to

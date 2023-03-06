@@ -113,6 +113,7 @@ in {
   environment.systemPackages = with pkgs; [
     htop
     micro
+    helix
     nano
     age
     rage
