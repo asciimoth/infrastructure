@@ -17,7 +17,9 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+require("awesome-remember-geometry")
 awpwkb = require("awpwkb")
+--require("smart_borders"){ show_button_tooltips = true }
 
 kb = awpwkb.init({
     default_layout = "en",
