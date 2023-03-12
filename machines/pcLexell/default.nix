@@ -25,6 +25,7 @@ in {
     ./nosleep.nix
     ./sound.nix
     ./power.nix
+    ./i18n.nix
     ./x.nix
 
     #./ssh.nix
