@@ -58,7 +58,7 @@ References:
 
 
 Basic:
-- Remove all themes frome awesome config except one
++ Remove all themes frome awesome config except one
 - Replace tmp on tmpfs with boot.cleanTmpDir = true;
 + Setup per window layout in awesome wm
 - Set micro as default editor
