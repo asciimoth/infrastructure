@@ -61,7 +61,7 @@ Basic:
 + Remove all themes frome awesome config except one
 + Replace tmp on tmpfs with boot.cleanTmpDir = true;
 + Setup per window layout in awesome wm
-- Set micro as default editor
++ Set micro as default editor
 - Setup locale, gpg
 -- See old configs
 - Replace builtin launcher with rofi

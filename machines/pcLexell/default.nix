@@ -240,6 +240,8 @@ in {
 
   environment.variables = {
     CONFIGROOT = "${constants.ConfigRoot}";
+    EDITOR = "micro";
+    VISUAL = "micro";
   };
 
   networking = {
