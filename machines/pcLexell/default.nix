@@ -98,7 +98,7 @@ in {
     #'';
   };
 
-  virtualisation= {
+  virtualisation = {
     libvirtd.enable = true;
     podman = {
       enable = true;
@@ -222,7 +222,7 @@ in {
     man.enable = true;
   };
 
-  # CUPS 
+  # CUPS
   # nixos.wiki/wiki/Printing
   #services.printing = {
   #  enable = true;
