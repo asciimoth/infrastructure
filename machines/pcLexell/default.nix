@@ -169,7 +169,9 @@ in {
     #qt5.qtbase.gtk
   ];
 
-  programs.ssh.askPassword = ""; # Ask with CLI but not GUI dialog
+  programs = {
+    gnupg.agent.enable = true;
+  };
 
   console = {
     earlySetup = true;

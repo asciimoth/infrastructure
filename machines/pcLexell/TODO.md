@@ -62,8 +62,8 @@ Basic:
 + Replace tmp on tmpfs with boot.cleanTmpDir = true;
 + Setup per window layout in awesome wm
 + Set micro as default editor
-- Setup locale, gpg
--- See old configs
++ Setup locale, gpg
+++ See old configs
 - Replace builtin launcher with rofi
 - Create scripts with notifications and shorcuts for
 -- Sound +-

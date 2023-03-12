@@ -118,6 +118,14 @@
   # and also slow down the system when something crash
   systemd.coredump.enable = lib.mkForce false;
 
+  programs = {
+    ssh.askPassword = ""; # Ask with CLI but not GUI dialog
+    gnupg.agent = {
+      pinentryFlavor = "curses";
+      #enableSSHSupport = true;
+    };
+  };
+
   boot = {
     cleanTmpDir = true;
     kernelParams = [
