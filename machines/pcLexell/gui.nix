@@ -6,14 +6,18 @@
 #
 # You should have received a copy of the CC0 legalcode along with this
 # work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
-let
-  ConfigRoot = "/etc/infrastructure";
-  MainUser = "moth";
-  Editor = "micro";
-in {
-  inherit
-    MainUser
-    ConfigRoot
-    Editor
-    ;
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: {
+  imports = [
+    ./x.nix
+  ];
+  environment.systemPackages = with pkgs; [
+    alacritty
+    firefox
+  ];
 }

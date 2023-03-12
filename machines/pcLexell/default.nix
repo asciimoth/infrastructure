@@ -26,7 +26,8 @@ in {
     ./sound.nix
     ./power.nix
     ./i18n.nix
-    ./x.nix
+    #./x.nix
+    ./gui.nix
 
     #./ssh.nix
 
@@ -130,9 +131,6 @@ in {
     tmate
     thefuck
     perl
-    alacritty
-
-    firefox
 
     nebula
 
@@ -243,8 +241,8 @@ in {
 
   environment.variables = {
     CONFIGROOT = "${constants.ConfigRoot}";
-    EDITOR = "micro";
-    VISUAL = "micro";
+    EDITOR = "${constants.Editor}";
+    VISUAL = "${constants.Editor}";
   };
 
   networking = {
