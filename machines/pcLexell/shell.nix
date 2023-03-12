@@ -151,7 +151,7 @@ in {
   services.getty.autologinUser = "moth";
 
   environment.variables = {
-    HISTCONTROL = "ignoreboth";
+    HISTCONTROL = "ignoreboth:erasedups";
   };
 
   environment.systemPackages = with pkgs; [

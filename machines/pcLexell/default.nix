@@ -50,8 +50,6 @@ in {
   nix.settings.auto-optimise-store = true;
   #nix.binaryCashes = lib.mkForce [ "https://cashe.nixos.org" ];
 
-  system.autoUpgrade.enable = lib.mkForce false;
-
   boot = {
     cleanTmpDir = true;
     consoleLogLevel = 0; # Show all levels
@@ -99,11 +97,16 @@ in {
     #'';
   };
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.dnsname.enable = true;
-    #defaultNetwork.settings.dns_enabled = true;
+  virtualisation= {
+    libvirtd.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.dnsname.enable = true;
+      autoPrune.enable = true;
+      #defaultNetwork.settings.dns_enabled = true;
+      #extraOptions = "--iptables=false"; # Makes shure that Podman/Docker doesn't alter the firewall
+    };
   };
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -113,7 +116,7 @@ in {
   environment.systemPackages = with pkgs; [
     htop
     micro
-    helix
+    #helix
     nano
     age
     rage
@@ -144,6 +147,23 @@ in {
     go
 
     alejandra # nix formatter
+
+    lshw # Provides detailed inforamtion about hardware
+    lsof # A tool to list open files
+
+    #smartmontools #smartmontools
+
+    #sshfs
+
+    usbutils #lsusb & CO
+
+    xdotool
+
+    # yara
+
+    #entr # Run commands when files change
+
+    #gqview #image viewer
 
     # For make Qt 5 apps look similar to GTK2 ones
     #qt5.qtbase.gtk
@@ -202,7 +222,22 @@ in {
     man.enable = true;
   };
 
-  hardware.enableRedistributableFirmware = true;
+  # CUPS 
+  # nixos.wiki/wiki/Printing
+  #services.printing = {
+  #  enable = true;
+  #  drivers = with pkgs; [
+  #    hplipWithPlugin
+  #  ];
+  #};
+
+  # Scaning
+  #hardware.sane = {
+  #  enable = true;
+  #  extraBackends = with pkgs; [
+  #    hplipWithPlugin
+  #  ];
+  #};
 
   environment.variables = {
     CONFIGROOT = "${constants.ConfigRoot}";
