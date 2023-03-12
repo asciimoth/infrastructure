@@ -51,7 +51,6 @@ in {
   #nix.binaryCashes = lib.mkForce [ "https://cashe.nixos.org" ];
 
   boot = {
-    cleanTmpDir = true;
     consoleLogLevel = 0; # Show all levels
   };
 

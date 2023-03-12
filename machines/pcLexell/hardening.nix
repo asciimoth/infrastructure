@@ -15,18 +15,18 @@
 }: {
   fileSystems = {
     "/".options = ["noatime" "nodiratime"];
-    "/tmp" = {
-      device = "tmpfs";
-      fsType = "tmpfs";
-      options = [
-        "noatime"
-        "nodiratime"
-        #"noexec" # Exec permition need for nix pkgs build
-        "nosuid"
-        "nodev"
-        "mode=1777"
-      ];
-    };
+    #"/tmp" = {
+    #  device = "tmpfs";
+    #  fsType = "tmpfs";
+    #  options = [
+    #    "noatime"
+    #    "nodiratime"
+    #    #"noexec" # Exec permition need for nix pkgs build
+    #    "nosuid"
+    #    "nodev"
+    #    "mode=1777"
+    #  ];
+    #};
   };
 
   #nix.settings.allowed-users = lib.mkForce [ "root" ];
@@ -119,6 +119,7 @@
   systemd.coredump.enable = lib.mkForce false;
 
   boot = {
+    cleanTmpDir = true;
     kernelParams = [
       "lockdown=confidentiality"
       "page_poison=1"
