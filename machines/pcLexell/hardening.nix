@@ -66,10 +66,39 @@
       # CCE-80645-5 (Medium), CCE-27295-5 (High).
       # CCE-80226-4 (High), CCE-27413-4 (Medium),
       # CCE-27445-6 (Medium)
+      permitRootLogin = "no";
+      forwardX11 = true;
+      #pubkeyAcceptedKeyTypes = [
+      #  "ssh-ed25519"
+      #  "ssh-rsa"
+      #];
+      #hostKeyAlgorithms = [
+      #  "ssh-ed25519"
+      #  "ssh-rsa"
+      #];
+      kexAlgorithms = [
+        "curve25519-sha256@libssh.org"
+        "diffie-hellman-group-exchange-sha256"
+      ];
+      macs = [
+        "hmac-sha2-512-etm@openssh.com"
+        "hmac-sha2-512"
+        "hmac-sha2-256"
+        "hmac-sha1"
+      ];
+      ciphers = [
+        "aes128-ctr"
+        "aes192-ctr"
+        "aes256-ctr"
+        "aes128-cbc"
+        "aes192-cbc"
+        "aes256-cbc"
+        "chacha20-poly1305@openssh.com"
+      ];
+      #MACs = "hmac-sha2-512,hmac-sha2-256,hmac-sha1";
+      #Ciphers = ;
       extraConfig = ''
-        PermitRootLogin no
-        AllowTcpForwarding yes
-        X11Forwarding yes
+        AllowTcpForwarding no
         AllowAgentForwarding no
         AllowStreamLocalForwarding no
         AuthenticationMethods publickey
@@ -77,8 +106,6 @@
         ClientAliveCountMax 0
         ClientAliveInterval 300
         Banner /etc/ssh_banner
-        MACs hmac-sha2-512,hmac-sha2-256,hmac-sha1
-        Ciphers aes128-ctr,aes192-ctr,aes256-ctr,aes128-cbc,aes192-cbc,aes256-cbc
         PermitUserEnvironment no
         Protocol 2
         IgnoreRhosts yes
