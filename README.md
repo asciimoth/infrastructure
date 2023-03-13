@@ -7,7 +7,7 @@
   </br>
   </br>
   
-[![CC0](https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=CC0&logoColor=CAD3F5&colorA=24273A&colorB=8AADF4)](https://github.com/DomesticMoth/infrastructure/blob/master/LICENSE)
+[![CC0](https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=CC0&color=orange)](https://github.com/DomesticMoth/infrastructure/blob/master/LICENSE)
 [![built with nix](https://img.shields.io/static/v1?style=for-the-badge&logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org)
 [![Formatting Check via alejandra](https://img.shields.io/github/actions/workflow/status/DomesticMoth/infrastructure/alejandra.yml?label=Nix%20fmt%20check&style=for-the-badge)](https://github.com/DomesticMoth/infrastructure/actions/workflows/alejandra.yml)
 [![nix-config flake check](https://img.shields.io/github/actions/workflow/status/DomesticMoth/infrastructure/flake_check.yml?label=Flake%20check&style=for-the-badge)](https://github.com/DomesticMoth/infrastructure/actions/workflows/flake_check.yml)
