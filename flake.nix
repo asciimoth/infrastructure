@@ -59,7 +59,7 @@
           #agenix.nixosModules
         ];
         specialArgs = {
-          inputs = inputs;
+          inherit inputs;
           hostname = "pcLexell";
         };
       };
