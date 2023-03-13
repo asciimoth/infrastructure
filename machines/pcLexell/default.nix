@@ -145,6 +145,7 @@ in {
     go
 
     alejandra # nix formatter
+    statix
 
     lshw # Provides detailed inforamtion about hardware
     lsof # A tool to list open files
