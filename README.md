@@ -1,5 +1,15 @@
-# My infrastructure
-My infrastructure
+<h1 align="center">
+  DomesticMoth' infrastructure 
+</h1>
+
+<div align="center">
+  <strong>Collection of my <a href="https://en.wikipedia.org/wiki/Infrastructure_as_code" >IaC</a> configs & related stuff.</strong>
+  </br>
+  </br>
+  
+[![CC0](https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=CC0&logoColor=CAD3F5&colorA=24273A&colorB=8AADF4)](https://github.com/DomesticMoth/infrastructure/blob/master/LICENSE)
+[![built with nix](https://img.shields.io/static/v1?style=for-the-badge&logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org)
+</div>
 
 # License
 Files in this repository are distributed under the [CC0 license](./LICENSE).  
