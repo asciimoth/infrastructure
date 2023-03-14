@@ -65,9 +65,7 @@ Basic:
 + Setup locale, gpg
 ++ See old configs
 - Replace builtin launcher with rofi
-- Create scripts with notifications and shorcuts for
--- Sound +-
--- Screen light +-
++ Create scripts with notifications and shorcuts for sound
 - Create system bar/dashboard with eww
 - At first does not make it as rich as possible
 -- Add hotkey to switch it visibility
@@ -97,6 +95,7 @@ Basic:
 -- Removable devices manager
 
 Basic after installation:
+- Create scripts with notifications and shorcuts for screen light
 - Disable auto login (?)
 - Enable initrd.nix again
 - Setup battary managmentd

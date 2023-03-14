@@ -13,6 +13,8 @@
   inputs,
   ...
 }: let
+  notifybyname = pkgs.writeShellScriptBin "notify-by-name" (builtins.readFile ./notify-by-name.sh);
+  volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);
   printfiles = pkgs.writeShellScriptBin "printfiles" ''
     if [ -d "$1" ] ; then
       tree $1 -fxainF -L 3 --prune --noreport | grep -v '/$' | grep -v '>' | tr -d '*'
@@ -181,5 +183,7 @@ in {
     x10
     getscript
     printfiles
+    notifybyname
+    volume
   ];
 }

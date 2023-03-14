@@ -20,5 +20,7 @@
     alacritty
     firefox
     rofi
+    notify-desktop
+    xorg.xbacklight
   ];
 }
