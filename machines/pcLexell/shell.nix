@@ -165,6 +165,7 @@ in {
     qrencode # Generate & print qr codes in terminal
     figlet # Print text with ascii fonts
     xclip # x11 clipboard managment tool
+    fzf # Fuzzy search 
 
     # My scripts
     withdir

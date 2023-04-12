@@ -28,6 +28,7 @@ in {
     ./i18n.nix
     #./x.nix
     ./gui.nix
+    ./example.nix
 
     #./ssh.nix
 
@@ -130,19 +131,19 @@ in {
 
     tmate
     thefuck
-    perl
+    #perl
 
     nebula
 
-    distrobox
+    #distrobox
 
-    nixopsUnstable
+    #nixopsUnstable
 
-    imhex
+    #imhex
 
     gping
 
-    go
+    #go
 
     alejandra # nix formatter
     statix
@@ -166,6 +167,14 @@ in {
 
     # For make Qt 5 apps look similar to GTK2 ones
     #qt5.qtbase.gtk
+
+    gcc
+    rustup
+    rustc
+    cargo
+    cargo-license
+
+    #zig
   ];
 
   programs = {

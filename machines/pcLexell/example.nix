@@ -13,15 +13,7 @@
   inputs,
   ...
 }: {
-  imports = [
-    ./x.nix
-  ];
   environment.systemPackages = with pkgs; [
-    alacritty
-    firefox
-    rofi
-    notify-desktop
-    xorg.xbacklight
-    xorg.xdpyinfo
+    aaa
   ];
 }
