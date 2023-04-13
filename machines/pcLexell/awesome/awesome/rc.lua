@@ -72,6 +72,8 @@ terminal = "alacritty"
 editor = "micro"
 editor_cmd = terminal .. " -e " .. editor
 
+CONTROLBOX = nil
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -335,7 +337,10 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
+    awful.key({ modkey },            "r",     function ()
+                    -- awful.screen.focused().mypromptbox:run()
+                    awful.util.spawn('alacritty --class CONTROLBOX -o "window.dimensions.lines=15" -o "window.dimensions.columns=30" -e "fish"')
+               end,
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
@@ -350,7 +355,14 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+    -- Volume control
+    awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("volume +") end,
+              {description = "Raise Volume", group = "launcher"}),
+    awful.key({}, "XF86AudioLowerVolume", function() awful.util.spawn("volume -") end,
+              {description = "Lower Volume", group = "launcher"}),
+    awful.key({}, "XF86AudioMute", function() awful.util.spawn("volume m") end,
+              {description = "Toggle Volume", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
@@ -531,6 +543,24 @@ awful.rules.rules = {
       }
     },
 
+    -- Spawn CONTROLBOX at the center of main screen with flocating mode
+    { rule = { class = "CONTROLBOX" },
+      properties = {
+         floating = true,
+         ontop = true,
+         sticky = false,
+         focus = true,
+         placement = awful.placement.centered,
+         screen = 1
+      },
+      callback = function(c)
+        --if CONTROLBOX ~= nil then
+        --    CONTROLBOX:kill()
+        --end
+        --CONTROLBOX = c
+      end
+    },
+
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
@@ -564,6 +594,18 @@ client.connect_signal("manage", function (c)
   --  c.sticky = true
   --  -- position
   --end
+  if c.class == "CONTROLBOX" then
+    c:connect_signal( "unfocus", function()
+      c:kill()
+    end)
+    width = c.screen.geometry.width / 2
+    height = c.screen.geometry.height / 2
+    c:geometry( {
+        width = width,
+        height = height,
+    } )
+    awful.placement.centered()
+  end
 end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
@@ -647,6 +689,9 @@ client.connect_signal("unfocus", function(c)
     c.opacity = 0.8
 end)
 -- }}}
+
+-- Proactive ID allocation for notififcations
+awful.util.spawn("notify-by-name -n VOLUME_CHANGE -t 1 -b VOLUME_CHANGE")
 
 -- Debug prints
 -- naughty.notify({ preset = naughty.config.presets.critical,
