@@ -17,7 +17,7 @@
   };
 
   home-manager.users.moth = {pkgs, ...}: {
-    home.file.".config/awesome".source = ./awesome;
+    #home.file.".config/awesome".source = ./awesome;
     xsession.windowManager.command = ''
       export AWESOME_THEMES_PATH="/home/moth/.config/awesome/themes"
       # See init.fish oncecall function
@@ -27,7 +27,10 @@
     '';
   };
 
+  programs.light.enable = true;
+
   environment.systemPackages = with pkgs; [
     picom
+    brightnessctl
   ];
 }

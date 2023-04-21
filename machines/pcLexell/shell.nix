@@ -15,6 +15,27 @@
 }: let
   notifybyname = pkgs.writeShellScriptBin "notify-by-name" (builtins.readFile ./notify-by-name.sh);
   volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);
+  bright = pkgs.writeShellScriptBin "bright" (builtins.readFile ./bright.sh);
+  read-or-value = pkgs.writeShellScriptBin "read-or-value" ''
+    RET=$(cat $1 2> /dev/null)
+    STATUS=$?
+    if [ $STATUS -ne 0 ]; then
+        RET=$2
+    fi
+    echo "$RET"
+  '';
+  num-max = pkgs.writeShellScriptBin "num-max" ''
+    [ "$1" -gt "$2" ] && echo $1 || echo $2
+  '';
+  num-min = pkgs.writeShellScriptBin "num-min" ''
+    [ "$1" -gt "$2" ] && echo $2 || echo $1
+  '';
+  num-lim = pkgs.writeShellScriptBin "num-lim" ''
+    num-min $(num-max $1 $3) $2
+  '';
+  percent-to-dec = pkgs.writeShellScriptBin "percent-to-dec" ''
+    awk "BEGIN { x = $1; print (x / 100) }"
+  '';
   printfiles = pkgs.writeShellScriptBin "printfiles" ''
     if [ -d "$1" ] ; then
       tree $1 -fxainF -L 3 --prune --noreport | grep -v '/$' | grep -v '>' | tr -d '*'
@@ -168,9 +189,14 @@ in {
     fzf # Fuzzy search 
 
     # My scripts
+    num-max
+    num-min
+    num-lim
+    read-or-value
     withdir
     clone-commit
     drop-caches
+    percent-to-dec
     dup
     printscript
     x2
@@ -186,5 +212,6 @@ in {
     printfiles
     notifybyname
     volume
+    bright
   ];
 }
