@@ -9,10 +9,10 @@
 {
   description = "Moth's NixOs configuration(s)";
   inputs = {
-    stable.url = "github:NixOS/nixpkgs/nixos-22.11";
+    stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "gitlab:rycee/home-manager/release-22.11";
+      url = "gitlab:rycee/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur.url = "github:nix-community/NUR";

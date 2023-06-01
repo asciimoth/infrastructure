@@ -16,6 +16,9 @@
   notifybyname = pkgs.writeShellScriptBin "notify-by-name" (builtins.readFile ./notify-by-name.sh);
   volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);
   bright = pkgs.writeShellScriptBin "bright" (builtins.readFile ./bright.sh);
+  decolor = pkgs.writeShellScriptBin "decolor" ''
+    cat /dev/stdin | sed -r "s/\x1B\[[0-9;]*[JKmsu]//g"
+  '';
   read-or-value = pkgs.writeShellScriptBin "read-or-value" ''
     RET=$(cat $1 2> /dev/null)
     STATUS=$?
@@ -213,5 +216,6 @@ in {
     notifybyname
     volume
     bright
+    decolor
   ];
 }

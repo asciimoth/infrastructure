@@ -86,7 +86,7 @@ in {
         # Note: This is a temporal solution used only as long as config is under development
         # TODO Use imperative user password managment in production
         #password = "${constants.MainUser}";
-        hashedPassword = "$5$SALTSALT$k4y1u90hZBQ3yYjQXwA/VHNnOKIO9.mzeiShw5uEyo9";
+        hashedPassword = "$6$/std7M9t7P1pR0HY$Bv4NtzMeKxG5IQHbwDD1uVjs7ONF99Ik.JrEAI4xV6fL0FMvByUDjrrgvotySja0UaU.Y1HqYc/sN7FLm6Rfi.";
       };
     };
     users.root.hashedPassword = null;
@@ -104,7 +104,8 @@ in {
     podman = {
       enable = true;
       dockerCompat = true;
-      defaultNetwork.dnsname.enable = true;
+      #defaultNetwork.dnsname.enable = true; #deprecated
+      defaultNetwork.settings.dns_enabled = true;
       autoPrune.enable = true;
       #defaultNetwork.settings.dns_enabled = true;
       #extraOptions = "--iptables=false"; # Makes shure that Podman/Docker doesn't alter the firewall

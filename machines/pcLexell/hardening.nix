@@ -56,9 +56,7 @@
     haveged.enable = true; # Entropy daemon
     chrony.enable = true; # Time sync
     openssh = {
-      passwordAuthentication = lib.mkForce false;
       allowSFTP = false;
-      kbdInteractiveAuthentication = false;
       # C2S/CIS: CCE-27471-2 (High), CCE-27082-7 (Medium),
       # CCE-27433-2 (Medium), CCE-27314-4 (Medium),
       # CCE-27455-5 (Medium), CCE-27363-1 (Medium),
@@ -66,8 +64,31 @@
       # CCE-80645-5 (Medium), CCE-27295-5 (High).
       # CCE-80226-4 (High), CCE-27413-4 (Medium),
       # CCE-27445-6 (Medium)
-      permitRootLogin = "no";
-      forwardX11 = true;
+      settings = {
+        PasswordAuthentication = lib.mkForce false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+        X11Forwarding = true;
+        KexAlgorithms = [
+          "curve25519-sha256@libssh.org"
+          "diffie-hellman-group-exchange-sha256"
+        ];
+        Ciphers = [
+          "aes128-ctr"
+          "aes192-ctr"
+          "aes256-ctr"
+          "aes128-cbc"
+          "aes192-cbc"
+          "aes256-cbc"
+          "chacha20-poly1305@openssh.com"
+        ];
+        Macs = [
+          "hmac-sha2-512-etm@openssh.com"
+          "hmac-sha2-512"
+          "hmac-sha2-256"
+          "hmac-sha1"
+        ];
+      };
       #pubkeyAcceptedKeyTypes = [
       #  "ssh-ed25519"
       #  "ssh-rsa"
@@ -76,25 +97,6 @@
       #  "ssh-ed25519"
       #  "ssh-rsa"
       #];
-      kexAlgorithms = [
-        "curve25519-sha256@libssh.org"
-        "diffie-hellman-group-exchange-sha256"
-      ];
-      macs = [
-        "hmac-sha2-512-etm@openssh.com"
-        "hmac-sha2-512"
-        "hmac-sha2-256"
-        "hmac-sha1"
-      ];
-      ciphers = [
-        "aes128-ctr"
-        "aes192-ctr"
-        "aes256-ctr"
-        "aes128-cbc"
-        "aes192-cbc"
-        "aes256-cbc"
-        "chacha20-poly1305@openssh.com"
-      ];
       #MACs = "hmac-sha2-512,hmac-sha2-256,hmac-sha1";
       #Ciphers = ;
       extraConfig = ''
@@ -154,7 +156,8 @@
   };
 
   boot = {
-    cleanTmpDir = true;
+    #cleanTmpDir = true;#deprecated
+    tmp.cleanOnBoot = true;
     kernelParams = [
       "lockdown=confidentiality"
       "page_poison=1"
