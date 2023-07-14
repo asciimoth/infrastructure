@@ -31,14 +31,19 @@
     [http]
     	proxy =
     [user]
-    	name = John Doe
-    	email =
+    	name = AsciiMoth
+    	email = ascii@moth.contact
+    	signingkey = C3A35C9F
     [core]
     	excludesfile = /etc/gitignore
-    	editor = nano
+    	editor = micro
     [init]
     	defaultBranch = master
     [pull]
       rebase = false
+    [commit]
+    	gpgsign = true
+    [tag]
+    	forceSignAnnotated = true
   '';
 }

@@ -150,7 +150,7 @@
   programs = {
     ssh.askPassword = ""; # Ask with CLI but not GUI dialog
     gnupg.agent = {
-      pinentryFlavor = "curses";
+      #pinentryFlavor = "curses";
       #enableSSHSupport = true;
     };
   };

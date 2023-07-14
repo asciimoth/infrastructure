@@ -13,14 +13,22 @@
   inputs,
   ...
 }: {
-  environment.systemPackages = with pkgs; [];
-  users.users.moth = {
-    #openssh.authorizedKeys.keys = [];
-  };
-  services.openssh = {
+  services.udev.packages = [ pkgs.yubikey-personalization ];
+
+  # Fix some GUI pinentry issues
+  services.dbus.packages = [ pkgs.gcr ];
+
+  environment.systemPackages = with pkgs; [
+    yubikey-personalization
+    yubikey-manager
+    pinentry-qt
+  ];
+
+  #services.pcscd.enable = true;
+
+  programs.gnupg.agent = {
     enable = true;
-    #passwordAuthentication = true;
-    #kbdInteractiveAuthentication = lib.mkForce true;
-    #permitRootLogin = lib.mkForce "yes";
+    enableSSHSupport = true;
+    pinentryFlavor = "qt";
   };
 }

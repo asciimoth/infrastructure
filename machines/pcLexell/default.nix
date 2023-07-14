@@ -21,6 +21,7 @@ in {
     #./initrd.nix
     ./shell.nix
     ./git.nix
+    ./gpg.nix
     ./hardening.nix
     ./nosleep.nix
     ./sound.nix
@@ -146,6 +147,9 @@ in {
 
     #go
 
+    boxxy
+    tmux
+
     alejandra # nix formatter
     statix
 
@@ -177,10 +181,6 @@ in {
 
     #zig
   ];
-
-  programs = {
-    gnupg.agent.enable = true;
-  };
 
   console = {
     earlySetup = true;
