@@ -118,7 +118,7 @@ in {
   environment.shellAliases = {
     # Nix/NixOS aliases
     nswitch = "sudo nixos-rebuild switch --flake /etc/infrastructure";
-    ncollect = "sudo nix-collect-garbage -d";
+    ncollect = "nix-collect-garbage -d && sudo nix-collect-garbage -d";
     noptimise = "sudo nix-store --optimise";
     nfmt = "alejandra";
 
