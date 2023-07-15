@@ -12,7 +12,9 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  constants = import ./constants.nix;
+in {
   services.udev.packages = [ pkgs.yubikey-personalization ];
 
   # Fix some GUI pinentry issues
@@ -31,4 +33,19 @@
     enableSSHSupport = true;
     pinentryFlavor = "qt";
   };
+
+  home-manager.users."${constants.MainUser}" = {pkgs, ...}: {
+    programs.gpg = {
+      enable = true;
+      mutableKeys = true;
+      mutableTrust = true;
+      publicKeys = [
+        {
+          source = ../../keys/moth.pub.gpg;
+          trust = 5;
+        }
+      ];
+    };
+  };
+
 }
