@@ -22,6 +22,7 @@ in {
     ./shell.nix
     ./git.nix
     ./gpg.nix
+    ./yubic.nix
     ./hardening.nix
     ./nosleep.nix
     ./sound.nix

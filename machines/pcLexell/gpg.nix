@@ -15,14 +15,10 @@
 }: let
   constants = import ./constants.nix;
 in {
-  services.udev.packages = [ pkgs.yubikey-personalization ];
-
   # Fix some GUI pinentry issues
   services.dbus.packages = [ pkgs.gcr ];
 
   environment.systemPackages = with pkgs; [
-    yubikey-personalization
-    yubikey-manager
     pinentry-qt
   ];
 
