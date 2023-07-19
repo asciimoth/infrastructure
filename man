@@ -1,20 +1,18 @@
-Installtion instruction for cases when initrd.nix enabled
+Installtion instruction
 
-0) Start from installing usb
+0) Boot from installation usb
 1) Install some tools
   $ nix-shell -p fido2luks git yubikey-manager openssl expect micro
 2) Clone this repo
-  git clone https://github.com/asciimoth/infrastructure.git
-
-
-
+  $ git clone https://github.com/asciimoth/infrastructure.git
+  $ chmod +x infrastructure/*.sh
 2) wipe disk if neded
   $ sudo wipefs -a /dev/<disk ex sda>
-3)  [If not already created] Create new partition table
+4)  [If not already created] Create new partition table
   $ sudo fdisk /dev/<disk ex sda>
     g
     w
-4) [If not already created] Create boot (UEFI) partition and format it 
+5) [If not already created] Create boot (UEFI) partition and format it 
   $ sudo fdisk /dev/<disk ex sda>
     n
     enter
@@ -24,89 +22,45 @@ Installtion instruction for cases when initrd.nix enabled
     EFI System
     w
   $ sudo mkfs.fat -F 32 /dev/<boot partition name ex sda1>
-5) Create partition for LUKS
+6) Create partition for LUKS
   $ sudo fdisk /dev/<disk ex sda>
     n
     enter
     enter
     enter
     w
-6) Generate temporal password
+7) Generate temporal password
   $ export PASSWORD=$(openssl rand -base64 128)
-7) Setup luks partition encrypted with password
-  $ echo "$PASSWORD" | sudo cryptsetup luksFormat -q /dev/<partition ex sdb1>
-  $ echo "$PASSWORD" | sudo cryptsetup luksOpen --test-passphrase /dev/<partition ex sdb1>
-8) Setup fido2luks
+8) Setup luks partition encrypted with password
+  $ echo "$PASSWORD" | sudo cryptsetup luksFormat -q /dev/<partition ex sda2>
+  $ echo "$PASSWORD" | sudo cryptsetup luksOpen --test-passphrase /dev/<partition ex sda2>
+9) Setup fido2luks
   chose a hostname for instalation system
-  $ export FIDO2_LABEL="/dev/<partition ex sda2> @ <HOSTNAME>"
-  $ CRED=$(fido2luks credential "$FIDO2_LABEL")
-  $ echo $CRED > CRED
-  $ expect -c 'spawn sudo fido2luks -i add-key /dev/<partition ex sda2> $::env(CRED) ; expect "Current password:"; send "$::env(PASSWORD)\r"; interact'
-  repeat last command with every token
-  $ sudo cryptsetup luksDump /dev/<partition ex sda2>
-  $ sudo fido2luks -i open /dev/<partition ex sda2> <opened partition name> $CRED
-  $ sudo cryptsetup luksClose /dev/<partition ex sda2>
-
-
-
-
-
-
-
-
-
-
-
-
-
-0) Mount usb key
-  $ lsblk
-  $ mkdir -p /usb
-  $ mount /dev/<partition name> /usb
-1) [If not already created] Create new partition table
-  $ fdisk
-2) [If not already created] Create boot (UEFI) partition and format it 
-  $ fdisk
-  $ mkfs.fat -F 32 /dev/<boot partition name ex sda1>
-3) Connect to interntet (wifi)
-  $ nmtui
-4) Create tmpfs for working with secrets
-  $ mkdir -p /secrets
-  $ mount -t tmpfs tmpfs /secrets
-5) Create key
-  $ dd if=/dev/urandom bs=1 count=4096 > /secrets/key.lek
-6) Encrypt key with password (interactive)
-  $ openssl enc -aes-256-cbc -pbkdf2 -in /secrets/key.lek -out /secrets/key.enc
-  6.1) Decrypt
-    $ openssl enc -aes-256-cbc -d -pbkdf2 -in /secrets/key.enc -out /secrets/key.lek
-7) Generate random names
-  $ openssl -rand -base64 33
-8) Move encrypted key to usb
-  $ cp /secrets/key.enc /key/<path key on usb>
-9) Calculate hashes of path and content of encrypted key file and add em to config
-  $ echo "/key/<path to key on usb>" | b3sum
-  $ b3sum /key/<path to key on usb>
-10) Wipe partition
-  $ wipefs -a /dev/<partition ex sdb1>
-11) Setup luks partition
-  $ cryptsetup luksFormat /dev/<partition ex sdb1> /secrets/key.lek
-  $ cryptsetup luksAddKey /dev/<partition ex sdb1> /secrets/key.lek
-  $ cryptsetup luksOpen /dev/<partition ex sdb1> crypted --key-file /key/key.lek
-12) Set up fs
-  $ mkfs.ext4 /dev/mapper/crypted
-13) Mount root
-  $ mount /dev/mapper/crypted /mnt
-14) Mount UEFI/boot partition
-  $ mount /dec/<partition> /mnt/boot
-15) Copy config from usb key
-  $ cp -r /usb/mynixos /mnt/etc/mynixos
-16) Generate system config
-  $ nixos-generate-config --root /mnt
-17) Copy new configuration.nix and hardware-configuration.nix to config
-  $ cp /mnt/etc/nixos/*configuration.nix /mnt/etc/mynixos/configs/MothsLaptop/
-18) Uncomment rows in /mnt/etc/mynixos/configs/MothsLaptop/default.nix
-19) Install from config
-  $ nixos-install --root /mnt --flake /mnt/etc/mynixos#MothsLaptop
+  repeat for every token:
+    $ sudo infrastructure/fido2luks.sh /dev/<partition ex sda2> <hostname of new machine> ~/creds $PASSWORD
+10) Mount creted luks partition
+  $ echo "$PASSWORD" | sudo cryptsetup luksOpen /dev/<partition ex sda2> crypted -
+11) Set up fs
+  $ sudo mkfs.ext4 /dev/mapper/crypted
+12) Mount root
+  $ sudo mount /dev/mapper/crypted /mnt
+13) Mount UEFI/boot partition
+  $ sudo mount /dev/<UEFI partition ex sda1> /mnt/boot
+14) Generate system config
+  $ sudo nixos-generate-config --root /mnt
+15) Copy config
+  $ cp -r infrastructure /mnt/etc/infrastructure
+16) Copy new configuration.nix and hardware-configuration.nix to config
+  $ cp /mnt/etc/nixos/*configuration.nix /mnt/etc/infrastructure/machines/pcLexell/
+17) Patch generated config
+  # There should not be nothing luks with password
+  # There should be this params
+  boot.initrd.luks.fido2Support = true;
+  boot.initrd.luks.devices."/dev/sda2".fido2.credentials = [ "" "" ]; # Here should be credentails from ~/creds
+18) Install from config
+  $ sudo nixos-install --root /mnt --flake /mnt/etc/mynixos#pcLexell
+19) Rip luks sliot with password
+  $ echo "$PASSWORD" | sudo cryptsetup luksRemoveKey /dev/sdb1 -
 20) Shutdown system
   $ shutdown now
 21) Change booting queue in bios
