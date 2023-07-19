@@ -1,5 +1,64 @@
 Installtion instruction for cases when initrd.nix enabled
 
+0) Start from installing usb
+1) Install some tools
+  $ nix-shell -p fido2luks git yubikey-manager openssl expect micro
+2) Clone this repo
+  git clone https://github.com/asciimoth/infrastructure.git
+
+
+
+2) wipe disk if neded
+  $ sudo wipefs -a /dev/<disk ex sda>
+3)  [If not already created] Create new partition table
+  $ sudo fdisk /dev/<disk ex sda>
+    g
+    w
+4) [If not already created] Create boot (UEFI) partition and format it 
+  $ sudo fdisk /dev/<disk ex sda>
+    n
+    enter
+    enter
+    +2G
+    t
+    EFI System
+    w
+  $ sudo mkfs.fat -F 32 /dev/<boot partition name ex sda1>
+5) Create partition for LUKS
+  $ sudo fdisk /dev/<disk ex sda>
+    n
+    enter
+    enter
+    enter
+    w
+6) Generate temporal password
+  $ export PASSWORD=$(openssl rand -base64 128)
+7) Setup luks partition encrypted with password
+  $ echo "$PASSWORD" | sudo cryptsetup luksFormat -q /dev/<partition ex sdb1>
+  $ echo "$PASSWORD" | sudo cryptsetup luksOpen --test-passphrase /dev/<partition ex sdb1>
+8) Setup fido2luks
+  chose a hostname for instalation system
+  $ export FIDO2_LABEL="/dev/<partition ex sda2> @ <HOSTNAME>"
+  $ CRED=$(fido2luks credential "$FIDO2_LABEL")
+  $ echo $CRED > CRED
+  $ expect -c 'spawn sudo fido2luks -i add-key /dev/<partition ex sda2> $::env(CRED) ; expect "Current password:"; send "$::env(PASSWORD)\r"; interact'
+  repeat last command with every token
+  $ sudo cryptsetup luksDump /dev/<partition ex sda2>
+  $ sudo fido2luks -i open /dev/<partition ex sda2> <opened partition name> $CRED
+  $ sudo cryptsetup luksClose /dev/<partition ex sda2>
+
+
+
+
+
+
+
+
+
+
+
+
+
 0) Mount usb key
   $ lsblk
   $ mkdir -p /usb
