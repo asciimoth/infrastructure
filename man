@@ -30,7 +30,7 @@ Installtion instruction
     enter
     w
 7) Generate temporal password
-  $ export PASSWORD=$(openssl rand -base64 128)
+  $ export PASSWORD=$(openssl rand -base64 128 | xargs)
 8) Setup luks partition encrypted with password
   $ echo "$PASSWORD" | sudo cryptsetup luksFormat -q /dev/<partition ex sda2>
   $ echo "$PASSWORD" | sudo cryptsetup luksOpen --test-passphrase /dev/<partition ex sda2>
