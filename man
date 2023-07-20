@@ -36,8 +36,9 @@ Installtion instruction
   $ echo "$PASSWORD" | sudo cryptsetup luksOpen --test-passphrase /dev/<partition ex sda2>
 9) Setup fido2luks
   chose a hostname for instalation system
+  export NEWHOSTNAME="pcLexell"
   repeat for every token:
-    $ fido2luks.sh /dev/sda2 pcLexell ~/creds $PASSWORD <token fido pin> <new password>
+    $ sudo fido2luks.sh /dev/sda2 $NEWHOSTNAME ~/creds $PASSWORD <token fido pin> <new password>
 10) Mount creted luks partition
   $ echo "$PASSWORD" | sudo cryptsetup luksOpen /dev/<partition ex sda2> crypted -
 11) Set up fs
