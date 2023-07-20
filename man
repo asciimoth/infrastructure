@@ -58,11 +58,14 @@ Installtion instruction
   # There should be this params
   boot.initrd.luks.fido2Support = true;
   boot.initrd.luks.devices."/dev/sda2".fido2.credentials = [ "" "" ]; # Here should be credentails from ~/creds
-18) Install from config
+18) Enable systemd-boot
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+19) Install from config
   $ sudo nixos-install --root /mnt --flake /mnt/etc/mynixos#pcLexell
-19) Rip luks sliot with password
+20) Rip luks sliot with password
   $ echo "$PASSWORD" | sudo cryptsetup luksRemoveKey /dev/sdb1 -
-20) Shutdown system
+21) Shutdown system
   $ shutdown now
-21) Change booting queue in bios
-22) Load to new sytem
+22) Change booting queue in bios
+23) Load to new sytem
