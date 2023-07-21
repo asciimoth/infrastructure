@@ -62,7 +62,7 @@ in {
   users = {
     mutableUsers = false;
     users = {
-      root.password = "root";
+      users.root.hashedPassword = null;
       "${constants.MainUser}" = {
         uid = 1000;
         isNormalUser = true;
@@ -91,7 +91,6 @@ in {
         hashedPassword = "$6$/std7M9t7P1pR0HY$Bv4NtzMeKxG5IQHbwDD1uVjs7ONF99Ik.JrEAI4xV6fL0FMvByUDjrrgvotySja0UaU.Y1HqYc/sN7FLm6Rfi.";
       };
     };
-    users.root.hashedPassword = null;
   };
 
   security.sudo = {
