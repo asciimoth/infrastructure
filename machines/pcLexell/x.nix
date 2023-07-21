@@ -33,8 +33,8 @@
       #};
     };
     videoDrivers = [
-      "nvidia"
-      "ati_ufree"
+      #"nvidia"
+      #"ati_ufree"
       #"amdgpu"
     ];
   };
