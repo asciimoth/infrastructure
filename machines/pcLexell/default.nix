@@ -62,7 +62,7 @@ in {
   users = {
     mutableUsers = false;
     users = {
-      users.root.hashedPassword = null;
+      root.hashedPassword = null;
       "${constants.MainUser}" = {
         uid = 1000;
         isNormalUser = true;
