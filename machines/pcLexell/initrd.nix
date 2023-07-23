@@ -16,7 +16,7 @@
   boot.initrd = {
     postDeviceCommands = let
       encrypted_key_b64 = (builtins.readFile ./encrypted_key.b64);
-      gpg_key_b64 = (builtins.readFile ../../keys/moth.pub.gpg);
+      gpg_key_b64 = (builtins.readFile ../../keys/moth.pub.b64);
     in
       lib.mkBefore ''
         echo "${encrypted_key_b64}" | base64 -d > encrypted_key
