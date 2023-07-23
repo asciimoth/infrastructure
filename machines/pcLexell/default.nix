@@ -18,7 +18,7 @@
 in {
   imports = [
     ./hm.nix
-    #./initrd.nix
+    ./initrd.nix
     ./shell.nix
     ./git.nix
     ./gpg.nix
