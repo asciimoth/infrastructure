@@ -12,6 +12,9 @@ Installtion instruction
   $ sudo fdisk /dev/<disk ex sda>
     g
     w
+  Or for virtualbox
+    o
+    w
 5) [If not already created] Create boot (UEFI) partition and format it 
   $ sudo fdisk /dev/<disk ex sda>
     n
@@ -20,6 +23,12 @@ Installtion instruction
     +2G
     t
     EFI System
+    w
+  Or for virtualbox
+    n
+    enter
+    enter
+    +2G
     w
   $ sudo mkfs.fat -F 32 /dev/<boot partition name ex sda1>
 6) Create partition for LUKS
