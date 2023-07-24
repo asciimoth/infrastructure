@@ -26,7 +26,7 @@
       #preLVM = lib.mkForce false;
       gpgCard = {
         encryptedPass = "./luks_key.asc";
-        publicKey = "../../keys/moth.pub.b64";
+        publicKey = "../../keys/moth.pub.asc";
       };
     };
   };
