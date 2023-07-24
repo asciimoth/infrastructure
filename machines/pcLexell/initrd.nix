@@ -23,11 +23,10 @@
     #    echo "${gpg_key_b64}" | base64 -d > gpg_key
     #  '';
     luks.devices."crypted" = {
-      #preLVM = lib.mkForce false;
+      preLVM = lib.mkForce false;
       gpgCard = {
         encryptedPass = "./luks_key.asc";
         publicKey = "../../keys/moth.pub.asc";
-        preLVM = lib.mkForce false;
       };
     };
   };
