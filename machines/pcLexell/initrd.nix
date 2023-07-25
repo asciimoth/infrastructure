@@ -13,17 +13,9 @@
   inputs,
   ...
 }: {
-  boot.initrd = {
-    #postDeviceCommands = let
-    #  encrypted_key_b64 = (builtins.readFile ./encrypted_key.b64);
-    #  gpg_key_b64 = (builtins.readFile ../../keys/moth.pub.b64);
-    #in
-    #  lib.mkBefore ''
-    #    echo "${encrypted_key_b64}" | base64 -d > encrypted_key
-    #    echo "${gpg_key_b64}" | base64 -d > gpg_key
-    #  '';
-    luks.devices."crypted" = {
-      preLVM = lib.mkForce false;
+  boot.initrd.luks = {
+    gpgSupport = true;
+    devices."crypted" = {
       gpgCard = {
         encryptedPass = "./luks_key.asc";
         publicKey = "../../keys/moth.pub.asc";
