@@ -17,8 +17,8 @@
     gpgSupport = true;
     devices."crypted" = {
       gpgCard = {
-        encryptedPass = "./luks_key.asc";
-        publicKey = "../../keys/moth.pub.asc";
+        encryptedPass = ./luks_key.asc;
+        publicKey = ../../keys/moth.pub.asc;
       };
     };
   };
