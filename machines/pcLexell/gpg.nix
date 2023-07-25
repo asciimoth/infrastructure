@@ -16,7 +16,7 @@
   constants = import ./constants.nix;
 in {
   # Fix some GUI pinentry issues
-  services.dbus.packages = [ pkgs.gcr ];
+  services.dbus.packages = [pkgs.gcr];
 
   environment.systemPackages = with pkgs; [
     pinentry-qt
@@ -43,5 +43,4 @@ in {
       ];
     };
   };
-
 }

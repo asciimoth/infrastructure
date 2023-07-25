@@ -15,7 +15,7 @@
 }: let
   constants = import ./constants.nix;
 in {
-  services.udev.packages = [ pkgs.yubikey-personalization ];
+  services.udev.packages = [pkgs.yubikey-personalization];
 
   environment.systemPackages = with pkgs; [
     yubikey-personalization
@@ -24,7 +24,7 @@ in {
   ];
   home-manager.users."${constants.MainUser}".systemd.user.services.yubikey-touch-detector = {
     Service = {
-      Environment = [ "PATH=${lib.makeBinPath [ pkgs.gnupg pkgs.yubikey-touch-detector ]}" ];
+      Environment = ["PATH=${lib.makeBinPath [pkgs.gnupg pkgs.yubikey-touch-detector]}"];
       ExecStart = toString (pkgs.writeShellScript "yubikey-touch-detector" ''
         export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
         yubikey-touch-detector -libnotify
@@ -32,11 +32,11 @@ in {
     };
     Unit = {
       Description = "yubikey-touch-detector";
-      After = [ "graphical-session.target" ];
-      Wants = [ "gpg-agent-ssh.socket" "gpg-agent.socket" ];
+      After = ["graphical-session.target"];
+      Wants = ["gpg-agent-ssh.socket" "gpg-agent.socket"];
     };
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = ["graphical-session.target"];
     };
   };
 }
