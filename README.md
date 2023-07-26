@@ -1,5 +1,5 @@
 <h1 align="center">
-  asciimoth's infrastructure 
+  ASCIIMoth's infrastructure 
 </h1>
 
 <div align="center">
