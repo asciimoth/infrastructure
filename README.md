@@ -1,5 +1,5 @@
 <h1 align="center">
-  ASCIIMoth's infrastructure 
+  asciimoth's infrastructure 
 </h1>
 
 <div align="center">
@@ -7,12 +7,12 @@
   </br>
   </br>
   
-[![CC0](https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=CC0&color=orange)](https://github.com/DomesticMoth/infrastructure/blob/master/LICENSE)
+[![CC0](https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=CC0&color=orange)](https://github.com/asciimoth/infrastructure/blob/master/LICENSE)
 [![built with nix](https://img.shields.io/static/v1?style=for-the-badge&logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org)
   
-[![Formatting Check via alejandra](https://img.shields.io/github/actions/workflow/status/DomesticMoth/infrastructure/alejandra.yml?label=Nix%20fmt%20check&style=for-the-badge)](https://github.com/DomesticMoth/infrastructure/actions/workflows/alejandra.yml)
-[![nix-config flake check](https://img.shields.io/github/actions/workflow/status/DomesticMoth/infrastructure/flake_check.yml?label=Flake%20check&style=for-the-badge)](https://github.com/DomesticMoth/infrastructure/actions/workflows/flake_check.yml)
-[![nix-config statix check](https://img.shields.io/github/actions/workflow/status/DomesticMoth/infrastructure/statix.yml?label=Statix&style=for-the-badge)](https://github.com/DomesticMoth/infrastructure/actions/workflows/statix.yml)
+[![Formatting Check via alejandra](https://img.shields.io/github/actions/workflow/status/asciimoth/infrastructure/alejandra.yml?label=Nix%20fmt%20check&style=for-the-badge)](https://github.com/asciimoth/infrastructure/actions/workflows/alejandra.yml)
+[![nix-config flake check](https://img.shields.io/github/actions/workflow/status/asciimoth/infrastructure/flake_check.yml?label=Flake%20check&style=for-the-badge)](https://github.com/asciimoth/infrastructure/actions/workflows/flake_check.yml)
+[![nix-config statix check](https://img.shields.io/github/actions/workflow/status/asciimoth/infrastructure/statix.yml?label=Statix&style=for-the-badge)](https://github.com/asciimoth/infrastructure/actions/workflows/statix.yml)
 </div>
 
 # License
@@ -25,8 +25,8 @@ Files in this repository are distributed under the [CC0 license](./LICENSE).
   <br />
   To the extent possible under law,
   <a rel="dct:publisher"
-     href="https://github.com/DomesticMoth">
-    <span property="dct:title">DomesticMoth</span></a>
+     href="https://github.com/asciimoth">
+    <span property="dct:title">asciimoth</span></a>
   has waived all copyright and related or neighboring rights to
   <span property="dct:title">infrastructure</span>.
 </p>
