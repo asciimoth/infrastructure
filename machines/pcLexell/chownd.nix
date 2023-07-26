@@ -18,8 +18,8 @@
 in {
   #
   systemd.services.chownd = {
-    wantedBy = [ "multi-user.target" ]; 
-    after = [ "multi-user.target" ];
+    wantedBy = ["multi-user.target"];
+    after = ["multi-user.target"];
     description = "Change owner of ${configpath} to ${constants.MainUser}";
     serviceConfig = {
       Type = "oneshot";

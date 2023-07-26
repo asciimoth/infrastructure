@@ -35,7 +35,7 @@ in {
     #./ssh.nix
 
     ../../names
-    ./chown.nix
+    ./chownd.nix
 
     # Generic. Include the results of the hardware scan.
     ./configuration.nix
