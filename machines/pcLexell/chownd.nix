@@ -13,18 +13,18 @@
   inputs,
   ...
 }: let
-  constants = import ./constants.nix;
-  configpath = "/etc/infrastructure";
+  chownd = pkgs.writeShellScriptBin "chownd" (builtins.readFile ./chownd.sh);
 in {
   #
   systemd.services.chownd = {
+    path = with pkgs; [ coreutils gawk ];
     wantedBy = ["multi-user.target"];
     after = ["multi-user.target"];
-    description = "Change owner of ${configpath} to ${constants.MainUser}";
+    description = "Change owner";
     serviceConfig = {
       Type = "oneshot";
       User = "root";
-      ExecStart = "${pkgs.coreutils-full}/bin/chown -R ${constants.MainUser} ${configpath}";
+      ExecStart = "${chownd}/bin/chownd";
     };
   };
 }

@@ -36,6 +36,7 @@ in {
 
     ../../names
     ./chownd.nix
+    ./local_auth.nix
 
     # Generic. Include the results of the hardware scan.
     ./configuration.nix
@@ -258,6 +259,11 @@ in {
     CONFIGROOT = "${constants.ConfigRoot}";
     EDITOR = "${constants.Editor}";
     VISUAL = "${constants.Editor}";
+  };
+
+  environment.etc."chownd/infr" = {
+    text="moth ${constants.ConfigRoot}";
+    mode = "744";
   };
 
   networking = {
