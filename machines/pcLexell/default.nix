@@ -30,6 +30,7 @@ in {
     ./i18n.nix
     #./x.nix
     ./gui.nix
+    ./network.nix
     ./example.nix
 
     #./ssh.nix
@@ -236,12 +237,12 @@ in {
 
   hardware.ksm.enable = true;
 
-  documentation = {
-    dev.enable = true;
-    doc.enable = true;
-    info.enable = true;
-    man.enable = true;
-  };
+  #documentation = {
+  #  dev.enable = true;
+  #  doc.enable = true;
+  #  info.enable = true;
+  #  #man.enable = true;
+  #};
 
   # CUPS
   # nixos.wiki/wiki/Printing
@@ -269,33 +270,5 @@ in {
   environment.etc."chownd/infr" = {
     text = "moth ${constants.ConfigRoot}";
     mode = "744";
-  };
-
-  networking = {
-    usePredictableInterfaceNames = true;
-    enableIPv6 = true;
-    dhcpcd = {
-      enable = true;
-      extraConfig = "\nnoipv6rs \nnoipv6 \nnohook resolv.conf";
-    };
-    useHostResolvConf = false;
-    networkmanager = {
-      enable = true;
-      dhcp = "dhcpcd";
-      dns = "none";
-      wifi = {
-        macAddress = "random";
-        scanRandMacAddress = true;
-      };
-    };
-    extraHosts = "";
-    firewall = {
-      enable = true;
-      allowedTCPPorts = lib.mkForce [];
-      allowedUDPPorts = lib.mkForce [];
-      trustedInterfaces = lib.mkForce ["lo"];
-    };
-    nameservers = ["8.8.8.8"];
-    #nameservers = [ "127.0.0.1" "::1" ];
   };
 }
