@@ -262,7 +262,7 @@ in {
   };
 
   environment.etc."chownd/infr" = {
-    text="moth ${constants.ConfigRoot}";
+    text = "moth ${constants.ConfigRoot}";
     mode = "744";
   };
 

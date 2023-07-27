@@ -17,7 +17,7 @@
 in {
   #
   systemd.services.chownd = {
-    path = with pkgs; [ coreutils gawk ];
+    path = with pkgs; [coreutils gawk];
     wantedBy = ["multi-user.target"];
     after = ["multi-user.target"];
     description = "Change owner";
