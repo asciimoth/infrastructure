@@ -64,7 +64,7 @@ in {
   users = {
     mutableUsers = false;
     users = {
-      root.hashedPassword = null;
+      root.hashedPassword = "*";
       "${constants.MainUser}" = {
         uid = 1000;
         isNormalUser = true;
@@ -86,11 +86,11 @@ in {
           "networkmanager"
           #"vboxusers"
         ];
-        # Warning: security issue
-        # Note: This is a temporal solution used only as long as config is under development
-        # TODO Use imperative user password managment in production
-        #password = "${constants.MainUser}";
-        hashedPassword = "$6$/std7M9t7P1pR0HY$Bv4NtzMeKxG5IQHbwDD1uVjs7ONF99Ik.JrEAI4xV6fL0FMvByUDjrrgvotySja0UaU.Y1HqYc/sN7FLm6Rfi.";
+        # I use pam_u2f so I dont need for passwords
+        # But nixos anyway requires it
+        # So this is the hash of a random 300 bit combination
+        #   that has never saved anywhere
+        hashedPassword = "$6$ORI3ESpCJxOGlGYG$ophduthBXVVkUU7SOAZoWD.OuhyUPzJ07ZyoccH2Sc9.Ef45MJfUG9HBcO8KEgKhmi4h9ZcSdyHmRXrNGdmaH0";
       };
     };
   };
