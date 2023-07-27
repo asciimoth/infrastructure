@@ -28,6 +28,7 @@ in {
   security.pam.services = {
     login.u2fAuth = true;
     sudo.u2fAuth = true;
+    doas.u2fAuth = true;
   };
   #home-manager.users.moth = {lib, ...}: {
   #  home.activation = {

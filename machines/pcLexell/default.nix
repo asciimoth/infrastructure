@@ -95,11 +95,16 @@ in {
     };
   };
 
-  security.sudo = {
-    enable = true;
-    #configFile = ''
-    #  %wheel ALL=(ALL) ALL
-    #'';
+  security = {
+    sudo = {
+      enable = true;
+      #configFile = ''
+      #  %wheel ALL=(ALL) ALL
+      #'';
+    };
+    doas = {
+      enable = true;
+    };
   };
 
   virtualisation = {
