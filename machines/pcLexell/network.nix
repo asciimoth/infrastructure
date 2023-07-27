@@ -12,10 +12,10 @@
   lib,
   inputs,
   ...
-}: {
-  environment.systemPackages = [
-    (pkgs.callPackage ./pkjs/meshnamed {})
-  ];
+}: let
+  meshnamed = pkgs.callPackage ./pkjs/meshnamed {};
+in {
+  #environment.systemPackages = [ meshnamed ];
   networking = {
     #proxy.default = constants.Promux1Socks;
     usePredictableInterfaceNames = true;
@@ -86,4 +86,16 @@
     meshname 127.0.0.1:5353
     meship 127.0.0.1:5353
   '';
+
+  systemd.services.meshnamed = {
+    #path = with pkgs; [];
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
+    description = "Resolve meshname and meship domains";
+    serviceConfig = {
+      Type = "simple";
+      User = "root";
+      ExecStart = "${meshnamed}/bin/meshnamed -listenaddr 127.0.0.1:5353";
+    };
+  };
 }
