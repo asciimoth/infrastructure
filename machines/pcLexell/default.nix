@@ -32,6 +32,7 @@ in {
     ./gui.nix
     ./network.nix
     ./example.nix
+    ./theme.nix
 
     #./ssh.nix
 
@@ -209,21 +210,6 @@ in {
   home-manager.users."${constants.MainUser}" = {pkgs, ...}: {
     home.file.".config/micro/settings.json".source = ./micro/settings.json;
     home.file.".config/micro/bindings.json".source = ./micro/bindings.json;
-  };
-
-  fonts = {
-    enableDefaultFonts = true;
-    fontDir.enable = true; #Will force recompile some programs
-    fonts = with pkgs; [
-      (nerdfonts.override {fonts = ["FiraCode" "FiraMono"];})
-    ];
-    fontconfig = {
-      defaultFonts = {
-        serif = ["FiraCode Nerd Font Mono"];
-        sansSerif = ["FiraCode Nerd Font Mono"];
-        monospace = ["FiraCode Nerd Font Mono"];
-      };
-    };
   };
 
   zramSwap = {

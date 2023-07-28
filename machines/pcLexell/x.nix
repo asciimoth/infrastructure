@@ -39,7 +39,7 @@
     ];
   };
 
-  environment.etc.wallaper.source = ./GreyDot.png;
+  #environment.etc.wallaper.source = ./GreyDot.png;
 
   home-manager.users.moth.xsession = {
     enable = true;

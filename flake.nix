@@ -24,6 +24,10 @@
       url = "github:colemickens/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     self,
@@ -33,6 +37,7 @@
     nur,
     #agenix,
     nixpkgs-wayland,
+    stylix,
   } @ inputs: {
     nixosConfigurations = {
       # Old Moth`s PC
@@ -57,6 +62,7 @@
           home-manager.nixosModules.home-manager
           nur.nixosModules.nur
           #agenix.nixosModules
+          stylix.nixosModules.stylix
         ];
         specialArgs = {
           inherit inputs;
