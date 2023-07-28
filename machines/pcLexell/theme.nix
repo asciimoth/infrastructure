@@ -17,11 +17,11 @@
   theme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
   #theme = "${pkgs.base16-schemes}/share/themes/catppuccin.yaml";
   wallpaper = pkgs.runCommand "image.png" {} ''
-        COLOR=$(${pkgs.yq}/bin/yq -r .base00 ${theme})
-        COLOR="#"$COLOR
-        ${pkgs.imagemagick}/bin/magick convert -size 1x1 xc:$COLOR $out
+    COLOR=$(${pkgs.yq}/bin/yq -r .base00 ${theme})
+    COLOR="#"$COLOR
+    ${pkgs.imagemagick}/bin/magick convert -size 1x1 xc:$COLOR $out
   '';
-  nfonts = (pkgs.nerdfonts.override {fonts = ["FiraCode" "FiraMono"];});
+  nfonts = pkgs.nerdfonts.override {fonts = ["FiraCode" "FiraMono"];};
 in {
   fonts = {
     enableDefaultFonts = true;
