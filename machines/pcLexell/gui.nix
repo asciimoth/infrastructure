@@ -12,16 +12,26 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  constants = import ./constants.nix;
+in {
   imports = [
     ./x.nix
   ];
   environment.systemPackages = with pkgs; [
-    alacritty
+    #alacritty
     firefox
-    rofi
+    #rofi
     notify-desktop
     xorg.xbacklight
     xorg.xdpyinfo
+    telegram-desktop
+    flameshot
   ];
+  home-manager.users."${constants.MainUser}" = {
+    programs = {
+      rofi.enable = true;
+      alacritty.enable = true;
+    };
+  };
 }

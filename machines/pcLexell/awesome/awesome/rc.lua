@@ -338,11 +338,14 @@ globalkeys = gears.table.join(
 
     -- Prompt
     awful.key({ modkey },            "r",     function ()
-                    -- awful.screen.focused().mypromptbox:run()
-                    awful.util.spawn('alacritty --class CONTROLBOX -o "window.dimensions.lines=15" -o "window.dimensions.columns=30" -e "fish"')
+                    awful.util.spawn('rofi -show drun')
                end,
               {description = "run prompt", group = "launcher"}),
-
+    -- awful.key({ modkey },            "r",     function ()
+    --                 -- awful.screen.focused().mypromptbox:run()
+    --                 awful.util.spawn('alacritty --class CONTROLBOX -o "window.dimensions.lines=15" -o "window.dimensions.columns=30" -e "fish"')
+    --            end,
+    --           {description = "run prompt", group = "launcher"}),
     awful.key({ modkey }, "x",
               function ()
                   awful.prompt.run {

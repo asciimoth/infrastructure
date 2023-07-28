@@ -127,9 +127,6 @@ in {
   ];
 
   environment.systemPackages = with pkgs; [
-    telegram-desktop
-    flameshot
-
     htop
     micro
     #helix

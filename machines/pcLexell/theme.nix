@@ -14,10 +14,8 @@
   ...
 }: let
   constants = import ./constants.nix;
-  theme = "${pkgs.base16-schemes}/share/themes/catppuccin.yaml";
-  #theme = pkgs.fetchurl {
-  #  url = "https://raw.githubusercontent.com/tined-theming/base16/main/catppuccin-latte.yaml";
-  #};
+  theme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
+  #theme = "${pkgs.base16-schemes}/share/themes/catppuccin.yaml";
   wallpaper = pkgs.runCommand "image.png" {} ''
         COLOR=$(${pkgs.yq}/bin/yq -r .base00 ${theme})
         COLOR="#"$COLOR
