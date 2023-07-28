@@ -52,7 +52,7 @@ in {
   services.dnscrypt-proxy2 = {
     enable = true;
     settings = {
-      listen_addresses = [ "127.0.0.1:53" "[::1]:53" ];
+      listen_addresses = ["127.0.0.1:53" "[::1]:53"];
       max_clients = 256;
       ipv4_servers = true;
       ipv6_servers = true;
@@ -100,7 +100,7 @@ in {
         "ams-ads-doh-nl"
         "adguard-dns-doh"
       ];
-      disabled_server_names = [ "yandex" ];
+      disabled_server_names = ["yandex"];
       forwarding_rules = "/etc/forwarding-rules";
     };
   };
