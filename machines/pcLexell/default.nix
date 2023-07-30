@@ -17,6 +17,7 @@
   constants = import ./constants.nix;
 in {
   imports = [
+    ./time.nix
     ./hm.nix
     ./initrd.nix
     ./shell.nix
@@ -49,7 +50,6 @@ in {
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
 
   networking.hostName = hostname;
-  time.timeZone = "Asia/Tbilisi";
 
   nix.package = pkgs.nixUnstable;
   nix.extraOptions = ''
@@ -125,6 +125,8 @@ in {
   nixpkgs.config.permittedInsecurePackages = [
     "python3.10-certifi-2022.12.7"
   ];
+
+  boot.supportedFilesystems = ["ntfs"];
 
   environment.systemPackages = with pkgs; [
     htop
