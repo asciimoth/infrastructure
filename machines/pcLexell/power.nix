@@ -13,11 +13,32 @@
   inputs,
   ...
 }: {
-  environment.systemPackages = with pkgs; [
-    autorandr
+  # https://discourse.nixos.org/t/thinkpad-t470s-power-management/8141/8
+  boot.kernelModules = ["coretemp" "cpuid"];
+
+  boot.extraModprobeConfig = lib.mkMerge [
+    # idle audio card after one second
+    "options snd_hda_intel power_save=1"
+    # enable wifi power saving (keep uapsd off to maintain low latencies)
+    "options iwlwifi power_save=1 uapsd_disable=1"
   ];
 
-  services.upower.enable = true;
+  environment.systemPackages = with pkgs; [
+    autorandr
+    powertop
+  ];
+
+  services = {
+    upower.enable = true;
+    thermald.enable = true;
+    tlp = {
+      enable = true;
+      extraConfig = ''
+        CPU_SCALING_GOVERNOR_ON_AC=performance
+        CPU_SCALING_GOVERNOR_ON_BAT=powersave
+      '';
+    };
+  };
 
   powerManagement = {
     enable = true;
