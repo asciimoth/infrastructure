@@ -34,6 +34,7 @@ in {
     ./network.nix
     ./example.nix
     ./theme.nix
+    ./usb.nix
 
     #./ssh.nix
 
@@ -146,7 +147,7 @@ in {
     thefuck
     #perl
 
-    nebula
+    #nebula
 
     #distrobox
 
@@ -174,6 +175,8 @@ in {
     usbutils #lsusb & CO
 
     xdotool
+
+    #udisksctludisksctl
 
     # yara
 

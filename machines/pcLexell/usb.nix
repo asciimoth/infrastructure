@@ -14,17 +14,29 @@
   ...
 }: let
   constants = import ./constants.nix;
+  notifybyname = pkgs.writeShellScriptBin "notify-by-name" (builtins.readFile ./notify-by-name.sh);
 in {
   environment.systemPackages = with pkgs; [
     udisks2
-    udiskie
+    #udiskie
   ];
   services.udisks2 = {
     enable = true;
   };
-  home-manager.users."${constants.MainUser}" = {
-    programs = {
-      rofi.enable = true;
+  home-manager.users."${constants.MainUser}".systemd.user.services.udiskie = {
+    Service = {
+      Environment = ["PATH=${lib.makeBinPath [pkgs.udiskie pkgs.notify-desktop pkgs.coreutils-full notifybyname]}"];
+      ExecStart = toString (pkgs.writeShellScript "yubikey-touch-detector" ''
+        udiskie -NaT --notify-command "notify-by-name -n UDISKIE_EVENT -u normal -t 800 -b 'USB'"
+      '');
+    };
+    Unit = {
+      Description = "Udiskie USB manager";
+      After = ["graphical-session.target"];
+      Wants = ["gpg-agent-ssh.socket" "gpg-agent.socket"];
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
     };
   };
 }
