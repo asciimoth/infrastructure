@@ -7,19 +7,24 @@
 # You should have received a copy of the CC0 legalcode along with this
 # work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 {
-  ConfigRoot = "/etc/infrastructure";
-  MainUser = "moth";
-  Editor = "micro";
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
+  constants = import ./constants.nix;
+in {
+  environment.systemPackages = with pkgs; [
+    udisks2
+    udiskie
+  ];
+  services.udisks2 = {
+    enable = true;
+  };
+  home-manager.users."${constants.MainUser}" = {
+    programs = {
+      rofi.enable = true;
+    };
+  };
 }
-#let
-#  ConfigRoot = "/etc/infrastructure";
-#  MainUser = "moth";
-#  Editor = "micro";
-#in {
-#  inherit
-#    MainUser
-#    ConfigRoot
-#    Editor
-#    ;
-#}
-
