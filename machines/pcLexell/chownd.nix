@@ -18,7 +18,7 @@
     sudo systemctl start chownd
   '';
 in {
-  environment.systemPackages = [ chownd_caller ];
+  environment.systemPackages = [chownd_caller];
   systemd.services.chownd = {
     path = with pkgs; [coreutils gawk];
     wantedBy = ["multi-user.target"];
