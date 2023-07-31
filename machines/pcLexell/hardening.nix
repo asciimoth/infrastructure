@@ -123,7 +123,11 @@
   };
 
   security = {
-    sudo.execWheelOnly = lib.mkForce true;
+    #doas
+    sudo = {
+      execWheelOnly = lib.mkForce true;
+      extraConfig = "Defaults env_reset,timestamp_timeout=0";
+    };
     auditd.enable = true;
     audit = {
       enable = true;
