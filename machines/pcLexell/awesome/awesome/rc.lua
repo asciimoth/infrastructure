@@ -20,6 +20,7 @@ require("awful.hotkeys_popup.keys")
 require("awesome-remember-geometry")
 awpwkb = require("awpwkb")
 battery_widget = require("battery-widget")
+-- require("b16theme")
 --require("smart_borders"){ show_button_tooltips = true }
 
 kb = awpwkb.init({
@@ -718,7 +719,7 @@ end)
 
 client.connect_signal("unfocus", function(c)
     c.border_color = beautiful.border_normal
-    c.opacity = 0.8
+    c.opacity = 0.5
 end)
 -- }}}
 

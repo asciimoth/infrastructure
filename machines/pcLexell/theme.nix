@@ -14,8 +14,9 @@
   ...
 }: let
   constants = import ./constants.nix;
-  theme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
-  #theme = "${pkgs.base16-schemes}/share/themes/catppuccin.yaml";
+  #theme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
+  theme = "${pkgs.base16-schemes}/share/themes/catppuccin.yaml";
+  #theme = "${pkgs.base16-schemes}/share/themes/isotope.yaml";
   wallpaper = pkgs.runCommand "image.png" {} ''
     COLOR=$(${pkgs.yq}/bin/yq -r .base00 ${theme})
     COLOR="#"$COLOR
