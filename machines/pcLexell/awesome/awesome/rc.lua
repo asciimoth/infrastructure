@@ -19,6 +19,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 require("awesome-remember-geometry")
 awpwkb = require("awpwkb")
+battery_widget = require("battery-widget")
 --require("smart_borders"){ show_button_tooltips = true }
 
 kb = awpwkb.init({
@@ -236,8 +237,31 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
             wibox.widget.systray(),
+            mykeyboardlayout,
+            battery_widget {
+                ac = "AC",
+                adapter = "BAT0",
+                ac_prefix = "AC: ",
+                battery_prefix = "Bat: ",
+                percent_colors = {
+                    { 25, "red"   },
+                    { 50, "orange"},
+                    {999, "green" },
+                },
+                listen = true,
+                timeout = 10,
+                widget_text = "${color_on}${percent}%${color_off} ${state}",
+                --widget_font = "Deja Vu Sans Mono 8",
+                tooltip_text = "Battery ${state}${time_est}\nCapacity: ${capacity_percent}%",
+                alert_threshold = 5,
+                alert_timeout = 0,
+                alert_title = "Low battery !",
+                alert_text = "${AC_BAT}${time_est}",
+                --alert_icon = "~/Downloads/low_battery_icon.png",
+                warn_full_battery = true,
+                --full_battery_icon = "~/Downloads/full_battery_icon.png",
+            },
             mytextclock,
             s.mylayoutbox,
         },

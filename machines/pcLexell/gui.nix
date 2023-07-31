@@ -25,7 +25,7 @@ in {
     notify-desktop
     xorg.xbacklight
     xorg.xdpyinfo
-    telegram-desktop
+    #telegram-desktop
     flameshot
   ];
   home-manager.users."${constants.MainUser}" = {
@@ -33,5 +33,8 @@ in {
       rofi.enable = true;
       alacritty.enable = true;
     };
+    home.packages = [
+      pkgs.tdesktop
+    ];
   };
 }

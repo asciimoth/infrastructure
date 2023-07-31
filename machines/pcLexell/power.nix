@@ -26,17 +26,19 @@
   environment.systemPackages = with pkgs; [
     autorandr
     powertop
+    acpid
   ];
 
   services = {
     upower.enable = true;
     thermald.enable = true;
+    acpid.enable = true;
     tlp = {
       enable = true;
-      extraConfig = ''
-        CPU_SCALING_GOVERNOR_ON_AC=performance
-        CPU_SCALING_GOVERNOR_ON_BAT=powersave
-      '';
+      settings = {
+        CPU_SCALING_GOVERNOR_ON_AC="performance";
+        CPU_SCALING_GOVERNOR_ON_BAT="powersave";
+      };
     };
   };
 
