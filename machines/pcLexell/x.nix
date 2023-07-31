@@ -37,6 +37,9 @@
       "ati_ufree"
       #"amdgpu"
     ];
+    excludePackages = with pkgs; [
+      xterm
+    ];
   };
 
   #environment.etc.wallaper.source = ./GreyDot.png;
