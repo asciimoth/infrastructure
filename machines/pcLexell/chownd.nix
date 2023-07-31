@@ -14,8 +14,11 @@
   ...
 }: let
   chownd = pkgs.writeShellScriptBin "chownd" (builtins.readFile ./chownd.sh);
+  chownd_caller = pkgs.writeShellScriptBin "chownd" ''
+    sudo systemctl start chownd
+  '';
 in {
-  #
+  environment.systemPackages = [ chownd_caller ];
   systemd.services.chownd = {
     path = with pkgs; [coreutils gawk];
     wantedBy = ["multi-user.target"];
