@@ -26,8 +26,8 @@ in {
     mutespeaker
   ];
 
-  systemd.user.services.mutespeaker = {
-    enable = true;
+  systemd.services.mutespeaker = {
+    enable = false;
     wantedBy = ["default.target"];
     after = ["network.target"];
     #description = "";

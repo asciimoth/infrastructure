@@ -19,17 +19,17 @@ function show {
 }
 
 function up {
-    amixer -c 0 set Master on > /dev/null
-    amixer -c 0 sset Master 5%+ > /dev/null
+    amixer set Master on > /dev/null
+    amixer set Master 5%+ > /dev/null
 }
 
 function down {
-    amixer -c 0 set Master on > /dev/null
-    amixer -c 0 sset Master 5%- > /dev/null
+    amixer set Master on > /dev/null
+    amixer set Master 5%- > /dev/null
 }
 
 function mute {
-    amixer -c 0 set Master 1+ toggle > /dev/null
+    amixer set Master 1+ toggle > /dev/null
 }
 
 case $1 in
