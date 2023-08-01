@@ -13,7 +13,7 @@
   inputs,
   ...
 }:
-  #
+#
 {
   environment.systemPackages = with pkgs; [
     thunderbird
