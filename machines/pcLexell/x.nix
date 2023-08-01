@@ -24,6 +24,7 @@
     libinput.enable = true;
     layout = "us,ru";
     xkbOptions = "grp:shifts_toggle";
+    dpi = 141; #https://dpi.lv/
     displayManager = {
       lightdm.enable = lib.mkForce false;
       startx.enable = true;
@@ -49,9 +50,18 @@
     scriptPath = ".xinitrc";
   };
 
-  hardware.opengl = {
-    enable = true;
-    driSupport32Bit = true;
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+    nvidia = {
+      #open = false;
+      modesetting.enable = true;
+      nvidiaSettings = true;
+      #package = config.boot.kernelPackages.nvidiaPackages.stable; #Optional
+    };
   };
 
   #services.unclutter = {
