@@ -136,10 +136,9 @@ in {
     nano
     age
     rage
-    tomb
+    sops
     b3sum
     openssl
-    cryptsetup
     neofetch
     pulseaudio
 

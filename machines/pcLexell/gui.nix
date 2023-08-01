@@ -27,6 +27,7 @@ in {
     xorg.xdpyinfo
     #telegram-desktop
     flameshot
+    obsidian
   ];
   home-manager.users."${constants.MainUser}" = {
     programs = {

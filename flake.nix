@@ -28,6 +28,10 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     self,
@@ -38,23 +42,10 @@
     #agenix,
     nixpkgs-wayland,
     stylix,
+    sops-nix,
   } @ inputs: {
     nixosConfigurations = {
-      # Old Moth`s PC
-      #MothsLaptop = nixpkgs.lib.nixosSystem {
-      #  system = "x86_64-linux";
-      #  modules = [
-      #    ./machines/MothsLaptop
-      #    home-manager.nixosModules.home-manager
-      #    nur.nixosModules.nur
-      #    agenix.nixosModules
-      #  ];
-      #  specialArgs = {
-      #    inputs = inputs;
-      #    hostname = "MothsLaptop";
-      #  };
-      #};
-      # Current Moth`s PC (Thinkpad P1 Laptop currently)
+      # Moth`s PC (Thinkpad P1 G5 Laptop currently)
       pcLexell = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -63,6 +54,7 @@
           nur.nixosModules.nur
           #agenix.nixosModules
           stylix.nixosModules.stylix
+          sops-nix.nixosModules.sops
         ];
         specialArgs = {
           inherit inputs;
