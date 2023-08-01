@@ -1,3 +1,5 @@
+# To add key
+# sops -r -i --add-<type> <key> <file>
 keys:
   - &moth_gpg C5C84658CCFD7E8E71DEE933AF3AE54FC3A35C9F
   - &pcLexell_age age1vzctvstte5cf8dru8hdukualgwfzz9zf4enxx8a5cznyxu450shshw8tzs
