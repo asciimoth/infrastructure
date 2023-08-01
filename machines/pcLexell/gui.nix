@@ -32,7 +32,17 @@ in {
   home-manager.users."${constants.MainUser}" = {
     programs = {
       rofi.enable = true;
-      alacritty.enable = true;
+      alacritty = { 
+        enable = true;
+        settings = {
+          scale_with_dpi = true;
+          dpi = {
+            x = 141;
+            y = 141;
+          };
+          font.size = lib.mkForce 9;
+        };
+      };
     };
     home.packages = [
       pkgs.tdesktop
