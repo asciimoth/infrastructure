@@ -22,8 +22,16 @@ in {
     text = "root /home/${constants.MainUser}/.config/Yubico/u2f_keys";
     mode = "744";
   };
-  home-manager.users."${constants.MainUser}" = {
-    home.file.".config/Yubico/u2f_keys".text = "moth:gXHGuXRnsYbUF1BfKb5xSC7r+i+uAmbBjfewm0vI/OFNk+TJrHCdbFvI3g2+hj4NLo75/6QUJJ2oasdxeU7uDQ==,79Hf8fzAhAl2ZyDlSJXc8rmfHBstAVxMK8g9KuXrsLa0eahM8n0g9pPGLYXWL3egZpfYhI6MKVnDZfTPfXLEJw==,es256,+presencemoth:MRbRS5FudZJMlORvvOAzxXDjcvaMPWirRifxDLwc5W5rscH+7buQOyvFq7zYx2BkIa5alzjX+bukxbaP28xEIQ==,tVu11SR+plTarazBCkSr/MwKQi+486+oC8warrXmqS6maHTt7wx9iVuG4VkDUGFChlvj6TcA0rTO6OMcsa0wzA==,es256,+presence";
+  #home-manager.users."${constants.MainUser}" = {
+  #  home.file.".config/Yubico/u2f_keys".text = "moth:gXHGuXRnsYbUF1BfKb5xSC7r+i+uAmbBjfewm0vI/OFNk+TJrHCdbFvI3g2+hj4NLo75/6QUJJ2oasdxeU7uDQ==,79Hf8fzAhAl2ZyDlSJXc8rmfHBstAVxMK8g9KuXrsLa0eahM8n0g9pPGLYXWL3egZpfYhI6MKVnDZfTPfXLEJw==,es256,+presencemoth:MRbRS5FudZJMlORvvOAzxXDjcvaMPWirRifxDLwc5W5rscH+7buQOyvFq7zYx2BkIa5alzjX+bukxbaP28xEIQ==,tVu11SR+plTarazBCkSr/MwKQi+486+oC8warrXmqS6maHTt7wx9iVuG4VkDUGFChlvj6TcA0rTO6OMcsa0wzA==,es256,+presence";
+  #};
+  sops.secrets."pcLexell-moth-u2f-keys.txt" = {
+    path = "/home/${constants.MainUser}/.config/Yubico/u2f_keys";
+    owner = "root";
+    group = "root";
+    mode = "744";
+    sopsFile = ../../secrets/pcLexell-moth-u2f-keys.txt;
+    format = "binary";
   };
   security.pam.services = {
     login.u2fAuth = true;

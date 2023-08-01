@@ -64,6 +64,8 @@ in {
     consoleLogLevel = 0; # Show all levels
   };
 
+  sops.age.keyFile = "/root/.config/sops/age/keys.txt";
+
   users = {
     mutableUsers = false;
     users = {
