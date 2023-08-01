@@ -35,6 +35,8 @@ in {
     ./example.nix
     ./theme.nix
     ./usb.nix
+    ./email.nix
+    ./email.nix
 
     #./ssh.nix
 
@@ -160,7 +162,7 @@ in {
 
     #go
 
-    boxxy
+    #boxxy
     tmux
 
     alejandra # nix formatter
