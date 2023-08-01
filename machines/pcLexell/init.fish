@@ -154,7 +154,7 @@ function add_gaps
 end
 
 function fish_prompt
-  history merge
+  #history merge
   set -g STATUS $status
   if [ $__LAST_STATUS_GENERATION = $status_generation ]
     set -g STATUS "0"
