@@ -32,7 +32,7 @@ in {
   home-manager.users."${constants.MainUser}" = {
     programs = {
       rofi.enable = true;
-      alacritty = { 
+      alacritty = {
         enable = true;
         settings = {
           scale_with_dpi = true;
