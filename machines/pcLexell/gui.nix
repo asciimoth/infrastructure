@@ -35,7 +35,10 @@ in {
     ];
     home-manager.users."${constants.MainUser}" = {
       programs = {
-        rofi.enable = true;
+        rofi = {
+          enable = true;
+          font = lib.mkForce "DejaVu Sans Mono 15";
+        };
         alacritty = {
           enable = true;
           settings = {
