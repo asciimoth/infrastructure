@@ -48,9 +48,9 @@ in {
 
         "browser.sessionstore.restore_hidden_tabs" = true;
         "browser.sessionstore.restore_on_demand" = false;
-        "browser.sessionstore.restore_pinned_tabs_on_demand" = false;	
+        "browser.sessionstore.restore_pinned_tabs_on_demand" = false;
         "browser.sessionstore.restore_tabs_lazily" = true;
-        "browser.sessionstore.resume_from_crash" = true;	
+        "browser.sessionstore.resume_from_crash" = true;
         #"browser.sessionstore.resume_session_once" = false;
         "browser.sessionstore.resuming_after_os_restart" = true;
 
@@ -59,7 +59,7 @@ in {
         "browser.bookmarks.addedImportButton" = true;
         # Disable top bookmarks
         "browser.toolbars.bookmarks.visibility" = "never";
-        
+
         # Disable auto update
         "app.update.checkInstallTime" = false;
         "app.update.auto" = false;

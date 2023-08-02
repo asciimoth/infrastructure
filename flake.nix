@@ -58,7 +58,7 @@
           #agenix.nixosModules
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops
-          { nixpkgs.overlays = [ nur.overlay ]; }
+          {nixpkgs.overlays = [nur.overlay];}
         ];
         specialArgs = {
           inherit inputs;
