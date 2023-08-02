@@ -18,7 +18,7 @@ in {
   imports = [
     ./x.nix
     ./firefox.nix
-    ./nheko.nix
+    ./matrix.nix
   ];
   options = {
     defaultApplications = lib.mkOption {
