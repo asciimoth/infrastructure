@@ -362,10 +362,10 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function ()
-                    awful.util.spawn('rofi -show drun')
-               end,
-              {description = "run prompt", group = "launcher"}),
+    awful.key({ modkey },"r", function () awful.util.spawn('rofi -show drun') end,
+              {description = "run rofi drun", group = "launcher"}),
+    awful.key({ modkey }, "p", function() awful.util.spawn('rofi-pass') end,
+              {description = "run rofi-pass", group = "launcher"}),
     -- awful.key({ modkey },            "r",     function ()
     --                 -- awful.screen.focused().mypromptbox:run()
     --                 awful.util.spawn('alacritty --class CONTROLBOX -o "window.dimensions.lines=15" -o "window.dimensions.columns=30" -e "fish"')
@@ -381,9 +381,6 @@ globalkeys = gears.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
-    -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"}),
     -- Volume control
     awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("volume +") end,
               {description = "Raise Volume", group = "launcher"}),

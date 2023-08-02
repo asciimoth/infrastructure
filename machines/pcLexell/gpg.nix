@@ -20,6 +20,8 @@ in {
 
   environment.systemPackages = with pkgs; [
     pinentry-qt
+    pass
+    rofi-pass
   ];
 
   #services.pcscd.enable = true;
