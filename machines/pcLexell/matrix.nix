@@ -15,7 +15,7 @@
 }: let
   constants = import ./constants.nix;
 in {
-  home-manager.users."${constants.MainUser}".programs.nheco = {
+  home-manager.users."${constants.MainUser}".programs.nheko = {
     enable = true;
   };
 }
