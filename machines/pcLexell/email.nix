@@ -12,10 +12,19 @@
   lib,
   inputs,
   ...
-}:
-#
-{
+}: let
+  constants = import ./constants.nix;
+in {
   environment.systemPackages = with pkgs; [
-    thunderbird
+    #thunderbird
   ];
+  home-manager.users."${constants.MainUser}".programs.thunderbird = {
+    enable = true;
+    profiles.default = {
+      isDefault = true;
+    };
+    settings = {
+      "privacy.donottrackheader.enabled" = true;
+    };
+  };
 }
