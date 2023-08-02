@@ -17,30 +17,33 @@
     ./awesome
   ];
 
-  services.xserver = {
-    enable = true;
-    autorun = false;
-    exportConfiguration = true;
-    libinput.enable = true;
-    layout = "us,ru";
-    xkbOptions = "grp:shifts_toggle";
-    dpi = 141; #https://dpi.lv/
-    displayManager = {
-      lightdm.enable = lib.mkForce false;
-      startx.enable = true;
-      #autoLogin = {
-      #  enable = true;
-      #  user = "moth";
-      #};
+  services = {
+    xserver = {
+      enable = true;
+      autorun = false;
+      exportConfiguration = true;
+      libinput.enable = true;
+      layout = "us,ru";
+      xkbOptions = "grp:shifts_toggle";
+      dpi = 141; #https://dpi.lv/
+      displayManager = {
+        lightdm.enable = lib.mkForce false;
+        startx.enable = true;
+        #autoLogin = {
+        #  enable = true;
+        #  user = "moth";
+        #};
+      };
+      videoDrivers = [
+        "nvidia"
+        "ati_ufree"
+        #"amdgpu"
+      ];
+      excludePackages = with pkgs; [
+        xterm
+      ];
     };
-    videoDrivers = [
-      "nvidia"
-      "ati_ufree"
-      #"amdgpu"
-    ];
-    excludePackages = with pkgs; [
-      xterm
-    ];
+    hardware.bolt.enable = false;
   };
 
   #environment.etc.wallaper.source = ./GreyDot.png;

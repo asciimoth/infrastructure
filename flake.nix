@@ -15,7 +15,10 @@
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/NUR";
+    nur = {
+      url = "github:nix-community/NUR";
+      #inputs.nixpkgs.follows = "nixpkgs";
+    };
     #agenix = {
     #  url = "github:ryantm/agenix";
     #  inputs.nixpkgs.follows = "nixpkgs";
@@ -55,6 +58,7 @@
           #agenix.nixosModules
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops
+          { nixpkgs.overlays = [ nur.overlay ]; }
         ];
         specialArgs = {
           inherit inputs;

@@ -17,35 +17,104 @@
 in {
   imports = [
     ./x.nix
+    ./firefox.nix
   ];
-  environment.systemPackages = with pkgs; [
-    #alacritty
-    firefox
-    #rofi
-    notify-desktop
-    xorg.xbacklight
-    xorg.xdpyinfo
-    #telegram-desktop
-    flameshot
-    obsidian
-  ];
-  home-manager.users."${constants.MainUser}" = {
-    programs = {
-      rofi.enable = true;
-      alacritty = {
-        enable = true;
-        settings = {
-          scale_with_dpi = true;
-          dpi = {
-            x = 141;
-            y = 141;
+  options = {
+    defaultApplications = lib.mkOption {
+      type = lib.types.attrs;
+    };
+  };
+
+  config = {
+    environment.systemPackages = with pkgs; [
+      notify-desktop
+      xorg.xbacklight
+      xorg.xdpyinfo
+      flameshot
+      obsidian
+    ];
+    home-manager.users."${constants.MainUser}" = {
+      programs = {
+        rofi.enable = true;
+        alacritty = {
+          enable = true;
+          settings = {
+            scale_with_dpi = true;
+            dpi = {
+              x = 141;
+              y = 141;
+            };
+            font.size = lib.mkForce 9;
           };
-          font.size = lib.mkForce 9;
         };
       };
+      home.packages = [
+        pkgs.tdesktop
+      ];
     };
-    home.packages = [
-      pkgs.tdesktop
-    ];
+
+    xdg.mime = {
+      enable = true;
+      defaultApplications = with config.defaultApplications;
+        builtins.mapAttrs
+          (name: value:
+            if value ? desktop then [ "${value.desktop}.desktop" ] else value)
+          {
+            #"inode/directory" = fm;
+            "text/html" = browser;
+            #"image/*" = { desktop = "org.gnome.eog"; };
+            #"application/zip" = archive;
+            #"application/rar" = archive;
+            #"application/7z" = archive;
+            #"application/*tar" = archive;
+            "x-scheme-handler/http" = browser;
+            "x-scheme-handler/https" = browser;
+            "x-scheme-handler/about" = browser;
+            "x-scheme-handler/mailto" = mail;
+            #"x-scheme-handler/matrix" = matrix;
+            #"application/pdf" = { desktop = "org.kde.okular"; };
+            #"application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
+            #  text_processor;
+            #"application/msword" = text_processor;
+            #"application/vnd.oasis.opendocument.text" = text_processor;
+            #"text/csv" = spreadsheet;
+            #"application/vnd.oasis.opendocument.spreadsheet" = spreadsheet;
+            "text/plain" = editor;
+          };
+    };
+    defaultApplications = {
+      #matrix = {
+      #  cmd = "${pkgs.nheko}/bin/nheko";
+      #  desktop = "nheko";
+      #};
+      browser = {
+        cmd = "${pkgs.firefox}/bin/firefox";
+        desktop = "firefox";
+      };
+      #fm = {
+      #  cmd = "${pkgs.dolphin}/bin/dolphin";
+      #  desktop = "org.kde.dolphin";
+      #};
+      editor = {
+        cmd = "${pkgs.micro}/bin/micro ${pkgs.micro}/bin/micro";
+        desktop = "micro";
+      };
+      mail = {
+        cmd = "${pkgs.thunderbird}/bin/thunderbird";
+        desktop = "thunderbird";
+      };
+      #text_processor = {
+      #  cmd = "${pkgs.libreoffice}/bin/libreoffice";
+      #  desktop = "libreoffice-startcenter";
+      #};
+      #spreadsheet = {
+      #  cmd = "${pkgs.libreoffice}/bin/libreoffice";
+      #  desktop = "libreoffice-startcenter";
+      #};
+      #archive = {
+      #  cmd = "${pkgs.gnome.file-roller}/bin/file-roller";
+      #  desktop = "org.gnome.FileRoller";
+      #};
+    };
   };
 }
