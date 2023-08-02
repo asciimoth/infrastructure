@@ -15,7 +15,7 @@
 }: let
   constants = import ./constants.nix;
   #theme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
-  theme = "${pkgs.base16-schemes}/share/themes/catppuccin.yaml";
+  theme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
   #theme = "${pkgs.base16-schemes}/share/themes/isotope.yaml";
   wallpaper = pkgs.runCommand "image.png" {} ''
     COLOR=$(${pkgs.yq}/bin/yq -r .base00 ${theme})
@@ -25,9 +25,9 @@
   nfonts = pkgs.nerdfonts.override {fonts = ["FiraCode" "FiraMono"];};
 in {
   fonts = {
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
     #fontDir.enable = true; #Will force recompile some programs
-    fonts = with pkgs; [
+    packages = with pkgs; [
       nfonts
     ];
     fontconfig = {
