@@ -18,6 +18,7 @@ in {
   imports = [
     ./x.nix
     ./firefox.nix
+    ./nheko.nix
   ];
   options = {
     defaultApplications = lib.mkOption {
@@ -88,10 +89,10 @@ in {
         };
     };
     defaultApplications = {
-      #matrix = {
-      #  cmd = "${pkgs.nheko}/bin/nheko";
-      #  desktop = "nheko";
-      #};
+      matrix = {
+        cmd = "${pkgs.nheko}/bin/nheko";
+        desktop = "nheko";
+      };
       browser = {
         cmd = "${pkgs.firefox}/bin/firefox";
         desktop = "firefox";
