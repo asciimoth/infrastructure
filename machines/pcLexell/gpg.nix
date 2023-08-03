@@ -14,6 +14,7 @@
   ...
 }: let
   constants = import ./constants.nix;
+  #pass otp append github.com --secret --issuer GitHub
   mypass = with pkgs; pass.withExtensions (ext: [ext.pass-otp]);
 in {
   # Fix some GUI pinentry issues
