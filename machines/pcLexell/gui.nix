@@ -48,7 +48,7 @@ in {
               x = 141;
               y = 141;
             };
-            font.size = lib.mkForce 9;
+            font.size = lib.mkForce 8;
           };
         };
       };

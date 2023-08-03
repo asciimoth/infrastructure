@@ -14,14 +14,16 @@
   ...
 }: let
   constants = import ./constants.nix;
+  mypass = with pkgs; pass.withExtensions (ext: [ext.pass-otp]);
 in {
   # Fix some GUI pinentry issues
   services.dbus.packages = [pkgs.gcr];
 
   environment.systemPackages = with pkgs; [
     pinentry-qt
-    pass
     rofi-pass
+    mypass
+    #pass.withExtensions (exts: [ exts.pass-otp ])
   ];
 
   #services.pcscd.enable = true;
