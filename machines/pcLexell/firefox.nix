@@ -19,7 +19,7 @@ in {
   home-manager.users."${constants.MainUser}".programs = {
     browserpass = {
       enable = true;
-      browsers = [ "firefox" ];
+      browsers = ["firefox"];
     };
     firefox = {
       enable = true;
