@@ -35,6 +35,10 @@ in {
     pinentryFlavor = "qt";
   };
 
+  environment.shellAliases = {
+    start = "systemctl --user restart pass-secret-service && startx";
+  };
+
   home-manager.users."${constants.MainUser}" = {pkgs, ...}: {
     programs.gpg = {
       enable = true;
@@ -46,6 +50,21 @@ in {
           trust = 5;
         }
       ];
+    };
+    services.pass-secret-service.enable = true;
+    systemd.user.services.pass-secret-service-fixer = {
+      Service = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.systemd}/bin/systemctl --user restart pass-secret-service";
+      };
+      Unit = {
+        Description = "Fix pass-secret-service by restarting it";
+        After = ["graphical-session.target"];
+        #Wants = ["graphical-session.target"];
+      };
+      Install = {
+        WantedBy = ["graphical-session.target"];
+      };
     };
   };
 }
