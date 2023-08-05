@@ -15,6 +15,7 @@
 }: let
   constants = import ./constants.nix;
 in {
+  # TODO add declarative nheko configuration after fix for this https://mynixos.com/home-manager/option/programs.nheko.settings
   home-manager.users."${constants.MainUser}".programs.nheko = {
     enable = true;
   };
