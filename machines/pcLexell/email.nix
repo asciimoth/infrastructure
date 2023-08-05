@@ -18,6 +18,7 @@ in {
   environment.systemPackages = with pkgs; [
     #thunderbird
     himalaya
+    aerc
   ];
   home-manager.users."${constants.MainUser}".programs.thunderbird = {
     enable = true;
