@@ -147,6 +147,7 @@ in {
     l = "exa --oneline -L -T -F --group-directories-first";
 
     # Etc
+    bat = "bat --paging never";
     tr = "exa --oneline -T -F --group-directories-first -a";
     gtr = "exa --oneline -T -F --group-directories-first -a --git-ignore --ignore-glob .git";
     qr = "qrencode -t UTF8 -o -";
