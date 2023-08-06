@@ -19,6 +19,19 @@
   decolor = pkgs.writeShellScriptBin "decolor" ''
     cat /dev/stdin | sed -r "s/\x1B\[[0-9;]*[JKmsu]//g"
   '';
+  ors = pkgs.writeShellScriptBin "OR" ''
+    # Return output of first command with non empty stdout
+    # Usage:
+    # OR COMMAND1 COMMAND2 COMMANDN
+    for ___CMD in "$@"
+    do
+        RESULT=$(eval $___CMD)
+        if [ -n "$RESULT" ]; then
+            echo "$RESULT"
+            exit 0
+        fi
+    done
+  '';
   read-or-value = pkgs.writeShellScriptBin "read-or-value" ''
     RET=$(cat $1 2> /dev/null)
     STATUS=$?
@@ -196,6 +209,7 @@ in {
     num-max
     num-min
     num-lim
+    ors
     read-or-value
     withdir
     clone-commit

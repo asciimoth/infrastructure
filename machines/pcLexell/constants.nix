@@ -10,6 +10,11 @@
   ConfigRoot = "/etc/infrastructure";
   MainUser = "moth";
   Editor = "micro";
+  Email = "ascii@moth.contact";
+  Nicknames = {
+    Full = "ASCII Moth";
+    Lower = "asciimoth";
+  };
 }
 #let
 #  ConfigRoot = "/etc/infrastructure";
