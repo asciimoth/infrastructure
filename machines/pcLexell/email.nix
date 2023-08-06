@@ -44,7 +44,7 @@ in {
           default = true;
           sync = true;
           sync-dir = "${maildir}/${host}/${login}";
-          sync-folders-strategy.exclude = ["Junk" "Trash"];
+          #sync-folders-strategy.exclude = ["Junk" "Trash"];
           # Backend
           backend = "imap";
           imap-host = "${host}";
@@ -54,6 +54,10 @@ in {
           imap-passwd = {cmd = passcmd;};
           imap-ssl = true;
           imap-starttls = false;
+          imap-watch-cmds = [
+            ''himalaya --account "${constants.Nicknames.Full}" account sync''
+            "echo 'Something changed'"
+          ];
           # Sender
           sender = "smtp";
           smtp-host = "${host}";
