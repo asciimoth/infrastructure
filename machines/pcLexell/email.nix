@@ -15,18 +15,19 @@
 }: let
   constants = import ./constants.nix;
 in {
-  environment.systemPackages = with pkgs; [
-    #thunderbird
-    himalaya
-    aerc
-  ];
-  home-manager.users."${constants.MainUser}".programs.thunderbird = {
-    enable = true;
-    profiles.default = {
-      isDefault = true;
+  home-manager.users."${constants.MainUser}".programs = {
+    himalaya = {
+      enable = true;
+      settings = {};
     };
-    settings = {
-      "privacy.donottrackheader.enabled" = true;
+    thunderbird = {
+      enable = true;
+      profiles.default = {
+        isDefault = true;
+      };
+      settings = {
+        "privacy.donottrackheader.enabled" = true;
+      };
     };
   };
 }
