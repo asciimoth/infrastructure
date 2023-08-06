@@ -51,9 +51,7 @@ in {
           imap-port = 993;
           imap-login = "${login}@${host}";
           imap-auth = "passwd";
-          imap-passwd = {
-            cmd = passcmd;
-          };
+          imap-passwd = {cmd = passcmd;};
           imap-ssl = true;
           imap-starttls = false;
           # Sender
@@ -62,9 +60,7 @@ in {
           smtp-port = 465;
           smtp-login = "${login}@${host}";
           smtp-auth = "passwd";
-          smtp-passwd = {
-            cmd = ["pass show email/${host}/${login}" "head -1" "cut -d' ' -f2"];
-          };
+          smtp-passwd = {cmd = passcmd;};
           smtp-ssl = true;
           smtp-starttls = false;
         };
