@@ -19,7 +19,11 @@ function call {
         else
             IDENT=$($COMMAND "$SUMMARY" "$BODY")
         fi
-        echo $IDENT > $FILENAME
+        if [[ ${IDENT} != *"Error"* ]];then
+            if [[ ${IDENT} != *"null"* ]];then
+                echo $IDENT > $FILENAME
+            fi
+        fi
     fi
 }
 

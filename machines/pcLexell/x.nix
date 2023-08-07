@@ -12,7 +12,9 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  constants = import ./constants.nix;
+in {
   imports = [
     ./awesome
   ];
@@ -48,7 +50,7 @@
 
   #environment.etc.wallaper.source = ./GreyDot.png;
 
-  home-manager.users.moth.xsession = {
+  home-manager.users."${constants.MainUser}".xsession = {
     enable = true;
     scriptPath = ".xinitrc";
   };

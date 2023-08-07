@@ -35,6 +35,20 @@ in {
       obsidian
     ];
     home-manager.users."${constants.MainUser}" = {
+      systemd.user.services.graphical-notify = {
+        Service = {
+          ExecStart = toString (pkgs.writeShellScript "graphical-notify" ''
+            ${pkgs.coreutils-full}/bin/touch /tmp/graphical-notifyer
+          '');
+        };
+        Unit = {
+          Description = "Create /tmp/graphical-notifyer when graphical session starts";
+          After = ["graphical-session.target"];
+        };
+        Install = {
+          WantedBy = ["graphical-session.target"];
+        };
+      };
       programs = {
         rofi = {
           enable = true;

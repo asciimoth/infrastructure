@@ -191,11 +191,11 @@ in {
     # For make Qt 5 apps look similar to GTK2 ones
     #qt5.qtbase.gtk
 
-    gcc
-    rustup
-    rustc
-    cargo
-    cargo-license
+    #gcc
+    #rustup
+    #rustc
+    #cargo
+    #cargo-license
 
     #zig
   ];
