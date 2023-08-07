@@ -14,6 +14,7 @@
   ...
 }: {
   # Force disable sleep/hibenation/suspendion
+  #powerManagement.enable = false;
   services.logind.lidSwitch = lib.mkForce "ignore";
   systemd.targets = {
     sleep.enable = lib.mkForce false;

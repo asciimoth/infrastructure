@@ -145,6 +145,8 @@ in {
     neofetch
     pulseaudio
 
+    #jq
+
     tmate
     thefuck
     #perl

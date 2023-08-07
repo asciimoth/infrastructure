@@ -27,7 +27,31 @@
         fi
     done
   '';
+  new-emails-count = pkgs.writeShellScriptBin "new-emails-count" ''
+    ${pkgs.himalaya}/bin/himalaya list -o json -f Inbox | ${pkgs.jq}/bin/jq '[.[] | select(.flags | index("Seen") | not)] | length'
+  '';
+  notifybyname = pkgs.writeShellScriptBin "notify-by-name" (builtins.readFile ./notify-by-name.sh);
+  new-emails-notify = pkgs.writeShellScriptBin "new-emails-notify" ''
+    COUNT=$(${new-emails-count}/bin/new-emails-count)
+    if [ "$COUNT" != "0" ] ; then
+      ${notifybyname}/bin/notify-by-name -n NEW_EMAILS -u critical -t 1800 -b "📫 $COUNT unread emails into inbox" >/dev/null 2>&1
+      sleep 0.1
+      ${notifybyname}/bin/notify-by-name -n NEW_EMAILS -u normal -t 4000 -b "📫 $COUNT unread emails into inbox" >/dev/null 2>&1
+    fi
+  '';
+  runer = pkgs.writeShellScriptBin "runer" ''
+    export ASCIIMOTH_PASSWORD=$(${pkgs.coreutils-full}/bin/cat /etc/emailpassword)
+    export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+    cd /home/${constants.MainUser}
+    ${pkgs.sudo}/bin/sudo -EH --user ${constants.MainUser} ${pkgs.himalaya}/bin/himalaya watch
+    #${pkgs.sudo}/bin/sudo -EH --user ${constants.MainUser} ${pkgs.bash}/bin/bash
+  '';
 in {
+  environment.systemPackages = with pkgs; [
+    new-emails-count
+    new-emails-notify
+    runer
+  ];
   home-manager.users."${constants.MainUser}".programs = {
     himalaya = {
       enable = true;
@@ -38,7 +62,7 @@ in {
         "${constants.Nicknames.Full}" = let
           login = "${constants.Nicknames.Lower}";
           host = "disroot.org";
-          passcmd = ''OR "echo \$ASCIIMOTH_PASSWORD"  "pass show email/disroot.org/asciimoth | head -1 | cut -d' ' -f2"'';
+          passcmd = ''${ors}/bin/OR "echo \$ASCIIMOTH_PASSWORD"  "${pkgs.pass}/bin/pass show email/disroot.org/asciimoth | head -1 | cut -d' ' -f2"'';
         in {
           email = "${constants.Email}";
           default = true;
@@ -55,9 +79,11 @@ in {
           imap-ssl = true;
           imap-starttls = false;
           imap-watch-cmds = [
-            ''himalaya --account "${constants.Nicknames.Full}" account sync''
-            "echo 'Something changed'"
+            ''${pkgs.himalaya}/bin/himalaya --account "${constants.Nicknames.Full}" account sync''"echo 'Something changed'"
+            ''${new-emails-notify}/bin/new-emails-notify''
           ];
+          #imap-notify-cmd = ''notify-desktop "Nem email from <sender>" "<subject>"'';
+          imap-notify-query = "NOT SEEN";
           # Sender
           sender = "smtp";
           smtp-host = "${host}";
@@ -78,6 +104,27 @@ in {
       settings = {
         "privacy.donottrackheader.enabled" = true;
       };
+    };
+  };
+  sops.secrets."email-asciimoth-key" = {
+    path = "/etc/emailpassword";
+    owner = "root";
+    group = "root";
+    mode = "600";
+    sopsFile = ../../secrets/email-asciimoth-key.txt;
+    format = "binary";
+  };
+  systemd.services.imap-loader = {
+    enable = false;
+    #wantedBy = ["default.target"];
+    wantedBy = ["network.target"];
+    after = ["network.target"];
+    description = "Load email updates via imap and himalaya";
+    serviceConfig = {
+      User = "root";
+      ExecStart = "${runer}/bin/runer";
+      Restart = "always";
+      RestartSec = 10;
     };
   };
 }
