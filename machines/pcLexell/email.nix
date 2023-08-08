@@ -60,6 +60,10 @@ in {
     new-emails-count
     new-emails-notify
   ];
+  environment.shellAliases."email"=''fish -C "source /etc/email-shell.fish"'';
+  environment.etc."email-shell.fish".text = ''
+    set -x ASCIIMOTH_PASSWORD (pass show email/disroot.org/asciimoth | head -1 | cut -d' ' -f2)
+  '';
   home-manager.users."${constants.MainUser}" = {
     programs = {
       himalaya = {
@@ -68,6 +72,9 @@ in {
           maildir = "/home/${constants.MainUser}/.mail";
         in {
           email-listing-page-size = 0;
+          downloads-dir = "/home/${constants.MainUser}/Downloads/email";
+          email-listing-datetime-local-tz = true;
+          email-listing-datetime-fmt = "%H:%M %d.%m.%Y";
           "${constants.Nicknames.Full}" = let
             login = "${constants.Nicknames.Lower}";
             host = "disroot.org";
