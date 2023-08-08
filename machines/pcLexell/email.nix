@@ -42,6 +42,8 @@
       ${notifybyname}/bin/notify-by-name -n NEW_EMAILS -u critical -t 1800 -b "📫 $COUNT unread emails into inbox" >/dev/null 2>&1
       sleep 0.1
       ${notifybyname}/bin/notify-by-name -n NEW_EMAILS -u normal -t 50000 -b "📫 $COUNT unread emails into inbox" >/dev/null 2>&1
+    else
+      ${notifybyname}/bin/notify-by-name -n NEW_EMAILS -u normal -t 1 -b " " >/dev/null 2>&1
     fi
   '';
   watchcmd = pkgs.writeShellScriptBin "watchcmd" ''
@@ -74,7 +76,7 @@ in {
           email-listing-page-size = 0;
           downloads-dir = "/home/${constants.MainUser}/Downloads/email";
           email-listing-datetime-local-tz = true;
-          email-listing-datetime-fmt = "%H:%M %d.%m.%Y";
+          bemail-listing-datetime-fmt = "%H:%M %d.%m.%Y";
           #email-reading-verify-cmd = "gpg --verify -q";
           #email-reading-decrypt-cmd = "gpg -dq";
           #email-writing-sign-cmd = "gpg -o - -saq";
