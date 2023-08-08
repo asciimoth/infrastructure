@@ -62,7 +62,7 @@ in {
     new-emails-count
     new-emails-notify
   ];
-  environment.shellAliases."email"=''fish -C "source /etc/email-shell.fish"'';
+  environment.shellAliases."email" = ''fish -C "source /etc/email-shell.fish"'';
   environment.etc."email-shell.fish".text = ''
     set -x ASCIIMOTH_PASSWORD (pass show email/disroot.org/asciimoth | head -1 | cut -d' ' -f2)
   '';
