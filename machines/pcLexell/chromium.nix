@@ -41,5 +41,4 @@ in {
     oneshot-chromium
     oneshot-chromium-desktop
   ];
-  
 }
