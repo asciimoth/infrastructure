@@ -75,13 +75,22 @@ in {
           downloads-dir = "/home/${constants.MainUser}/Downloads/email";
           email-listing-datetime-local-tz = true;
           email-listing-datetime-fmt = "%H:%M %d.%m.%Y";
+          #email-reading-verify-cmd = "gpg --verify -q";
+          #email-reading-decrypt-cmd = "gpg -dq";
+          #email-writing-sign-cmd = "gpg -o - -saq";
+          #email-writing-encrypt-cmd = "gpg -o - -eqar <recipient>";
           "${constants.Nicknames.Full}" = let
             login = "${constants.Nicknames.Lower}";
             host = "disroot.org";
             passcmd = ''${ors}/bin/OR "echo \$ASCIIMOTH_PASSWORD"  "${pkgs.pass}/bin/pass show email/disroot.org/asciimoth | head -1 | cut -d' ' -f2"'';
           in {
             email = "${constants.Email}";
+            display-name = "ASCII Moth";
             default = true;
+            signature = ''
+              ASCII Moth
+              ^0w0^
+            '';
             sync = false;
             sync-dir = "${maildir}/${host}/${login}";
             #sync-folders-strategy.exclude = ["Junk" "Trash"];
