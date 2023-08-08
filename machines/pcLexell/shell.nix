@@ -19,6 +19,13 @@
   decolor = pkgs.writeShellScriptBin "decolor" ''
     cat /dev/stdin | sed -r "s/\x1B\[[0-9;]*[JKmsu]//g"
   '';
+  randqr = pkgs.writeShellScriptBin "randqr" ''
+    while true; do
+      clear
+      openssl rand 32 | qrencode -t UTF8 -o -
+      sleep 0.1
+    done
+  '';
   ors = pkgs.writeShellScriptBin "OR" ''
     # Return output of first command with non empty stdout
     # Usage:
@@ -232,5 +239,6 @@ in {
     volume
     bright
     decolor
+    randqr
   ];
 }
