@@ -19,6 +19,7 @@ in {
     ./x.nix
     ./firefox.nix
     ./matrix.nix
+    ./chromium.nix
   ];
   options = {
     defaultApplications = lib.mkOption {

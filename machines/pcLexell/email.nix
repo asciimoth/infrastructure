@@ -76,7 +76,7 @@ in {
           email-listing-page-size = 0;
           downloads-dir = "/home/${constants.MainUser}/Downloads/email";
           email-listing-datetime-local-tz = true;
-          bemail-listing-datetime-fmt = "%H:%M %d.%m.%Y";
+          email-listing-datetime-fmt = "%H:%M %d.%m.%Y";
           #email-reading-verify-cmd = "gpg --verify -q";
           #email-reading-decrypt-cmd = "gpg -dq";
           #email-writing-sign-cmd = "gpg -o - -saq";
