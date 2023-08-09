@@ -14,6 +14,14 @@
   ...
 }: let
   constants = import ./constants.nix;
+  read-or-value = pkgs.writeShellScriptBin "read-or-value" ''
+    RET=$(cat $1 2> /dev/null)
+    STATUS=$?
+    if [ $STATUS -ne 0 ]; then
+        RET=$2
+    fi
+    echo "$RET"
+  '';
   ors = pkgs.writeShellScriptBin "OR" ''
     # Return output of first command with non empty stdout
     # Usage:
@@ -37,13 +45,23 @@
   '';
   notifybyname = pkgs.writeShellScriptBin "notify-by-name" (builtins.readFile ./notify-by-name.sh);
   new-emails-notify = pkgs.writeShellScriptBin "new-emails-notify" ''
-    COUNT=$(${new-emails-count}/bin/new-emails-count)
+    COUNT=$(/nix/store/4qq7gqzppvxn05g4gmzcgrxbqqzv0p0j-new-emails-count/bin/new-emails-count)
+    LATESTIDFILE="/tmp/$USER-email-notifications-latest-id"
+    LATESTUNREADID=$(${pkgs.himalaya}/bin/himalaya --output json search -f "Inbox" "NOT SEEN" | ${pkgs.jq}/bin/jq -r ".[0].id")
+    SAVED=$(${read-or-value}/bin/read-or-value $LATESTIDFILE "0")
+    if [ "$SAVED" -ge "$LATESTUNREADID" ]; then
+        exit 0
+    fi
     if [ "$COUNT" != "0" ] ; then
-      ${notifybyname}/bin/notify-by-name -n NEW_EMAILS -u critical -t 1800 -b "📫 $COUNT unread emails into inbox" >/dev/null 2>&1
+      /nix/store/r8fcc765iy69gas7fdfjf29jbly4rh80-notify-by-name/bin/notify-by-name -n NEW_EMAILS -u critical -t 1800 -b "📫 $COUNT unread emails into inbox" >/dev/null 2>&1
       sleep 0.1
-      ${notifybyname}/bin/notify-by-name -n NEW_EMAILS -u normal -t 50000 -b "📫 $COUNT unread emails into inbox" >/dev/null 2>&1
+      /nix/store/r8fcc765iy69gas7fdfjf29jbly4rh80-notify-by-name/bin/notify-by-name -n NEW_EMAILS -u normal -t 50000 -b "📫 $COUNT unread emails into inbox" >/dev/null 2>&1
+      EXT=$?
+      if [ "$EXT" == "0" ] ; then
+        echo "$LATESTUNREADID" > $LATESTIDFILE
+      fi
     else
-      ${notifybyname}/bin/notify-by-name -n NEW_EMAILS -u normal -t 1 -b " " >/dev/null 2>&1
+      /nix/store/r8fcc765iy69gas7fdfjf29jbly4rh80-notify-by-name/bin/notify-by-name -n NEW_EMAILS -u normal -t 1 -b " " >/dev/null 2>&1
     fi
   '';
   watchcmd = pkgs.writeShellScriptBin "watchcmd" ''
