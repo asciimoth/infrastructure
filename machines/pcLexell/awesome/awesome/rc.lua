@@ -392,7 +392,10 @@ globalkeys = gears.table.join(
     awful.key({}, "XF86MonBrightnessUp", function() awful.util.spawn("bright +") end,
               {description = "Raise bright", group = "launcher"}),
     awful.key({}, "XF86MonBrightnessDown", function() awful.util.spawn("bright -") end,
-              {description = "Lower bright", group = "launcher"})
+              {description = "Lower bright", group = "launcher"}),
+    -- Print screen
+    awful.key({}, "Print", function() awful.util.spawn("flameshot gui") end,
+              {description = "Print screen", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
