@@ -2,9 +2,6 @@ RIcing & other system customisation TODO
 
 References:
 - Nix/NixOS
--- My old configs
--- https://github.com/xenocorn/mynix
--- https://github.com/xenocorn/nixos_host_config
 -- My snippets
 --- https://gist.github.com/ASCIIMoth/1943f8c8de3fc466eb64a0bca2c1d2ea
 -- RuNixOs chat users
