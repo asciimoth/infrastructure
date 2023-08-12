@@ -14,7 +14,7 @@
   ...
 }: let
   constants = import ./constants.nix;
-  oneshot-chromium = pkgs.writeShellScriptBin "oneshot-chromium" ''
+  oneshot-chromium-ungoogled = pkgs.writeShellScriptBin "oneshot-chromium-ungoogled" ''
     # Run ungoogled-chromium in isolated container
     # and clean all it data after exit
     # It is intended for one-time logins to services.
@@ -30,15 +30,31 @@
     ${pkgs.boxxy}/bin/boxxy --no-config --rule "$HOME/.cache/chromium:$TMPDIR/.cache/chromium" --rule "$HOME/.config/chromium:$TMPDIR/.config/chromium" ${pkgs.ungoogled-chromium}/bin/chromium
     rm -rf $TMPDIR
   '';
+  oneshot-chromium = pkgs.writeShellScriptBin "oneshot-chromium" ''
+    # Run ungoogled-chromium in isolated container
+    # and clean all it data after exit
+    # It is intended for one-time logins to services.
+    # Use it where the tor browser is not suitable because of cloudflare and so on
+    RND=$(openssl rand -hex 30)
+    TMPDIR="/tmp/oneshot-chromium-$RND"
+    mkdir $TMPDIR
+    mkdir -p "$TMPDIR/.config/chromium"
+    mkdir -p "$TMPDIR/.cache/chromium"
+    mkdir -p "$HOME/.config/chromium"
+    mkdir -p "$HOME/.cache/chromium"
+    echo "Tmp dir: $TMPDIR"
+    ${pkgs.boxxy}/bin/boxxy --no-config --rule "$HOME/.cache/chromium:$TMPDIR/.cache/chromium" --rule "$HOME/.config/chromium:$TMPDIR/.config/chromium" ${pkgs.chromium}/bin/chromium
+    rm -rf $TMPDIR
+  '';
   oneshot-chromium-desktop = pkgs.makeDesktopItem {
     name = "Chromium";
     desktopName = "Chromium";
-    exec = "${oneshot-chromium}/bin/oneshot-chromium";
+    exec = "${oneshot-chromium-ungoogled}/bin/oneshot-chromium-ungoogled";
     terminal = false;
   };
 in {
   environment.systemPackages = with pkgs; [
-    oneshot-chromium
+    oneshot-chromium-ungoogled
     oneshot-chromium-desktop
   ];
 }
