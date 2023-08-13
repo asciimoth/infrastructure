@@ -31,6 +31,6 @@ in {
   ];
   environment.shellAliases = {
     qr = "qrencode -t UTF8 -o -";
-    passqr = "scanqr | pass otp append"
+    passqr = "scanqr | pass otp append web";
   };
 }
