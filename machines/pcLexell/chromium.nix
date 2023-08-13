@@ -55,6 +55,7 @@
 in {
   environment.systemPackages = with pkgs; [
     oneshot-chromium-ungoogled
+    oneshot-chromium
     oneshot-chromium-desktop
   ];
 }
