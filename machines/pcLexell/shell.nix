@@ -170,7 +170,6 @@ in {
     bat = "bat --paging never";
     tr = "exa --oneline -T -F --group-directories-first -a";
     gtr = "exa --oneline -T -F --group-directories-first -a --git-ignore --ignore-glob .git";
-    qr = "qrencode -t UTF8 -o -";
     print = "figlet -c -t";
     stop = "shutdown now";
     copy = "xclip -selection c";
@@ -207,7 +206,7 @@ in {
     bat # Modern analog of cat
     ripgrep # Modern analog of grep with some usefull patches
     ripgrep-all # Some usefull extensions for ripgrep
-    qrencode # Generate & print qr codes in terminal
+    #qrencode # Generate & print qr codes in terminal
     figlet # Print text with ascii fonts
     xclip # x11 clipboard managment tool
     fzf # Fuzzy search

@@ -36,6 +36,7 @@ in {
     ./theme.nix
     ./usb.nix
     ./email.nix
+    ./qr.nix
 
     #./ssh.nix
 
