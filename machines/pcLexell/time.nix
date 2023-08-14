@@ -13,6 +13,9 @@
   inputs,
   ...
 }: {
-  time.timeZone = "Asia/Tbilisi";
-  services.openntpd.enable = true;
+  time = {
+    timeZone = "Asia/Tbilisi";
+    hardwareClockInLocalTime = true;
+  };
+  #services.ntp.enable = true;
 }
