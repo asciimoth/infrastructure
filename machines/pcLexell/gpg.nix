@@ -49,6 +49,10 @@ in {
           source = ../../keys/moth.pub.gpg;
           trust = 5;
         }
+        {
+          source = ../../keys/silk-revoked.pub;
+          trust = 2;
+        }
       ];
     };
     services.pass-secret-service.enable = true;
