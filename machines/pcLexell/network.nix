@@ -41,7 +41,9 @@ in {
     firewall = {
       enable = true;
       allowedTCPPorts = lib.mkForce [];
+      allowedTCPPortRanges = lib.mkForce [];
       allowedUDPPorts = lib.mkForce [];
+      allowedUDPPortRanges = lib.mkForce [];
       trustedInterfaces = lib.mkForce ["lo"]; #open all ports on localhost
       #extraCommands = "ip6tables -A INPUT -s fe80::/10 -j ACCEPT";
     };

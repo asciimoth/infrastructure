@@ -37,6 +37,7 @@ in {
     ./usb.nix
     ./email.nix
     ./qr.nix
+    ./kdeconnect.nix
 
     #./ssh.nix
 
