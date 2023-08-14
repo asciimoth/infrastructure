@@ -14,19 +14,27 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    dcnnt
-    pkgs.writeShellScriptBin "notify-escape" ''
-      #
-    '';
+    #dcnnt
+    # dcnnt has very insecure code, so it should be run it in isolation
+    boxxy
+    (pkgs.writeShellScriptBin "dcnnt" ''
+      ${dcnnt}/bin/dcnnt
+    '')
   ];
   networking.firewall = {
-    allowedTCPPorts = lib.mkForce [ 5040 ];
+    allowedTCPPorts = lib.mkForce [5040];
     allowedTCPPortRanges = lib.mkForce [
-      { from = 1714; to = 1764; }
+      {
+        from = 1714;
+        to = 1764;
+      }
     ];
-    allowedUDPPorts = lib.mkForce [ 5040 ];
+    allowedUDPPorts = lib.mkForce [5040];
     allowedUDPPortRanges = lib.mkForce [
-      { from = 1714; to = 1764; }
+      {
+        from = 1714;
+        to = 1764;
+      }
     ];
   };
 }
