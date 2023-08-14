@@ -16,6 +16,19 @@
   notifybyname = pkgs.writeShellScriptBin "notify-by-name" (builtins.readFile ./notify-by-name.sh);
   volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);
   bright = pkgs.writeShellScriptBin "bright" (builtins.readFile ./bright.sh);
+  uclip = pkgs.writeShellScriptBin "uclip" ''
+    # Universal text clipboard manager
+    # for both X11 and wayland
+    if (( $# == 0 )) ; then
+        TEXT=$(</dev/stdin)
+    else
+        TEXT="$1"
+    fi
+    echo -n "$TEXT" | ${pkgs.xclip}/bin/xclip -selection primary &>/dev/null
+    echo -n "$TEXT" | ${pkgs.xclip}/bin/xclip -selection secondary &>/dev/null
+    echo -n "$TEXT" | ${pkgs.xclip}/bin/xclip -selection clipboar &>/dev/null
+    echo -n "$TEXT" | ${pkgs.wl-clipboard}/bin/wl-copy &>/dev/null
+  '';
   decolor = pkgs.writeShellScriptBin "decolor" ''
     cat /dev/stdin | sed -r "s/\x1B\[[0-9;]*[JKmsu]//g"
   '';
@@ -239,5 +252,6 @@ in {
     bright
     decolor
     randqr
+    uclip
   ];
 }
