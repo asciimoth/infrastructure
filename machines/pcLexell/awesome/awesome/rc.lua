@@ -395,7 +395,9 @@ globalkeys = gears.table.join(
               {description = "Lower bright", group = "launcher"}),
     -- Print screen
     awful.key({}, "Print", function() awful.util.spawn("flameshot gui") end,
-              {description = "Print screen", group = "launcher"})
+              {description = "Print screen", group = "launcher"}),
+    awful.key({ "Control" }, "Print", function() awful.util.spawn("clipqr") end,
+              {description = "Scan QR from screen", group = "launcher"})
 )
 
 clientkeys = gears.table.join(

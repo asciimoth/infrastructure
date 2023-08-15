@@ -42,6 +42,16 @@
       fi
     done
   '';
+  otppassshow = pkgs.writeShellScriptBin "otppassshow" ''
+    STORE="/home/$USER/.password-store/"
+    NAME=$((cd $STORE && find . -type f) | sed '/^.\/secret_service/d' | sed 's/^.\{2\}//' | sed 's/.\{4\}$//' | ${pkgs.fzf}/bin/fzf)
+    CONTENT=$(pass otp $NAME)
+    echo "$CONTENT"
+    echo ""
+    echo -n "$CONTENT" | uclip
+    echo -n "$CONTENT" | qrencode -t UTF8 -o -
+    read
+  '';
   clipqr = pkgs.writeShellScriptBin "clipqr" ''
     DATA=$(scanqr)
     echo -n "$DATA" | uclip
@@ -59,6 +69,12 @@
     exec = "passshow";
     terminal = true;
   };
+  otppassshow-desktop = pkgs.makeDesktopItem {
+    name = "otppassshow";
+    desktopName = "otppassshow";
+    exec = "otppassshow";
+    terminal = true;
+  };
 in {
   environment.systemPackages = with pkgs; [
     zbar
@@ -68,9 +84,11 @@ in {
     scanqr
     passshow
     clipqr
+    otppassshow
     #
     clipqr-desktop
     passshow-desktop
+    otppassshow-desktop
   ];
   environment.shellAliases = {
     qr = "qrencode -t UTF8 -o -";
