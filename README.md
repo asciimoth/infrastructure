@@ -8,7 +8,7 @@
   </br>
   
 [![CC0](https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=CC0&color=orange)](https://github.com/asciimoth/infrastructure/blob/master/LICENSE)
-[![I use nix btw](https://img.shields.io/static/v1?style=for-the-badge&logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org)
+[![I use nix btw](https://img.shields.io/static/v1?style=for-the-badge&logo=nixos&logoColor=white&label=&message=I%20use%20Nix%20btw&color=41439a)](https://builtwithnix.org)
   
 [![Formatting Check via alejandra](https://img.shields.io/github/actions/workflow/status/asciimoth/infrastructure/alejandra.yml?label=Nix%20fmt%20check&style=for-the-badge)](https://github.com/asciimoth/infrastructure/actions/workflows/alejandra.yml)
 [![nix-config flake check](https://img.shields.io/github/actions/workflow/status/asciimoth/infrastructure/flake_check.yml?label=Flake%20check&style=for-the-badge)](https://github.com/asciimoth/infrastructure/actions/workflows/flake_check.yml)
