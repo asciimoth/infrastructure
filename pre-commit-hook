@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+run_test () {
+  NAME=$1
+  CMD=$2
+  echo -n "Runing \"$NAME\" test"
+  RESULT=$($CMD 2>&1)
+  CODE=$?
+  if [ "$CODE" != "0" ]; then
+    echo -e " ... \033[0;31m[FAIL]\033[0m"
+    echo "$RESULT"
+    exit $CODE
+  fi
+  echo -e " ... \033[0;32m[OK]\033[0m"
+}
+
+run_test "alejandra" "nix run nixpkgs#alejandra -- --check ."
+run_test "flake check" "nix flake check"
+run_test "statix" "nix run nixpkgs#statix -- check ./"
+
+exit 0
