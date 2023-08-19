@@ -20,29 +20,44 @@ in {
     enable = true;
     alsa.enable = true;
     pulse.enable = true;
-    #jack.enable = true;
+    jack.enable = true;
   };
+  
   environment.systemPackages = with pkgs; [
     mutespeaker
   ];
 
-  systemd.user.services.mutespeaker = {
-    enable = true;
-    wantedBy = ["default.target"];
-    after = ["network.target"];
-    #description = "";
-    path = with pkgs; [
-      pulseaudio
-      mutespeaker
-      bash
-    ];
-    #environment = {};
-    serviceConfig = {
-      #User = "moth";
-      ExecStart = "${mutespeaker}/bin/mutespeaker";
-      #ExecStart = "bash -c '${mutespeaker}/bin/mutespeaker >> /home/moth/log/mutespeaker &>> /home/mot/log/mutespeaker'";
-      Restart = "always";
-      RestartSec = 10;
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
+  systemd.user.services= {
+    mutespeaker = {
+      enable = true;
+      wantedBy = ["default.target"];
+      after = ["network.target"];
+      #description = "";
+      path = with pkgs; [
+        pulseaudio
+        mutespeaker
+        bash
+      ];
+      #environment = {};
+      serviceConfig = {
+        #User = "moth";
+        ExecStart = "${mutespeaker}/bin/mutespeaker";
+        #ExecStart = "bash -c '${mutespeaker}/bin/mutespeaker >> /home/moth/log/mutespeaker &>> /home/mot/log/mutespeaker'";
+        Restart = "always";
+        RestartSec = 10;
+      };
+    };
+    mpris-proxy = {
+      enable = true;
+      wantedBy = [ "default.target" ];
+      after = [ "network.target" "sound.target" ];
+      description = "Mpris proxy";
+      serviceConfig = {
+        ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+      };
     };
   };
 }
