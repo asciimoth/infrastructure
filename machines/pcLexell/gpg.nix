@@ -53,6 +53,10 @@ in {
           source = ../../keys/silk-revoked.pub;
           trust = 2;
         }
+        {
+          source = ../../keys/toasty.pub.gpg.asc;
+          trust = 4;
+        }
       ];
     };
     services.pass-secret-service.enable = true;

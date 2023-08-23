@@ -22,7 +22,7 @@ in {
     pulse.enable = true;
     jack.enable = true;
   };
-  
+
   environment.systemPackages = with pkgs; [
     mutespeaker
   ];
@@ -30,7 +30,7 @@ in {
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  systemd.user.services= {
+  systemd.user.services = {
     mutespeaker = {
       enable = true;
       wantedBy = ["default.target"];
@@ -52,8 +52,8 @@ in {
     };
     mpris-proxy = {
       enable = true;
-      wantedBy = [ "default.target" ];
-      after = [ "network.target" "sound.target" ];
+      wantedBy = ["default.target"];
+      after = ["network.target" "sound.target"];
       description = "Mpris proxy";
       serviceConfig = {
         ExecStart = "${pkgs.bluez}/bin/mpris-proxy";

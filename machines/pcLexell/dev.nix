@@ -12,17 +12,12 @@
   lib,
   inputs,
   ...
-}: {
-  environment.systemPackages = with pkgs; [
-    ripgrep
-  ];
-  programs.neovim = {
+}: let
+  constants = import ./constants.nix;
+in {
+  home-manager.users."${constants.MainUser}".programs.direnv = {
     enable = true;
-    viAlias = true;
-    vimAlias = true;
-    #defaultEditor = true;
-    #extraConfig = ''
-    #  set number relativenumber
-    #'';
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
   };
 }

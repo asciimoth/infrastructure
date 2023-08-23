@@ -38,6 +38,8 @@ in {
     ./email.nix
     ./qr.nix
     #./kdeconnect.nix
+    ./vim.nix
+    ./dev.nix
 
     #./ssh.nix
 

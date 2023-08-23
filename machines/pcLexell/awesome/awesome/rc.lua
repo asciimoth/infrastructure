@@ -578,6 +578,7 @@ awful.rules.rules = {
          floating = true,
          ontop = true,
          sticky = true,
+         placement = awful.placement.centered,
          focus = false
       }
     },

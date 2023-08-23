@@ -16,6 +16,31 @@
   notifybyname = pkgs.writeShellScriptBin "notify-by-name" (builtins.readFile ./notify-by-name.sh);
   volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);
   bright = pkgs.writeShellScriptBin "bright" (builtins.readFile ./bright.sh);
+  where = pkgs.writeShellScriptBin "where" ''
+    #!/usr/bin/env bash
+    for ENTRY in "$@"
+    do
+        RAW=$(whereis $ENTRY)
+        IFS=' ' read -r NAME RAW <<< "$RAW"
+        echo -n "$NAME "
+        for PTH in $RAW; do
+            #echo "$PTH"
+            if [ -d "$PTH" ]; then
+                echo -n "$PTH ";
+            else
+                if [[ -x "$PTH" ]]
+                then
+                    echo -n "$PTH "
+                    PTH=$(readlink -f "$PTH")
+                    echo -n "$PTH "
+                else
+                    echo -n "$PTH "
+                fi
+            fi
+        done
+        echo ""
+    done
+  '';
   uclip = pkgs.writeShellScriptBin "uclip" ''
     # Universal text clipboard manager
     # for both X11 and wayland
@@ -253,5 +278,6 @@ in {
     decolor
     randqr
     uclip
+    where
   ];
 }

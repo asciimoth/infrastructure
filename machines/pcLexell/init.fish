@@ -179,3 +179,5 @@ function fuck -d "Correct your previous console command"
     builtin history merge
   end
 end
+
+direnv hook fish | source

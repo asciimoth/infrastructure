@@ -34,6 +34,7 @@ in {
       xorg.xdpyinfo
       flameshot
       obsidian
+      tor-browser-bundle-bin
     ];
     home-manager.users."${constants.MainUser}" = {
       systemd.user.services.graphical-notify = {
@@ -53,7 +54,7 @@ in {
       programs = {
         rofi = {
           enable = true;
-          font = lib.mkForce "DejaVu Sans Mono 15";
+          font = lib.mkForce "DejaVu Sans Mono 14";
         };
         alacritty = {
           enable = true;
