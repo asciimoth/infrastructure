@@ -17,6 +17,10 @@
     git
   ];
 
+  environment.shellAliases = {
+    poop = ''git push origin "$(git branch | grep "\*" | cut -d " " -f2)"'';
+  };
+
   environment.etc.gitignore.text = ''
     # Windows executable files; For crosscompilation cases
     *.exe
