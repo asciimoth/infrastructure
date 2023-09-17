@@ -111,7 +111,7 @@ outTheme = {"colors": {
     "brights": brights,
     "background": base00,
     "cursor_bg": base05,
-    "cursor_fg": base05,
+    "cursor_fg": base00,
     "compose_cursor": base06,
     "foreground": base05,
     "scrollbar_thumb": base01,
