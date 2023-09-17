@@ -182,6 +182,8 @@ in {
 
     usbutils #lsusb & CO
 
+    jq
+
     xdotool
 
     #udisksctludisksctl

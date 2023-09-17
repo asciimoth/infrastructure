@@ -14,6 +14,7 @@
   ...
 }: {
   time = {
+    #timeZone = "Europe/Moscow";
     timeZone = "Asia/Tbilisi";
     hardwareClockInLocalTime = true;
   };

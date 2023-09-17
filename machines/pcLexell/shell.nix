@@ -180,6 +180,8 @@ in {
     noptimise = "sudo nix-store --optimise";
     nfmt = "alejandra";
 
+    #"${config.options.ABC}" = "echo ABC";
+
     # Navigation
     ch = "cd ~";
     ".." = "cd ..";

@@ -15,6 +15,8 @@ set __BR_GREEN (set_color brgreen)
 set __GREEN (set_color green)
 set __BR_RED (set_color brred)
 
+source /etc/theme.fish
+
 function shgaps
   set -g GAPS $argv[1]
 end
@@ -154,6 +156,7 @@ function add_gaps
 end
 
 function fish_prompt
+  base16-load
   #history merge
   set -g STATUS $status
   if [ $__LAST_STATUS_GENERATION = $status_generation ]

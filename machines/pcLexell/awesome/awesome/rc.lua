@@ -69,7 +69,7 @@ end
 beautiful.init(gears.filesystem.get_themes_dir() .. "mytheme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
+terminal = "wezterm"
 -- editor = os.getenv("EDITOR") or "nano"
 editor = "micro"
 editor_cmd = terminal .. " -e " .. editor
@@ -546,7 +546,7 @@ awful.rules.rules = {
           "Kruler",
           "MessageWin",  -- kalarm.
           "Sxiv",
-          "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+          -- "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
           "xtightvncviewer"},

@@ -54,7 +54,7 @@ in {
       programs = {
         rofi = {
           enable = true;
-          font = lib.mkForce "DejaVu Sans Mono 14";
+          font = lib.mkForce "FiraCode Nerd Font Mono 14";
         };
         alacritty = {
           enable = true;
@@ -66,6 +66,22 @@ in {
             };
             font.size = lib.mkForce 8;
           };
+        };
+        wezterm = {
+          enable = true;
+          extraConfig = ''
+            return {
+              font_size = 15,
+              hide_tab_bar_if_only_one_tab = true,
+              font = wezterm.font_with_fallback {
+                "FiraCode Nerd Font Mono",
+                "DejaVu Sans Mono",
+                "Noto Color Emoji",
+              },
+              -- color_scheme = "stylix",
+              color_scheme = "custom",
+            }
+          '';
         };
       };
       home.packages = [
