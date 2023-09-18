@@ -56,17 +56,17 @@ in {
           enable = true;
           font = lib.mkForce "FiraCode Nerd Font Mono 14";
         };
-        alacritty = {
-          enable = true;
-          settings = {
-            scale_with_dpi = true;
-            dpi = {
-              x = 141;
-              y = 141;
-            };
-            font.size = lib.mkForce 8;
-          };
-        };
+        #alacritty = {
+        #  enable = true;
+        #  settings = {
+        #    scale_with_dpi = true;
+        #    dpi = {
+        #      x = 141;
+        #      y = 141;
+        #    };
+        #    font.size = lib.mkForce 8;
+        #  };
+        #};
         wezterm = {
           enable = true;
           extraConfig = builtins.readFile ./wezTerm.lua;
