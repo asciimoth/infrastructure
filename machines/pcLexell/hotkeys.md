@@ -1,0 +1,11 @@
+# Wezterm
+- `CTRL-SHIFT-K` or `CMD-K` - clear crollback buffer and ask shell to redraw prompt
+- `SHIFT-PageUp` and `SHIFT-PageUp` - adjust the viewport scrollback position by half full screen for each press
+- `CTRL-SHIFT-F` - activate search mode
+    - `Esc` - escape search mode
+    - `ArrowUp` or `ArrowDown` - move over matches
+    - `CTRL-R` - cycle through the pattern matching modes: CaseSensitive, IgnoreCase, RegExp
+    - `CTRL-U` - clear search pattern
+    - `CTRL-SHIFT-C` - copy selected text to clipboard
+- `CTRL-SHIFT-SPACE` - quick select mode
+- 

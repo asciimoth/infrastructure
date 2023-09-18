@@ -40,6 +40,7 @@ in {
     #./kdeconnect.nix
     ./vim.nix
     ./dev.nix
+    ./steam.nix
 
     #./ssh.nix
 
