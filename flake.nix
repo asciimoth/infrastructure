@@ -90,11 +90,12 @@
         };
       };
     };
-    devShell.x86_64-linux = with nixpkgs.legacyPackages.x86_64-linux;
+    devShells.x86_64-linux.default = with nixpkgs.legacyPackages.x86_64-linux;
       mkShell {
         inherit (checks.pre-commit-check) shellHook;
         buildInputs = [
           alejandra
+          statix
         ];
       };
   };
