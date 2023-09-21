@@ -366,21 +366,11 @@ globalkeys = gears.table.join(
               {description = "run rofi drun", group = "launcher"}),
     awful.key({ modkey }, "p", function() awful.util.spawn('rofi-pass') end,
               {description = "run rofi-pass", group = "launcher"}),
-    -- awful.key({ modkey },            "r",     function ()
-    --                 -- awful.screen.focused().mypromptbox:run()
-    --                 awful.util.spawn('alacritty --class CONTROLBOX -o "window.dimensions.lines=15" -o "window.dimensions.columns=30" -e "fish"')
-    --            end,
-    --           {description = "run prompt", group = "launcher"}),
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"}),
+    awful.key({ modkey },            "x",     function ()
+                    -- awful.screen.focused().mypromptbox:run()
+                    awful.util.spawn('controlbox htop')
+               end,
+               {description = "run prompt", group = "launcher"}),
     -- Volume control
     awful.key({}, "XF86AudioRaiseVolume", function() awful.util.spawn("volume +") end,
               {description = "Raise Volume", group = "launcher"}),
@@ -591,7 +581,8 @@ awful.rules.rules = {
          sticky = false,
          focus = true,
          placement = awful.placement.centered,
-         screen = 1
+         screen = 1,
+         border_width = 2
       },
       callback = function(c)
         --if CONTROLBOX ~= nil then

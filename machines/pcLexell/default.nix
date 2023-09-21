@@ -49,6 +49,8 @@ in {
     ./chownd.nix
     ./local_auth.nix
 
+    ./controlbox.nix
+
     # Generic. Include the results of the hardware scan.
     ./configuration.nix
   ];
