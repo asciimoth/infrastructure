@@ -65,7 +65,7 @@
         src = ./.;
         hooks = {
           alejandra.enable = true;
-          nixfmt.enable = true;
+          nixfmt.enable = false;
           statix.enable = true;
         };
       };
