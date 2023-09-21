@@ -41,6 +41,7 @@ in {
     ./vim.nix
     ./dev.nix
     ./steam.nix
+    ./ranger.nix
 
     #./ssh.nix
     ./ssh_client.nix
@@ -152,8 +153,6 @@ in {
     openssl
     neofetch
     pulseaudio
-
-    #jq
 
     tmate
     thefuck
