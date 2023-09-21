@@ -11,6 +11,7 @@ return {
   },
   -- color_scheme = "stylix",
   color_scheme = "custom",
+  -- https://wezfurlong.org/wezterm/config/default-keys.html
   keys = {
     {
       key = 'K',
@@ -22,5 +23,13 @@ return {
     },
     { key = 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-0.5) },
     { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(0.5) },
+    --
+    { key = '=', mods = 'CTRL', action = act.SendKey { key = '=', mods = 'CTRL' }, },
+    { key = '-', mods = 'CTRL', action = act.SendKey { key = '-', mods = 'CTRL' }, },
+    { key = '=', mods = 'SUPER', action = act.SendKey { key = '=', mods = 'SUPER' }, },
+    { key = '-', mods = 'SUPER', action = act.SendKey { key = '-', mods = 'SUPER' }, },
+    --
+    { key = 'PageUp', mods = 'CTRL', action = act.SendKey { key = 'PageUp', mods = 'CTRL' }, },
+    { key = 'PageDown', mods = 'CTRL', action = act.SendKey { key = 'PageDown', mods = 'CTRL' }, },
   },
 }
