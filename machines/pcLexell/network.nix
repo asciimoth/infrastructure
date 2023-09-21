@@ -37,7 +37,9 @@ in {
       };
       # dispatcherScripts  # https://github.com/cyplo/dotfiles/blob/master/nixos/common-hardware.nix
     };
-    extraHosts = "";
+    extraHosts = ''
+      78.153.130.171 hearty-health
+    '';
     firewall = {
       enable = true;
       allowedTCPPorts = lib.mkForce [];

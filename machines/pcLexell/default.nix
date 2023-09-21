@@ -43,6 +43,7 @@ in {
     ./steam.nix
 
     #./ssh.nix
+    ./ssh_client.nix
 
     ../../names
     ./chownd.nix
