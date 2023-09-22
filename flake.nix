@@ -19,14 +19,6 @@
       url = "github:nix-community/NUR";
       #inputs.nixpkgs.follows = "nixpkgs";
     };
-    #agenix = {
-    #  url = "github:ryantm/agenix";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
-    nixpkgs-wayland = {
-      url = "github:colemickens/nixpkgs-wayland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,11 +27,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    #systems.url = "github:nix-systems/x86_64-linux";
-    #flake-utils = {
-    #  url = "github:numtide/flake-utils";
-    #  inputs.systems.follows = "systems";
-    #;
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,8 +38,6 @@
     home-manager,
     stable,
     nur,
-    #agenix,
-    nixpkgs-wayland,
     stylix,
     sops-nix,
     pre-commit-hooks,
@@ -79,7 +64,6 @@
           ./machines/pcLexell
           home-manager.nixosModules.home-manager
           nur.nixosModules.nur
-          #agenix.nixosModules
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops
           {nixpkgs.overlays = [nur.overlay];}
