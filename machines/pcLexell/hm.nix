@@ -12,9 +12,16 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  constants = import ./constants.nix;
+in {
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
-  home-manager.users.moth.home.stateVersion = config.system.stateVersion;
   home-manager.users.root.home.stateVersion = config.system.stateVersion;
+  home-manager.users.${constants.MainUser} = {
+    home.stateVersion = config.system.stateVersion;
+    systemd.user.tmpfiles.rules = [
+      "L+    /home/${constants.MainUser}/mnt                   -    -    -     -           /run/media/${constants.MainUser}"
+    ];
+  };
 }
