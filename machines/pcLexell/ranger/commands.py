@@ -1994,25 +1994,44 @@ class paste_ext(Command):
 
 from ranger.ext.img_display import ImageDisplayer, register_image_displayer
 import subprocess
-from shlex import quote
+import os.path
+import os
+
+def run(cmd):
+    return subprocess.check_output(cmd).decode("utf-8")
+
+def get_img_dim(path):
+    width, height = run(["get-img-dimension", path]).replace("\n", "").split(" ")
+    height = int(height)
+    width = int(width)
+    if width == 0:
+        width = 1
+    return width, height
 
 @register_image_displayer("wezterm-image-display-method")
 class WeztermImageDisplayer(ImageDisplayer):
     def draw(self, path, start_x, start_y, width, height):
-        print("\033[%d;%dH" % (start_y, start_x+1))
-        #path = quote(path)
+        if os.path.exists(path+".gifed.gif") and ".cache/ranger" in path:
+            path += ".gifed.gif"
+        width = max(1, width-2)
+        height = max(1, height-2)
+        img_width, img_height = get_img_dim(path)
         draw_cmd = [
             "wezterm",
             "imgcat",
             path,
-            "--width",
-            str(width),
-            "--height",
-            str(height),
         ]
+        if img_height*(width/img_width) > height:
+            height = max(1, int(height/2))
+            draw_cmd.append("--height")
+            draw_cmd.append(str(height))
+        else:
+            draw_cmd.append("--width")
+            draw_cmd.append(str(width))
+        print("\033[%d;%dH" % (start_y, start_x))
         subprocess.run(draw_cmd)
     def clear(self, start_x, start_y, width, height):
         cleaner = " "*width
         for i in range(height):
-            print("\033[%d;%dH" % (start_y+i, start_x+1))
+            print("\033[%d;%dH" % (start_y+i, start_x))
             print(cleaner)

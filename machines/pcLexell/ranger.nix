@@ -36,6 +36,27 @@
     cat $TMPFILE
     rm -rf $TMPFILE
   '';
+  get-main-img-dimension = pkgs.writeShellScriptBin "get-main-img-dimension" ''
+    DIM=$(identify -format '%wx%h ' "$1" 2>/dev/null | cut -d ' ' -f 1)
+    WIDTH=$(echo -n $DIM | cut -d 'x' -f 1)
+    HEIGTH=$(echo -n $DIM | cut -d 'x' -f 2)
+
+    if (( WIDTH > HEIGTH )); then
+        echo "WIDTH"
+    else
+        if (( HEIGTH > WIDTH )); then
+          echo "HEIGTH"
+        else
+          echo "EQ"
+        fi
+    fi
+  '';
+  get-img-dimension = pkgs.writeShellScriptBin "get-img-dimension" ''
+    DIM=$(identify -format '%wx%h ' "$1" 2>/dev/null | cut -d ' ' -f 1)
+    WIDTH=$(echo -n $DIM | cut -d 'x' -f 1)
+    HEIGTH=$(echo -n $DIM | cut -d 'x' -f 2)
+    echo "$WIDTH $HEIGTH"
+  '';
 in {
   environment.systemPackages = with pkgs; [
     my-ranger #ranger
@@ -58,6 +79,8 @@ in {
     file
     #
     pick
+    get-main-img-dimension
+    get-img-dimension
   ];
   home-manager.users.${constants.MainUser} = {pkgs, ...}: {
     home.file.".config/ranger_nix".source = ./ranger;

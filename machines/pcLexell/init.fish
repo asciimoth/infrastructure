@@ -199,4 +199,10 @@ function fuck -d "Correct your previous console command"
   end
 end
 
-direnv hook fish | source
+if [ $USER = "root" ]
+    printf "User root; do not load direnv"
+else
+    direnv hook fish | source
+end
+
+
