@@ -28,6 +28,7 @@ in {
     flameshot
     obsidian
     tor-browser-bundle-bin
+    river
   ];
   home-manager.users."${constants.MainUser}" = {
     systemd.user.services.graphical-notify = {

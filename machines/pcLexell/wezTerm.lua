@@ -9,6 +9,7 @@ return {
     "DejaVu Sans Mono",
     "Noto Color Emoji",
   },
+  window_close_confirmation = 'NeverPrompt',
   -- color_scheme = "stylix",
   color_scheme = "custom",
   -- https://wezfurlong.org/wezterm/config/default-keys.html

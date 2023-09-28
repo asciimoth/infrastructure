@@ -152,6 +152,7 @@ in {
     b3sum
     openssl
     neofetch
+    cpufetch
     pulseaudio
 
     tmate

@@ -56,6 +56,11 @@
     echo -n "$TEXT" | ${pkgs.xclip}/bin/xclip -selection clipboar &>/dev/null
     echo -n "$TEXT" | ${pkgs.wl-clipboard}/bin/wl-copy &>/dev/null
   '';
+  file2clip = pkgs.writeShellScriptBin "file2clip" ''
+    # TODO
+    #   Broken with any files except static images
+    ${pkgs.xclip}/bin/xclip -sel clipboard -t "${pkgs.file}/bin/file -b --mime-type $1" $1
+  '';
   decolor = pkgs.writeShellScriptBin "decolor" ''
     cat /dev/stdin | sed -r "s/\x1B\[[0-9;]*[JKmsu]//g"
     #
@@ -205,16 +210,16 @@ in {
     c = "clear";
     h = "history | rg";
     rf = "rm -rf";
-    ll = "exa --oneline -L -T -F --group-directories-first -l";
-    la = "exa --oneline -L -T -F --group-directories-first -la";
-    l = "exa --oneline -L -T -F --group-directories-first";
+    ll = "${pkgs.exa}/bin/exa --oneline -L -T -F --group-directories-first -l --icons";
+    la = "${pkgs.exa}/bin/exa --oneline -L -T -F --group-directories-first -la --icons";
+    l = "${pkgs.exa}/bin/exa --oneline -L -T -F --group-directories-first --icons";
 
     # Etc
     bat = "bat --paging never";
-    tr = "exa --oneline -T -F --group-directories-first -a";
-    gtr = "exa --oneline -T -F --group-directories-first -a --git-ignore --ignore-glob .git";
+    tr = "${pkgs.exa}/bin/exa --oneline -T -F --group-directories-first -a --icons";
+    gtr = "${pkgs.exa}/bin/exa --oneline -T -F --group-directories-first -a --git-ignore --ignore-glob .git --icons";
     print = "figlet -c -t";
-    stop = "shutdown now";
+    stop = "sudo shutdown now";
     copy = "xclip -selection c";
     random64 = "openssl rand -base64 33";
     randomhex = "openssl rand -hex 20";
@@ -227,8 +232,7 @@ in {
     size = "du -shP";
     root = "sudo -i";
     mke = "chmod +x";
-    dropproxy = ''
-      export ALL_PROXY="" && export all_proxy="" && export SOCKS_PROXY = "" && export socks_proxy = "" && export HTTP_PROXY = "" && export http_proxy = "" && export HTTPS_PROXY = "" && export https_proxy = ""'';
+    dropproxy = ''export ALL_PROXY="" && export all_proxy="" && export SOCKS_PROXY = "" && export socks_proxy = "" && export HTTP_PROXY = "" && export http_proxy = "" && export HTTPS_PROXY = "" && export https_proxy = ""'';
   };
 
   programs.fish = {
@@ -244,7 +248,7 @@ in {
 
   environment.systemPackages = with pkgs; [
     # Shell tools
-    exa # Modern analog of ls/tree
+    #exa # Modern analog of ls/tree
     bat # Modern analog of cat
     ripgrep # Modern analog of grep with some usefull patches
     ripgrep-all # Some usefull extensions for ripgrep
@@ -282,6 +286,7 @@ in {
     decolor
     randqr
     uclip
+    file2clip
     where
   ];
 }
