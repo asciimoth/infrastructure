@@ -20,6 +20,12 @@
     exec = "${pkgs.wezterm}/bin/wezterm";
     terminal = false;
   };
+  copyscreen = pkgs.writeShellScriptBin "copyscreen" ''
+    TMPFILE="/tmp/copyscreen-$(${pkgs.openssl}/bin/openssl rand 40 | base32).png"
+    ${pkgs.flameshot}/bin/flameshot gui -r > $TMPFILE
+    file2clip $TMPFILE
+    rm -rf $TMPFILE
+  '';
 in {
   imports = [
     ./x.nix
@@ -32,6 +38,7 @@ in {
     xorg.xbacklight
     xorg.xdpyinfo
     flameshot
+    copyscreen
     obsidian
     tor-browser-bundle-bin
     #hyprdim

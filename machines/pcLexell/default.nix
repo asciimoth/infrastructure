@@ -154,6 +154,8 @@ in {
     neofetch
     cpufetch
     pulseaudio
+    strace
+    copyq # clipboard manager
 
     nix-tree
 

@@ -53,13 +53,17 @@
     fi
     echo -n "$TEXT" | ${pkgs.xclip}/bin/xclip -selection primary &>/dev/null
     echo -n "$TEXT" | ${pkgs.xclip}/bin/xclip -selection secondary &>/dev/null
-    echo -n "$TEXT" | ${pkgs.xclip}/bin/xclip -selection clipboar &>/dev/null
+    echo -n "$TEXT" | ${pkgs.xclip}/bin/xclip -selection clipboard &>/dev/null
     echo -n "$TEXT" | ${pkgs.wl-clipboard}/bin/wl-copy &>/dev/null
   '';
   file2clip = pkgs.writeShellScriptBin "file2clip" ''
-    # TODO
-    #   Broken with any files except static images
-    ${pkgs.xclip}/bin/xclip -sel clipboard -t "${pkgs.file}/bin/file -b --mime-type $1" $1
+    MIME=$(${pkgs.file}/bin/file -b --mime-type $1)
+    if [[ "$MIME" != "image"* ]]; then
+      MIME="text/plain"
+    fi
+    cat $1 | xclip -selection primary -t "$MIME"
+    cat $1 | xclip -selection secondary -t "$MIME"
+    cat $1 | xclip -selection clipboard -t "$MIME"
   '';
   decolor = pkgs.writeShellScriptBin "decolor" ''
     cat /dev/stdin | sed -r "s/\x1B\[[0-9;]*[JKmsu]//g"
