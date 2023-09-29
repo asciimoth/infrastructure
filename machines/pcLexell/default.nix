@@ -155,6 +155,8 @@ in {
     cpufetch
     pulseaudio
 
+    nix-tree
+
     tmate
     thefuck
     #perl

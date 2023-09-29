@@ -14,6 +14,12 @@
   ...
 }: let
   constants = import ./constants.nix;
+  wezterm-desktop = pkgs.makeDesktopItem {
+    name = "wezterm";
+    desktopName = "wezterm";
+    exec = "${pkgs.wezterm}/bin/wezterm";
+    terminal = false;
+  };
 in {
   imports = [
     ./x.nix
@@ -38,6 +44,70 @@ in {
       enable = true;
     };
   };
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        pass-secret-service
+      ];
+    };
+    mime = let
+      defaultApplications = {
+        browser = {
+          cmd = "${pkgs.firefox}/bin/firefox";
+          desktop = "firefox";
+        };
+        matrix = {
+          cmd = "${pkgs.nheko}/bin/nheko";
+          desktop = "nheko";
+        };
+        editor = {
+          cmd = "${pkgs.micro}/bin/micro ${pkgs.micro}/bin/micro";
+          desktop = "micro";
+        };
+        fm = {
+          cmd = "ranger";
+          desktop = "ranger";
+        };
+        terminal = {
+          cmd = "${pkgs.wezterm}/bin/wezterm";
+          desktop = "WezTerm";
+        };
+      };
+    in {
+      enable = true;
+      defaultApplications = with defaultApplications;
+        builtins.mapAttrs
+        (name: value:
+          if value ? desktop
+          then ["${value.desktop}.desktop"]
+          else value)
+        {
+          "x-terminal-emulator" = terminal;
+          "inode/directory" = fm;
+          "text/html" = browser;
+          #"image/*" = { desktop = "org.gnome.eog"; };
+          #"application/zip" = archive;
+          #"application/rar" = archive;
+          #"application/7z" = archive;
+          #"application/*tar" = archive;
+          "x-scheme-handler/http" = browser;
+          "x-scheme-handler/https" = browser;
+          "x-scheme-handler/about" = browser;
+          "x-www-browser" = browser;
+          #"x-scheme-handler/mailto" = mail;
+          "x-scheme-handler/matrix" = matrix;
+          #"application/pdf" = { desktop = "org.kde.okular"; };
+          #"application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
+          #  text_processor;
+          #"application/msword" = text_processor;
+          #"application/vnd.oasis.opendocument.text" = text_processor;
+          #"text/csv" = spreadsheet;
+          #"application/vnd.oasis.opendocument.spreadsheet" = spreadsheet;
+          "text/plain" = editor;
+        };
+    };
+  };
   home-manager.users."${constants.MainUser}" = {
     systemd.user.services.graphical-notify = {
       Service = {
@@ -57,6 +127,7 @@ in {
       rofi = {
         enable = true;
         font = lib.mkForce "FiraCode Nerd Font Mono 14";
+        #terminal = "wezterm";
       };
       wezterm = {
         enable = true;
@@ -67,5 +138,9 @@ in {
       pkgs.tdesktop
     ];
     home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
+    home.sessionVariables = {
+      TERMINAL = "wezterm";
+      TERM = "wezterm";
+    };
   };
 }

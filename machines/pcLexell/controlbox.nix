@@ -14,7 +14,7 @@
   ...
 }: let
   controlbox = pkgs.writeShellScriptBin "controlbox" ''
-    ${pkgs.alacritty}/bin/alacritty --class CONTROLBOX -o "scale_with_dpi=True" -o "dpi.x=144" -o "dpi.y=144" -o "font.size=8" -o "window.dimensions.lines=15" -o "window.dimensions.columns=30" -e ${pkgs.fish}/bin/fish -c "source /etc/theme.fish && base16-load && $*"
+    ${pkgs.wezterm}/bin/wezterm start --class CONTROLBOX -e ${pkgs.fish}/bin/fish -c "source /etc/theme.fish && base16-load && $*"
   '';
 in {
   environment.systemPackages = with pkgs; [controlbox];

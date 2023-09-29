@@ -57,6 +57,13 @@
     HEIGTH=$(echo -n $DIM | cut -d 'x' -f 2)
     echo "$WIDTH $HEIGTH"
   '';
+  ranger-desktop = pkgs.makeDesktopItem {
+    name = "ranger";
+    desktopName = "ranger";
+    #exec = "${my-ranger}/bin/ranger";
+    exec = "controlbox ranger";
+    terminal = false;
+  };
 in {
   environment.systemPackages = with pkgs; [
     my-ranger #ranger
@@ -81,6 +88,8 @@ in {
     pick
     get-main-img-dimension
     get-img-dimension
+    #
+    ranger-desktop
   ];
   home-manager.users.${constants.MainUser} = {pkgs, ...}: {
     home.file.".config/ranger_nix".source = ./ranger;
