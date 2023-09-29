@@ -10,6 +10,9 @@ return {
     "Noto Color Emoji",
   },
   window_close_confirmation = 'NeverPrompt',
+  -- enable_wayland = false,
+  -- front_end = "Software",
+  -- front_end = "OpenGL",
   -- color_scheme = "stylix",
   color_scheme = "custom",
   -- https://wezfurlong.org/wezterm/config/default-keys.html

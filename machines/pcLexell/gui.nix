@@ -28,8 +28,16 @@ in {
     flameshot
     obsidian
     tor-browser-bundle-bin
-    river
+    #hyprdim
   ];
+  programs.hyprland = {
+    #enable = true;
+    nvidiaPatches = true;
+    xwayland = {
+      hidpi = true;
+      enable = true;
+    };
+  };
   home-manager.users."${constants.MainUser}" = {
     systemd.user.services.graphical-notify = {
       Service = {
@@ -58,5 +66,6 @@ in {
     home.packages = [
       pkgs.tdesktop
     ];
+    home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
   };
 }

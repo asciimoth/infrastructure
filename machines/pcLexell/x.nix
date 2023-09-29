@@ -46,6 +46,8 @@ in {
       ];
     };
     hardware.bolt.enable = false;
+    dbus.enable = true;
+    tumbler.enable = true;
   };
 
   #environment.etc.wallaper.source = ./GreyDot.png;
@@ -60,11 +62,19 @@ in {
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        vaapiVdpau
+        libvdpau-va-gl
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [libva];
+      setLdLibraryPath = true;
     };
     nvidia = {
       #open = false;
       modesetting.enable = true;
       nvidiaSettings = true;
+      forceFullCompositionPipeline = true;
+      powerManagement.enable = true;
       #package = config.boot.kernelPackages.nvidiaPackages.stable; #Optional
     };
   };
