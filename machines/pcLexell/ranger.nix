@@ -21,6 +21,7 @@
     LOCKED_REV=$(read-or-value $LOCKSFILE "NONE")
     ACTUAL_REV=$(readlink -f $NIX_RANGER)
     if [ "$LOCKED_REV" != "$ACTUAL_REV" ]; then
+      rm -rf $REAL_RANGER
       cp -rL $NIX_RANGER $REAL_RANGER
       chmod -R +w $REAL_RANGER
       echo -n "$ACTUAL_REV" > $LOCKSFILE

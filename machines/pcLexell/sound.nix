@@ -15,6 +15,10 @@
 }: let
   mutespeaker = pkgs.writeShellScriptBin "mutespeaker" (builtins.readFile ./mutespeaker.sh);
 in {
+  imports = [
+    ./mpd.nix
+  ];
+
   sound.enable = true;
   services.pipewire = {
     enable = true;

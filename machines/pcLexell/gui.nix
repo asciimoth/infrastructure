@@ -42,6 +42,8 @@ in {
     obsidian
     tor-browser-bundle-bin
     #hyprdim
+    gthumb # image viewver; automatically bind to xdg
+    mpv # Video player
   ];
   programs.hyprland = {
     #enable = true;
