@@ -69,6 +69,7 @@
   bashscript = pkgs.writeShellScriptBin "bashscript" ''
     echo "#!/usr/bin/env bash" > $1
     chmod +x $1
+    echo $1
   '';
   decolor = pkgs.writeShellScriptBin "decolor" ''
     cat /dev/stdin | sed -r "s/\x1B\[[0-9;]*[JKmsu]//g"
@@ -242,6 +243,7 @@ in {
     root = "sudo -i";
     mke = "chmod +x";
     dropproxy = ''export ALL_PROXY="" && export all_proxy="" && export SOCKS_PROXY = "" && export socks_proxy = "" && export HTTP_PROXY = "" && export http_proxy = "" && export HTTPS_PROXY = "" && export https_proxy = ""'';
+    fkill = "ps -ef | sed 1d | fzf -m | awk '{print $2}' | xargs kill -9";
   };
 
   programs.fish = {
