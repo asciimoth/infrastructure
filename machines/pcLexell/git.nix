@@ -15,6 +15,7 @@
 }: {
   environment.systemPackages = with pkgs; [
     git
+    hub
   ];
 
   environment.shellAliases = {

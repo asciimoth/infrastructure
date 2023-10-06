@@ -182,6 +182,7 @@ in {
 
     #boxxy
     tmux
+    tab-rs
 
     lshw # Provides detailed inforamtion about hardware
     lsof # A tool to list open files
