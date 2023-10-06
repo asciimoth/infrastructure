@@ -16,6 +16,7 @@
   notifybyname =
     pkgs.writeShellScriptBin "notify-by-name"
     (builtins.readFile ./notify-by-name.sh);
+  loginer = pkgs.writeShellScriptBin "loginer" (builtins.readFile ./loginer.sh);
   volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);
   bright = pkgs.writeShellScriptBin "bright" (builtins.readFile ./bright.sh);
   where = pkgs.writeShellScriptBin "where" ''
@@ -64,6 +65,10 @@
     cat $1 | xclip -selection primary -t "$MIME"
     cat $1 | xclip -selection secondary -t "$MIME"
     cat $1 | xclip -selection clipboard -t "$MIME"
+  '';
+  bashscript = pkgs.writeShellScriptBin "bashscript" ''
+    echo "#!/usr/bin/env bash" > $1
+    chmod +x $1
   '';
   decolor = pkgs.writeShellScriptBin "decolor" ''
     cat /dev/stdin | sed -r "s/\x1B\[[0-9;]*[JKmsu]//g"
@@ -230,7 +235,7 @@ in {
     genpass = "openssl rand -base64 33";
     cppass = "openssl rand -base64 33 | xclip -selection c";
     pause = "sleep 100000d";
-    stat = "systemctl status";
+    sstat = "systemctl status";
     jour = "journalctl -u";
     sec = "systemd-analyse security";
     size = "du -shP";
@@ -292,5 +297,7 @@ in {
     uclip
     file2clip
     where
+    bashscript
+    loginer
   ];
 }

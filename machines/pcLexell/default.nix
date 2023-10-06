@@ -143,6 +143,9 @@ in {
 
   environment.systemPackages = with pkgs; [
     htop
+    btop
+    nvtop
+    glances
     micro
     #helix
     nano
@@ -156,6 +159,8 @@ in {
     pulseaudio
     strace
     copyq # clipboard manager
+    wget
+    curl
 
     nix-tree
 

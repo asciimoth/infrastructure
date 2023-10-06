@@ -42,6 +42,7 @@ in {
           #stylus
           #tab-counter
           browserpass
+          auto-tab-discard
         ];
         # Custom CSS
         userChrome = ''

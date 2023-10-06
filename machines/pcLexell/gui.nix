@@ -104,9 +104,9 @@ in {
           "x-scheme-handler/https" = browser;
           "x-scheme-handler/about" = browser;
           "x-www-browser" = browser;
+          "application/pdf" = browser;
           #"x-scheme-handler/mailto" = mail;
           "x-scheme-handler/matrix" = matrix;
-          #"application/pdf" = { desktop = "org.kde.okular"; };
           #"application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
           #  text_processor;
           #"application/msword" = text_processor;
