@@ -42,6 +42,7 @@ in {
     ./dev.nix
     ./steam.nix
     ./ranger.nix
+    ./desel.nix
 
     #./ssh.nix
     ./ssh_client.nix
