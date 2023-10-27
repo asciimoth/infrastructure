@@ -91,6 +91,8 @@ in {
     get-img-dimension
     #
     ranger-desktop
+    #
+    #yazi
   ];
   home-manager.users.${constants.MainUser} = {pkgs, ...}: {
     home.file.".config/ranger_nix".source = ./ranger;

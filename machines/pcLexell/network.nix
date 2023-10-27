@@ -42,7 +42,7 @@ in {
     '';
     firewall = {
       enable = true;
-      allowedTCPPorts = lib.mkForce [];
+      allowedTCPPorts = lib.mkForce [5900];
       allowedTCPPortRanges = lib.mkForce [];
       allowedUDPPorts = lib.mkForce [];
       allowedUDPPortRanges = lib.mkForce [];

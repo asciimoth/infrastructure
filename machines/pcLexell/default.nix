@@ -132,6 +132,7 @@ in {
       defaultNetwork.settings.dns_enabled = true;
       autoPrune.enable = true;
       #defaultNetwork.settings.dns_enabled = true;
+      enableNvidia = true; # Enable use of NVidia GPUs from within containers
       #extraOptions = "--iptables=false"; # Makes shure that Podman/Docker doesn't alter the firewall
     };
   };
@@ -162,6 +163,7 @@ in {
     copyq # clipboard manager
     wget
     curl
+    alejandra
 
     nix-tree
 
@@ -184,6 +186,8 @@ in {
     #boxxy
     tmux
     tab-rs
+
+    nmap
 
     lshw # Provides detailed inforamtion about hardware
     lsof # A tool to list open files

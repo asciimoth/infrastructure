@@ -20,4 +20,8 @@ in {
     enableBashIntegration = true;
     nix-direnv.enable = true;
   };
+  environment.systemPackages = with pkgs; [
+    distrobox
+    hub
+  ];
 }
