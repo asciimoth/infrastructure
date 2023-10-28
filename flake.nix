@@ -11,6 +11,7 @@
   inputs = {
     stable.url = "github:NixOS/nixpkgs/nixos-23.05";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    master.url = "github:NixOS/nixpkgs";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +38,7 @@
     nixpkgs,
     home-manager,
     stable,
+    master,
     nur,
     stylix,
     sops-nix,
@@ -66,7 +68,11 @@
           nur.nixosModules.nur
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops
-          {nixpkgs.overlays = [nur.overlay];}
+          {
+            nixpkgs.overlays = [nur.overlay];
+            _module.args.master = import inputs.master {inherit (pkgs.stdenv.targetPlatform) system;};
+            _module.args.stable = import inputs.stable {inherit (pkgs.stdenv.targetPlatform) system;};
+          }
         ];
         specialArgs = {
           inherit inputs;

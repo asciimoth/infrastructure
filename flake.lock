@@ -147,6 +147,21 @@
         "type": "github"
       }
     },
+    "master": {
+      "locked": {
+        "lastModified": 1698486651,
+        "narHash": "sha256-kMeWAjb57gtxSGg0qXd1wrRQ6oaa1n4L5uv8LzbeUl4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9b3fcd484c1d233b7411b944f76a5e287a94bfbb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1690881714,
@@ -237,6 +252,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "master": "master",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
         "pre-commit-hooks": "pre-commit-hooks",
