@@ -16,6 +16,7 @@
   notifybyname =
     pkgs.writeShellScriptBin "notify-by-name"
     (builtins.readFile ./notify-by-name.sh);
+  aligner = pkgs.writeShellScriptBin "aligner" (builtins.readFile ./aligner.sh);
   loginer = pkgs.writeShellScriptBin "loginer" (builtins.readFile ./loginer.sh);
   volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);
   bright = pkgs.writeShellScriptBin "bright" (builtins.readFile ./bright.sh);
@@ -58,13 +59,14 @@
     echo -n "$TEXT" | ${pkgs.wl-clipboard}/bin/wl-copy &>/dev/null
   '';
   file2clip = pkgs.writeShellScriptBin "file2clip" ''
-    MIME=$(${pkgs.file}/bin/file -b --mime-type $1)
+    FILE=$1
+    MIME=$(${pkgs.file}/bin/file -b --mime-type "''${FILE}")
     if [[ "$MIME" != "image"* ]]; then
       MIME="text/plain"
     fi
-    cat $1 | xclip -selection primary -t "$MIME"
-    cat $1 | xclip -selection secondary -t "$MIME"
-    cat $1 | xclip -selection clipboard -t "$MIME"
+    cat "''${FILE}" | xclip -selection primary -t "$MIME"
+    cat "''${FILE}" | xclip -selection secondary -t "$MIME"
+    cat "''${FILE}" | xclip -selection clipboard -t "$MIME"
   '';
   bashscript = pkgs.writeShellScriptBin "bashscript" ''
     echo "#!/usr/bin/env bash" > $1
@@ -226,7 +228,7 @@ in {
 
     # Etc
     bat = "bat --paging never";
-    tr = "${pkgs.exa}/bin/exa --oneline -T -F --group-directories-first -a --icons";
+    tre = "${pkgs.exa}/bin/exa --oneline -T -F --group-directories-first -a --icons";
     gtr = "${pkgs.exa}/bin/exa --oneline -T -F --group-directories-first -a --git-ignore --ignore-glob .git --icons";
     print = "figlet -c -t";
     stop = "sudo shutdown now";
@@ -301,5 +303,6 @@ in {
     where
     bashscript
     loginer
+    aligner
   ];
 }

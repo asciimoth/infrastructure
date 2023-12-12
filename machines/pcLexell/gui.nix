@@ -44,6 +44,7 @@ in {
     #hyprdim
     gthumb # image viewver; automatically bind to xdg
     mpv # Video player
+    eww
   ];
   programs.hyprland = {
     #enable = true;

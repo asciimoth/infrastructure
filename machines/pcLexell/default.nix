@@ -12,6 +12,7 @@
   lib,
   inputs,
   hostname,
+  master,
   ...
 }: let
   constants = import ./constants.nix;
@@ -183,9 +184,11 @@ in {
 
     #go
 
-    #boxxy
+    master.boxxy
     tmux
     tab-rs
+
+    duf # Disk Usage/Free Utility
 
     nmap
 
@@ -201,6 +204,8 @@ in {
     jq
 
     xdotool
+
+    drawio
 
     #udisksctludisksctl
 
@@ -220,6 +225,7 @@ in {
     #cargo-license
 
     #zig
+    #master.yazi
   ];
 
   console = {
@@ -251,12 +257,16 @@ in {
 
   hardware.ksm.enable = true;
 
-  #documentation = {
-  #  dev.enable = true;
-  #  doc.enable = true;
-  #  info.enable = true;
-  #  #man.enable = true;
-  #};
+  # Need for faster builds
+  documentation = {
+    dev.enable = false;
+    doc.enable = false;
+    info.enable = false;
+    man = {
+      enable = false;
+      man-db.enable = false;
+    };
+  };
 
   # CUPS
   # nixos.wiki/wiki/Printing

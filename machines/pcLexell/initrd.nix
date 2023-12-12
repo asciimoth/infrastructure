@@ -13,12 +13,15 @@
   inputs,
   ...
 }: {
-  boot.initrd.luks = {
-    gpgSupport = true;
-    devices."crypted" = {
-      gpgCard = {
-        encryptedPass = ./luks_key.asc;
-        publicKey = ../../keys/moth.pub.asc;
+  boot.initrd = {
+    preDeviceCommands = lib.mkBefore (builtins.readFile ./init_message);
+    luks = {
+      gpgSupport = true;
+      devices."crypted" = {
+        gpgCard = {
+          encryptedPass = ./luks_key.asc;
+          publicKey = ../../keys/moth.pub.asc;
+        };
       };
     };
   };
