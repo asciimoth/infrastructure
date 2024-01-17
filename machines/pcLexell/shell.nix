@@ -14,9 +14,7 @@
   ...
 }: let
   nixlogo = pkgs.writeText "NixOsLogo" (builtins.readFile ./nix_logo);
-  notifybyname =
-    pkgs.writeShellScriptBin "notify-by-name"
-    (builtins.readFile ./notify-by-name.sh);
+  notifybyname = pkgs.writeShellScriptBin "notify-by-name" (builtins.readFile ./notify-by-name.sh);
   aligner = pkgs.writeShellScriptBin "aligner" (builtins.readFile ./aligner.sh);
   loginer = pkgs.writeShellScriptBin "loginer" (builtins.readFile ./loginer.sh);
   volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);

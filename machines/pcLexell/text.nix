@@ -21,7 +21,6 @@ in {
     micro
     sublime4
     ripgrep # Needs for nvim setup
-    wmctrl
     #helix
   ];
   programs.neovim = {
@@ -38,17 +37,19 @@ in {
   #  0.0.0.0 sublimetext.com
   #  0.0.0.0 forum.sublimetext.com
   #'';
-  home-manager.users."${constants.MainUser}".systemd.user.services.stlc = {
-    Service = {
-      Environment = ["PATH=${lib.makeBinPath [pkgs.xorg.xprop pkgs.wmctrl pkgs.wmctrl pkgs.gnugrep pkgs.findutils]}"];
-      ExecStart = "${stlc}/bin/stlc";
-    };
-    Unit = {
-      Description = "Autoclose sublime text 'please buy licence' windows";
-      After = ["graphical-session.target"];
-    };
-    Install = {
-      WantedBy = ["graphical-session.target"];
+  home-manager.users."${constants.MainUser}" = {
+    systemd.user.services.stlc = {
+      Service = {
+        Environment = ["PATH=${lib.makeBinPath [pkgs.xorg.xprop pkgs.wmctrl pkgs.wmctrl pkgs.gnugrep pkgs.findutils]}"];
+        ExecStart = "${stlc}/bin/stlc";
+      };
+      Unit = {
+        Description = "Autoclose sublime text 'please buy licence' windows";
+        After = ["graphical-session.target"];
+      };
+      Install = {
+        WantedBy = ["graphical-session.target"];
+      };
     };
   };
 }
