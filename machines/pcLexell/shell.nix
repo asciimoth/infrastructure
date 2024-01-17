@@ -19,6 +19,7 @@
   loginer = pkgs.writeShellScriptBin "loginer" (builtins.readFile ./loginer.sh);
   volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);
   bright = pkgs.writeShellScriptBin "bright" (builtins.readFile ./bright.sh);
+  arraydedup = pkgs.writeShellScriptBin "arraydedup" (builtins.readFile ./arraydedup.sh);
   printlogo = pkgs.writeShellScriptBin "printlogo" ''
     cat ${nixlogo} | aligner -b $@
   '';
@@ -47,6 +48,9 @@
         echo ""
     done
   '';
+  nwhere =
+    pkgs.writeShellScriptBin "where" ''
+    '';
   uclip = pkgs.writeShellScriptBin "uclip" ''
     # Universal text clipboard manager
     # for both X11 and wayland
@@ -306,10 +310,12 @@ in {
     uclip
     file2clip
     where
+    nwhere
     bashscript
     loginer
     aligner
     printlogo
     myexa
+    arraydedup
   ];
 }
