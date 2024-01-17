@@ -2,6 +2,15 @@
 
 set -o noclobber -o noglob -o pipefail
 
+calculate_length() {
+    local length=0
+    while IFS= read -r line; do
+        local line_length=${#line}
+        length=$([ "$length" -gt "$line_length" ] && echo $length || echo $line_length)
+    done <<< "$1"
+    echo "$length"
+}
+
 CONFIG_PATH="$HOME/.config/loginer"
 CACHE_PATH="$HOME/.cache/loginer"
 
@@ -54,7 +63,17 @@ else
     fi
 fi
 
-CMD=$(echo "$LIST" | fzf --bind "load:pos:$LINE" --layout=reverse --inline-info --border)
+clear
+
+printlogo
+
+MAX_LENGTH=$(calculate_length "$LIST")
+
+MARGIN=$(( ($(tput cols) - $MAX_LENGTH - 2) / 2))
+
+MARGIN="--margin=0,$MARGIN,0,$MARGIN"
+
+CMD=$(echo "$LIST" | fzf --bind "load:pos:$LINE" --layout=reverse --no-bold --info=hidden --no-separator --height=~$(( ($(tput lines) - 21))) "$MARGIN")
 
 if [ "" != "$CMD" ]; then
     rm -rf $CACHE_PATH

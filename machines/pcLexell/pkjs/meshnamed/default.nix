@@ -18,7 +18,7 @@ buildGoModule rec {
 
   #src = ./meshname;
 
-  vendorSha256 = "sha256-kiNxB2R3Z6Z/Resr3r4jKCImVhyoOY55dEiV+JRUjDk=";
+  vendorHash = "sha256-kiNxB2R3Z6Z/Resr3r4jKCImVhyoOY55dEiV+JRUjDk=";
 
   subPackages = ["cmd/meshnamed"];
 

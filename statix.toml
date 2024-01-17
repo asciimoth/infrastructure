@@ -1,4 +1,9 @@
-disabled = []
 nix_version = '2.4'
-ignore = ['.direnv']
+ignore = [
+    '.direnv'
+]
+disabled = [
+    "repeated_keys"
+]
+
 

@@ -9,11 +9,11 @@
 {
   description = "Moth's NixOs configuration(s)";
   inputs = {
-    stable.url = "github:NixOS/nixpkgs/nixos-23.05";
+    stable.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     master.url = "github:NixOS/nixpkgs";
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
@@ -68,6 +68,7 @@
           nur.nixosModules.nur
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops
+          #ags.homeManagerModules.default
           {
             nixpkgs.overlays = [nur.overlay];
             _module.args.master = import inputs.master {inherit (pkgs.stdenv.targetPlatform) system;};

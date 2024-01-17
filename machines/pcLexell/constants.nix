@@ -15,16 +15,5 @@
     Full = "ASCII Moth";
     Lower = "asciimoth";
   };
+  theme = "catppuccin-mocha"; # catppuccin-mocha isotope gruvbox-material-dark-hard
 }
-#let
-#  ConfigRoot = "/etc/infrastructure";
-#  MainUser = "moth";
-#  Editor = "micro";
-#in {
-#  inherit
-#    MainUser
-#    ConfigRoot
-#    Editor
-#    ;
-#}
-

@@ -39,7 +39,7 @@ in {
     ./email.nix
     ./qr.nix
     #./kdeconnect.nix
-    ./vim.nix
+    ./text.nix
     ./dev.nix
     ./steam.nix
     ./ranger.nix
@@ -140,6 +140,8 @@ in {
 
   nixpkgs.config.permittedInsecurePackages = [
     "python3.10-certifi-2022.12.7"
+    "electron-25.9.0"
+    "openssl-1.1.1w" # For sublime text
   ];
 
   boot.supportedFilesystems = ["ntfs"];
@@ -149,9 +151,6 @@ in {
     btop
     nvtop
     glances
-    micro
-    #helix
-    nano
     age
     rage
     sops
@@ -184,11 +183,12 @@ in {
 
     #go
 
-    master.boxxy
+    #master.boxxy
+    boxxy
     tmux
     tab-rs
 
-    duf # Disk Usage/Free Utility
+    duf # Disk Usage Utility
 
     nmap
 
@@ -206,6 +206,8 @@ in {
     xdotool
 
     drawio
+
+    #zathura
 
     #udisksctludisksctl
 
@@ -226,6 +228,10 @@ in {
 
     #zig
     #master.yazi
+
+    # Drawing
+    krita
+    xournal
   ];
 
   console = {
@@ -244,6 +250,7 @@ in {
   home-manager.users."${constants.MainUser}" = {pkgs, ...}: {
     home.file.".config/micro/settings.json".source = ./micro/settings.json;
     home.file.".config/micro/bindings.json".source = ./micro/bindings.json;
+    programs.zathura.enable = true;
   };
 
   zramSwap = {

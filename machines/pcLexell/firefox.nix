@@ -79,17 +79,17 @@ in {
           "signon.management.page.breach-alerts.enabled" = false;
           "signon.rememberSignons" = false;
 
-          "browser.startup.homepage" = "https://duckduckgo.com/";
+          "browser.startup.homepage" = "https://kagi.com/";
           #"startup.homepage_welcome_url" = "https://nixos.org";
           "browser.newtabpage.enabled" = false;
 
           "general.useragent.locale" = "en-US";
           "browser.search.region" = "US";
           "browser.search.isUS" = true;
-          "browser.search.defaultenginename" = "DuckDuckGo";
-          "browser.search.selectedEngine" = "DuckDuckGo";
-          "browser.urlbar.placeholderName" = "DuckDuckGo";
-          "browser.search.openintab" = true;
+          #"browser.search.defaultenginename" = "DuckDuckGo";
+          #"browser.search.selectedEngine" = "DuckDuckGo";
+          #"browser.urlbar.placeholderName" = "DuckDuckGo";
+          #"browser.search.openintab" = true;
 
           # Set theme
           #"extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";

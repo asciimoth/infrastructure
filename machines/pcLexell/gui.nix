@@ -46,17 +46,18 @@ in {
     mpv # Video player
     eww
   ];
-  programs.hyprland = {
-    #enable = true;
-    nvidiaPatches = true;
-    xwayland = {
-      hidpi = true;
-      enable = true;
-    };
-  };
+  #programs.hyprland = {
+  #  #enable = true;
+  #  nvidiaPatches = true;
+  #  xwayland = {
+  #    hidpi = true;
+  #    enable = true;
+  #  };
+  #};
   xdg = {
     portal = {
       enable = true;
+      config.common.default = "*";
       extraPortals = with pkgs; [
         pass-secret-service
       ];

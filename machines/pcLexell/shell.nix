@@ -13,6 +13,7 @@
   inputs,
   ...
 }: let
+  nixlogo = pkgs.writeText "NixOsLogo" (builtins.readFile ./nix_logo);
   notifybyname =
     pkgs.writeShellScriptBin "notify-by-name"
     (builtins.readFile ./notify-by-name.sh);
@@ -20,6 +21,9 @@
   loginer = pkgs.writeShellScriptBin "loginer" (builtins.readFile ./loginer.sh);
   volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);
   bright = pkgs.writeShellScriptBin "bright" (builtins.readFile ./bright.sh);
+  printlogo = pkgs.writeShellScriptBin "printlogo" ''
+    cat ${nixlogo} | aligner -b $@
+  '';
   where = pkgs.writeShellScriptBin "where" ''
     #!/usr/bin/env bash
     for ENTRY in "$@"
@@ -190,6 +194,9 @@
   printscript = pkgs.writeShellScriptBin "printscript" ''
     bat $(whereis -b $1 | cut -d ' ' -f 2) -p
   '';
+  myexa = pkgs.writeShellScriptBin "exa" ''
+    ${pkgs.eza}/bin/eza ''${@: 2}
+  '';
 in {
   users.defaultUserShell = pkgs.fish;
 
@@ -222,14 +229,14 @@ in {
     c = "clear";
     h = "history | rg";
     rf = "rm -rf";
-    ll = "${pkgs.exa}/bin/exa --oneline -L -T -F --group-directories-first -l --icons";
-    la = "${pkgs.exa}/bin/exa --oneline -L -T -F --group-directories-first -la --icons";
-    l = "${pkgs.exa}/bin/exa --oneline -L -T -F --group-directories-first --icons";
+    ll = "${myexa}/bin/exa --oneline -L -T -F --group-directories-first -l --icons";
+    la = "${myexa}/bin/exa --oneline -L -T -F --group-directories-first -la --icons";
+    l = "${myexa}/bin/exa --oneline -L -T -F --group-directories-first --icons";
 
     # Etc
     bat = "bat --paging never";
-    tre = "${pkgs.exa}/bin/exa --oneline -T -F --group-directories-first -a --icons";
-    gtr = "${pkgs.exa}/bin/exa --oneline -T -F --group-directories-first -a --git-ignore --ignore-glob .git --icons";
+    tre = "${myexa}/bin/exa --oneline -T -F --group-directories-first -a --icons";
+    gtr = "${myexa}/bin/exa --oneline -T -F --group-directories-first -a --git-ignore --ignore-glob .git --icons";
     print = "figlet -c -t";
     stop = "sudo shutdown now";
     copy = "xclip -selection c";
@@ -304,5 +311,7 @@ in {
     bashscript
     loginer
     aligner
+    printlogo
+    myexa
   ];
 }

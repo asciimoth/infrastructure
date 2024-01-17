@@ -39,6 +39,7 @@ in {
     };
     extraHosts = ''
       78.153.130.171 hearty-health
+      192.168.1.141 pipebomb.local
     '';
     firewall = {
       enable = true;

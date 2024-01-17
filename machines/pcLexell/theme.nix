@@ -14,9 +14,7 @@
   ...
 }: let
   constants = import ./constants.nix;
-  #theme = "${pkgs.base16-schemes}/share/themes/gruvbox-material-dark-hard.yaml";
-  theme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-  #theme = "${pkgs.base16-schemes}/share/themes/isotope.yaml";
+  theme = "${pkgs.base16-schemes}/share/themes/${constants.theme}.yaml";
   jsonTheme = pkgs.runCommand "yml2json" {} ''
     ${pkgs.yq}/bin/yq -Mc . ${theme} > $out
   '';
