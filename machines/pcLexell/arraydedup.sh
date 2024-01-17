@@ -7,22 +7,24 @@ remove_duplicates() {
     local element
 
     for element in "${@:2}"; do  # Skip the first argument (delimiter)
-        if [[ -z ${seen[$element]} ]]; then
-            unique_elements+=("$element")  # add unseen element to unique_elements
-            seen[$element]=1  # mark element as seen
+        if [[ "$element" != "" ]]; then
+            if [[ -z ${seen[$element]} ]]; then
+                unique_elements+=("$element")  # add unseen element to unique_elements
+                seen[$element]=1  # mark element as seen
+            fi
         fi
     done
 
     # Join array elements using the specified delimiter
     local IFS="$1"  # Set internal field separator to the delimiter
-    echo "${unique_elements[*]}"
+    echo -n "${unique_elements[*]}"
 }
 
 # Check the number of arguments
 if [ "$#" -eq 0 ]; then
     exit 0  # Exit silently if no arguments are passed
 elif [ "$#" -eq 1 ]; then
-    echo "$1"  # If only one argument is passed, print it
+    echo -n "$1"  # If only one argument is passed, print it
     exit 0
 fi
 

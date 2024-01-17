@@ -23,34 +23,7 @@
   printlogo = pkgs.writeShellScriptBin "printlogo" ''
     cat ${nixlogo} | aligner -b $@
   '';
-  where = pkgs.writeShellScriptBin "where" ''
-    #!/usr/bin/env bash
-    for ENTRY in "$@"
-    do
-        RAW=$(whereis $ENTRY)
-        IFS=' ' read -r NAME RAW <<< "$RAW"
-        echo -n "$NAME "
-        for PTH in $RAW; do
-            #echo "$PTH"
-            if [ -d "$PTH" ]; then
-                echo -n "$PTH ";
-            else
-                if [[ -x "$PTH" ]]
-                then
-                    echo -n "$PTH "
-                    PTH=$(readlink -f "$PTH")
-                    echo -n "$PTH "
-                else
-                    echo -n "$PTH "
-                fi
-            fi
-        done
-        echo ""
-    done
-  '';
-  nwhere =
-    pkgs.writeShellScriptBin "where" ''
-    '';
+  where = pkgs.writeShellScriptBin "where" (builtins.readFile ./where.sh);
   uclip = pkgs.writeShellScriptBin "uclip" ''
     # Universal text clipboard manager
     # for both X11 and wayland
@@ -236,6 +209,7 @@ in {
     l = "${myexa}/bin/exa --oneline -L -T -F --group-directories-first --icons";
 
     # Etc
+    whereis = "where";
     bat = "bat --paging never";
     tre = "${myexa}/bin/exa --oneline -T -F --group-directories-first -a --icons";
     gtr = "${myexa}/bin/exa --oneline -T -F --group-directories-first -a --git-ignore --ignore-glob .git --icons";
@@ -310,7 +284,6 @@ in {
     uclip
     file2clip
     where
-    nwhere
     bashscript
     loginer
     aligner

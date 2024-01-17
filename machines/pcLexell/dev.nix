@@ -14,26 +14,27 @@
   ...
 }: let
   constants = import ./constants.nix;
-  debash = pkgs.writeShellScriptBin "debash" ''
-    export NO_DEBASH=true
-    $1 ''${@: 2}
-  '';
+  #debash = pkgs.writeShellScriptBin "debash" ''
+  #  export NO_DEBASH=true
+  #  $1 ''${@: 2}
+  #'';
 in {
   home-manager.users."${constants.MainUser}" = {
-    home.file.".bashrc".text = lib.mkAfter ''
-      # Debash!
-      if [[ $IN_NIX_SHELL ]]; then
-          if [[ "$NO_DEBASH" == "" ]]; then
-              echo "debash: Loading default user shell"
-              echo "debash: To prevent it, use 'export NO_DEBASH=true'"
-              dshell=$(awk -F: -v user="$USER" '$1 == user {print $NF}' /etc/passwd)
-              $dshell
-              dcode=$?
-              echo "debash: $dshell finished with $dcode"
-              exit $dcode
-          fi
-      fi
-    '';
+    #home.file.".bashrc".text = lib.mkAfter ''
+    #  # Debash!
+    #  if [[ $IN_NIX_SHELL ]]; then
+    #      if [[ "$NO_DEBASH" == "" ]]; then
+    #          echo "debash: Loading default user shell"
+    #          echo "debash: To prevent it, use 'export NO_DEBASH=true'"
+    #          dshell=$(awk -F: -v user="$USER" '$1 == user {print $NF}' /etc/passwd)
+    #          $dshell
+    #          dcode=$?
+    #          echo "debash: $dshell finished with $dcode"
+    #          exit $dcode
+    #      fi
+    #  fi
+    #  PS1="$(whoami)@$(hostname):$(pwd):\$(date) "
+    #'';
     programs.direnv = {
       enable = true;
       enableBashIntegration = true;
@@ -43,6 +44,6 @@ in {
   environment.systemPackages = with pkgs; [
     distrobox
     hub
-    debash
+    #debash
   ];
 }
