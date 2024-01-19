@@ -250,7 +250,18 @@ in {
   home-manager.users."${constants.MainUser}" = {pkgs, ...}: {
     home.file.".config/micro/settings.json".source = ./micro/settings.json;
     home.file.".config/micro/bindings.json".source = ./micro/bindings.json;
-    programs.zathura.enable = true;
+    programs = {
+      zathura.enable = true;
+    };
+  };
+
+  programs = {
+    command-not-found.enable = false;
+    nix-index = {
+      enable = true;
+      # enableBashIntegration = true;
+      #enableFishIntegration = true;
+    };
   };
 
   zramSwap = {
