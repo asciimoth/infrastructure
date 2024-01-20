@@ -40,8 +40,8 @@ in {
   home-manager.users."${constants.MainUser}" = {
     systemd.user.services.stlc = {
       Service = {
-        Environment = ["PATH=${lib.makeBinPath [pkgs.xorg.xprop pkgs.wmctrl pkgs.wmctrl pkgs.gnugrep pkgs.findutils]}"];
-        ExecStart = "${stlc}/bin/stlc";
+        Environment = ["PATH=${lib.makeBinPath [pkgs.xorg.xprop pkgs.wmctrl pkgs.wmctrl pkgs.gnugrep pkgs.findutils pkgs.coreutils-full]}"];
+        ExecStart = "${stlc}/bin/stlc 4";
       };
       Unit = {
         Description = "Autoclose sublime text 'please buy licence' windows";

@@ -3,6 +3,12 @@ set -o noclobber -o noglob -o nounset -o pipefail
 
 # Autoclose sublime text "please buy licence" windows
 
+if [[ "$0" != "" ]]; then
+    echo "Wait $1 secs"
+    sleep $1
+    echo "Started!"
+fi
+
 read -r -d '' PATTERN << EOM
 _NET_WM_NAME(UTF8_STRING) =
 _NET_WM_STATE(ATOM) = _NET_WM_STATE_MODAL, _NET_WM_STATE_SKIP_TASKBAR
