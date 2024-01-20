@@ -48,9 +48,13 @@
     cat "''${FILE}" | xclip -selection clipboard -t "$MIME"
   '';
   bashscript = pkgs.writeShellScriptBin "bashscript" ''
-    echo "#!/usr/bin/env bash" > $1
-    chmod +x $1
-    echo $1
+    echo "#!/usr/bin/env bash" > "$1"
+    echo "set -o noclobber -o noglob -o nounset -o pipefail" >> "$1"
+    chmod +x "$1"
+    echo "$1"
+    if [[ "$2" != "" ]]; then
+      "$2" "$1"
+    fi
   '';
   decolor = pkgs.writeShellScriptBin "decolor" ''
     cat /dev/stdin | sed -r "s/\x1B\[[0-9;]*[JKmsu]//g"
