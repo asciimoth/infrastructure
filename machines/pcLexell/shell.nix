@@ -174,7 +174,11 @@
     bat $(whereis -b $1 | cut -d ' ' -f 2) -p
   '';
   myexa = pkgs.writeShellScriptBin "exa" ''
-    ${pkgs.eza}/bin/eza ''${@: 2}
+    ${pkgs.eza}/bin/eza ''${@: 1}
+  '';
+  unfree = pkgs.writeShellScriptBin "unfree" ''
+    export NIXPKGS_ALLOW_UNFREE=1
+    "''${@: 1}"
   '';
 in {
   users.defaultUserShell = pkgs.fish;
@@ -252,6 +256,7 @@ in {
     bat # Modern analog of cat
     ripgrep # Modern analog of grep with some usefull patches
     ripgrep-all # Some usefull extensions for ripgrep
+    bat-extras.batgrep
     #qrencode # Generate & print qr codes in terminal
     figlet # Print text with ascii fonts
     xclip # x11 clipboard managment tool
@@ -294,5 +299,6 @@ in {
     printlogo
     myexa
     arraydedup
+    unfree
   ];
 }
