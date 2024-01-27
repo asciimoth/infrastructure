@@ -44,6 +44,7 @@ in {
     ./steam.nix
     ./ranger.nix
     ./desel.nix
+    ./dot.nix
 
     #./ssh.nix
     ./ssh_client.nix
@@ -204,8 +205,6 @@ in {
     jq
 
     xdotool
-
-    bubblewrap
 
     drawio
 
