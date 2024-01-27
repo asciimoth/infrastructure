@@ -205,6 +205,8 @@ in {
 
     xdotool
 
+    bubblewrap
+
     drawio
 
     #zathura

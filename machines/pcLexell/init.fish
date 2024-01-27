@@ -7,13 +7,6 @@
 # You should have received a copy of the CC0 legalcode along with this
 # work.  If not, see <http://creativecommons.org/publicdomain/zero/1.0/>.
 
-if not set -q LOGINER_USED
-    if [ "$USER" != "root" ]
-        set -gx LOGINER_USED TRUE
-        loginer
-    end
-end
-
 set GAPS " "
 set DEFAULT_USER "moth"
 
@@ -204,6 +197,14 @@ function fuck -d "Correct your previous console command"
     builtin history delete --exact --case-sensitive -- $fucked_up_command
     builtin history merge
   end
+end
+
+if not set -q LOGINER_USED
+    if [ "$USER" != "root" ]
+        base16-load
+        set -gx LOGINER_USED TRUE
+        loginer
+    end
 end
 
 if [ $USER = "root" ]
