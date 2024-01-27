@@ -31,6 +31,12 @@
     local/
     env
     .env
+    .sublime-workspace
+    .sublime-project
+    *.sublime-workspace
+    *.sublime-project
+    *.sublime-workspace*
+    *.sublime-project*
   '';
   environment.etc.gitconfig.text = ''
     [http]
