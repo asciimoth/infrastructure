@@ -40,13 +40,13 @@ in {
         extensions = with pkgs.vscode-extensions;
           [
             catppuccin.catppuccin-vsc-icons
-            #vscode-language-pack-ru
+            ms-ceintl.vscode-language-pack-ru
             #stephlin.vscode-tmux-keybinding
             #jamesyang999.vscode-emacs-minimum
             #github.vscode-pull-request-github
-            #bierner.markdown-mermaid
+            bierner.markdown-mermaid
             #yzhang.markdown-all-in-one
-            #bierner.markdown-checkbox
+            bierner.markdown-checkbox
             #shd101wyy.markdown-preview-enhanced
             #ms-vsliveshare.vsliveshare
             #ms-vscode.live-server
@@ -57,7 +57,8 @@ in {
             #usernamehw.errorlens
             #bbenoist.nix
             #arrterian.nix-env-selector
-            #jnoortheen.nix-ide
+            mkhl.direnv
+            jnoortheen.nix-ide
             #kamadorueda.alejandra
             #kahole.magit
             #mhutchie.git-graph
@@ -92,6 +93,7 @@ in {
             #theangryepicbanana.language-pascal
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            #https://marketplace.visualstudio.com/items?itemName=yoshi389111.markdown-table-rainbow
             {
               name = "vscode-custom-css";
               publisher = "be5invis";
@@ -101,6 +103,30 @@ in {
               # https://github.com/robb0wen/synthwave-vscode/blob/master/synthwave84.css
               # https://gist.github.com/js2me/dfccef039e1ce727eafce4145c0bb4cb
             }
+            {
+              name = "mermaid-markdown-syntax-highlighting";
+              publisher = "bpruitt-goddard";
+              version = "1.6.0";
+              sha256 = "sha256-XYGQk5zCStBzHVW0Kqs44vI0SyPx20ve3dtegRScc5M=";
+            }
+            #{
+            #  name = "";
+            #  publisher = "";
+            #  version = "";
+            #  #sha256 = "";
+            #}
+            {
+              name = "graphviz-interactive-preview";
+              publisher = "tintinweb";
+              version = "0.3.5";
+              sha256 = "sha256-5A+RXGGVF/LY2IQ9jDvmS2/G6/T9BBqDPIx+7SXNeTo=";
+            }
+            #{
+            #  name = "nix-extension-pack";
+            #  publisher = "pinage404";
+            #  version = "3.0.0";
+            #  sha256 = "sha256-cWXd6AlyxBroZF+cXZzzWZbYPDuOqwCZIK67cEP5sNk=";
+            #}
           ];
         # https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings
         userSettings = {
@@ -140,7 +166,33 @@ in {
           "workbench.editor.enablePreview" = false;
           "workbench.editor.enablePreviewFromQuickOpen" = false;
           "terminal.integrated.stickyScroll.enabled" = true;
+          # [Nix]
+          "nix.serverSettings" = {
+            # settings for 'nixd' LSP
+            "nixd" = {
+              "eval" = {
+                # stuff
+              };
+              "formatting" = {
+                "command" = "nixpkgs-fmt";
+              };
+              "options" = {
+                "enable" = true;
+                "target" = {
+                  # tweak arguments here
+                  "args" = [];
+                  # NixOS options
+                  "installable" = "<flakeref>#nixosConfigurations.<name>.options";
+                  # Flake-parts options
+                  # "installable": "<flakeref>#debug.options"
+                  # Home-manager options
+                  # "installable": "<flakeref>#homeConfigurations.<name>.options"
+                };
+              };
+            };
+          };
           # [Etc]
+          "workbench.startupEditor" = "none";
           "telemetry.telemetryLevel" = "off";
           "telemetry.enableCrashReporter" = false;
           "telemetry.enableTelemetry" = true;
@@ -165,6 +217,8 @@ in {
       codewrap
       ide
       ide-desktop
+      nixpkgs-fmt
+      nixd
     ];
     shellAliases = {
       code = "codium";
