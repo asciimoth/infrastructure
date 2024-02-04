@@ -23,20 +23,29 @@
   };
 
   environment.etc.gitignore.text = ''
-    # Windows executable files; For crosscompilation cases
-    *.exe
+    # Example: windows executable files; For crosscompilation cases
+    #*.exe
 
     # Local files
     local
     local/
+
+    # Env files
     env
     .env
+
+    # SublimeText files
     .sublime-workspace
     .sublime-project
     *.sublime-workspace
     *.sublime-project
     *.sublime-workspace*
     *.sublime-project*
+
+    # VScode(ium)
+    .vscode
+    .codium
+    .vscodium
   '';
   environment.etc.gitconfig.text = ''
     [http]

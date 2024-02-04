@@ -210,7 +210,12 @@ end
 if [ $USER = "root" ]
     printf "User root; do not load direnv"
 else
-    direnv hook fish | source
+    if [ "$NODIRENV" = "" ]
+        direnv hook fish | source
+    end
 end
+
+string match -q "$TERM_PROGRAM" "vscode"
+and . (codium --locate-shell-integration-path fish)
 
 

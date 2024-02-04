@@ -15,5 +15,14 @@
     Full = "ASCII Moth";
     Lower = "asciimoth";
   };
-  theme = "catppuccin-mocha"; # catppuccin-mocha isotope gruvbox-material-dark-hard
+  theme = "equilibrium-gray-dark";
+  # catppuccin-mocha atelier-cave ashes apathy 3024 isotope gruvbox-material-dark-hard
+  # atelier-dune atelier-estuary atelier-seaside
+  # brewer
+  # chalk
+  # circus
+  # classic-dark
+  # eighties
+  # equilibrium-dark
+  # equilibrium-gray-dark
 }

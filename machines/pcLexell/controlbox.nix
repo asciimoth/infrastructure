@@ -14,7 +14,7 @@
   ...
 }: let
   controlbox = pkgs.writeShellScriptBin "controlbox" ''
-    ${pkgs.wezterm}/bin/wezterm start --class CONTROLBOX -e ${pkgs.fish}/bin/fish -c "source /etc/theme.fish && base16-load && $*"
+    ${pkgs.wezterm}/bin/wezterm start --no-auto-connect --always-new-process --class CONTROLBOX --cwd $PWD -e ${pkgs.fish}/bin/fish -c "$*"
   '';
 in {
   environment.systemPackages = with pkgs; [controlbox];

@@ -37,6 +37,7 @@ in {
       };
       # dispatcherScripts  # https://github.com/cyplo/dotfiles/blob/master/nixos/common-hardware.nix
     };
+    # https://code.visualstudio.com/docs/setup/network#_common-hostnames
     extraHosts = ''
       78.153.130.171 hearty-health
       192.168.1.141 pipebomb.local

@@ -14,36 +14,160 @@
   ...
 }: let
   constants = import ./constants.nix;
-  #debash = pkgs.writeShellScriptBin "debash" ''
-  #  export NO_DEBASH=true
-  #  $1 ''${@: 2}
-  #'';
+  codewrap = pkgs.writeShellScriptBin "code-wrap" (builtins.readFile ./code-wrap.sh);
+  #https://stackoverflow.com/a/67799667
+  ide = pkgs.writers.writePython3Bin "ide" {} (builtins.readFile ./ide.py);
+  ide-desktop = pkgs.makeDesktopItem {
+    name = "IDE";
+    desktopName = "IDE";
+    exec = "${ide}/bin/ide";
+    terminal = false;
+  };
 in {
   home-manager.users."${constants.MainUser}" = {
-    #home.file.".bashrc".text = lib.mkAfter ''
-    #  # Debash!
-    #  if [[ $IN_NIX_SHELL ]]; then
-    #      if [[ "$NO_DEBASH" == "" ]]; then
-    #          echo "debash: Loading default user shell"
-    #          echo "debash: To prevent it, use 'export NO_DEBASH=true'"
-    #          dshell=$(awk -F: -v user="$USER" '$1 == user {print $NF}' /etc/passwd)
-    #          $dshell
-    #          dcode=$?
-    #          echo "debash: $dshell finished with $dcode"
-    #          exit $dcode
-    #      fi
-    #  fi
-    #  PS1="$(whoami)@$(hostname):$(pwd):\$(date) "
-    #'';
-    programs.direnv = {
-      enable = true;
-      enableBashIntegration = true;
-      nix-direnv.enable = true;
+    programs = {
+      direnv = {
+        enable = true;
+        enableBashIntegration = true;
+        nix-direnv.enable = true;
+      };
+      vscode = {
+        # https://mynixos.com/home-manager/options/programs.vscode
+        enable = true;
+        package = pkgs.vscodium;
+        enableExtensionUpdateCheck = false;
+        enableUpdateCheck = false;
+        extensions = with pkgs.vscode-extensions;
+          [
+            catppuccin.catppuccin-vsc-icons
+            #vscode-language-pack-ru
+            #stephlin.vscode-tmux-keybinding
+            #jamesyang999.vscode-emacs-minimum
+            #github.vscode-pull-request-github
+            #bierner.markdown-mermaid
+            #yzhang.markdown-all-in-one
+            #bierner.markdown-checkbox
+            #shd101wyy.markdown-preview-enhanced
+            #ms-vsliveshare.vsliveshare
+            #ms-vscode.live-server
+            #ms-vscode-remote.remote-ssh
+            #redhat.vscode-yaml
+            #bungcip.better-toml
+            #tamasfe.even-better-toml
+            #usernamehw.errorlens
+            #bbenoist.nix
+            #arrterian.nix-env-selector
+            #jnoortheen.nix-ide
+            #kamadorueda.alejandra
+            #kahole.magit
+            #mhutchie.git-graph
+            #waderyan.gitblame
+            #codezombiech.gitignore
+            #donjayamanne.githistory
+            #skyapps.fish-vscode
+            #bmalehorn.vscode-fish
+            #mads-hartmann.bash-ide-vscode
+            #sumneko.lua
+            #skellock.just
+            #ziglang.vscode-zig
+            #tiehuis.zig
+            #mattn.lisp
+            #golang.go
+            #jock.svg
+            #tomoki1207.pdf
+            #github.copilot
+            #serayuzgur.crates
+            #nvarner.typst-lsp
+            #mgt19937.typst-preview
+            #humao.rest-client
+            #bodil.file-browser
+            #bierner.emojisense
+            #bierner.markdown-emoji
+            #wmaurer.change-case
+            #irongeek.vscode-env
+            #eugleo.magic-racket
+            #rust-lang.rust-analyzer
+            #graphql.vscode-graphql-syntax
+            #asciidoctor.asciidoctor-vscode
+            #theangryepicbanana.language-pascal
+          ]
+          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              name = "vscode-custom-css";
+              publisher = "be5invis";
+              version = "7.2.1";
+              sha256 = "sha256-vNEVfDR4hGFXoElGqSNcmCyGi0vxN9gvPO9xkMhEfu8=";
+              # https://github.com/be5invis/vscode-custom-css
+              # https://github.com/robb0wen/synthwave-vscode/blob/master/synthwave84.css
+              # https://gist.github.com/js2me/dfccef039e1ce727eafce4145c0bb4cb
+            }
+          ];
+        # https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_tune-your-settings
+        userSettings = {
+          # [Theming]
+          # TODO: mo
+          "vscode_custom_css.imports" = [""];
+          #https://github.com/tonsky/FiraCode/wiki/VS-Code-Instructions
+          "editor.fontFamily" = lib.mkForce "FiraCode Nerd Font Mono Ret";
+          "editor.fontLigatures" = true;
+          "terminal.integrated.fontFamily" = lib.mkForce "FiraCode Nerd Font Mono Ret";
+          "workbench.iconTheme" = "catppuccin-mocha";
+          # [Minification]
+          #"workbench.editor.tabActionCloseVisibility" = false;
+          #"workbench.activityBar.location" = "hidden";
+          #"window.menuBarVisibility" = "hidden"; # Top bar with "File Edit Selection ..."
+          #"workbench.layoutControl.enabled" = false;
+          #"workbench.layoutControl.type" = "menu";
+          #"editor.scrollbar.verticalScrollbarSize" = 3;
+          #"editor.scrollbar.horizontalScrollbarSize" = 3;
+          #"editor.minimap.enabled" = false;
+          ##"window.title" = " ";
+          #"window.titleBarStyle" = "native";
+          #"workbench.sideBar.location" = "right";
+          "breadcrumbs.enabled" = false;
+          "breadcrumbs.icons" = false;
+          #"editor.lightbulb.enabled" = false;
+          #"editor.overviewRulerBorder" = false;
+          ##Explorer ctrl+shift+E
+          ##Source Control ctrl+shift+G
+          ##Extensions ctrl+shift+X
+          #"workbench.editor.pinnedTabSizing" = "compact";
+          #"workbench.editor.tabSizing" = "shrink";
+          #"editor.glyphMargin" = false;
+          #"workbench.editor.showTabs" = "single";
+          "editor.guides.indentation" = false;
+          "editor.stickyScroll.enabled" = false;
+          "workbench.editor.enablePreview" = false;
+          "workbench.editor.enablePreviewFromQuickOpen" = false;
+          "terminal.integrated.stickyScroll.enabled" = true;
+          # [Etc]
+          "telemetry.telemetryLevel" = "off";
+          "telemetry.enableCrashReporter" = false;
+          "telemetry.enableTelemetry" = true;
+          "editor.emptySelectionClipboard" = false;
+          "editor.insertSpaces" = true;
+          "editor.renderWhitespace" = "trailing"; # boundary
+          "editor.rulers" = [
+            80
+            {
+              "column" = 100;
+              "color" = "#997777";
+            }
+          ];
+        };
+      };
     };
   };
-  environment.systemPackages = with pkgs; [
-    distrobox
-    hub
-    #debash
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      distrobox
+      hub
+      codewrap
+      ide
+      ide-desktop
+    ];
+    shellAliases = {
+      code = "codium";
+    };
+  };
 }

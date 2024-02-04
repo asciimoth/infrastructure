@@ -34,7 +34,7 @@
     TMPFILE="/tmp/pick-$(${pkgs.openssl}/bin/openssl rand 40 | base32)"
     CMD="$1=$TMPFILE"
     touch $TMPFILE
-    controlbox ranger $CMD
+    controlbox ranger $CMD > /dev/null 2> /dev/null
     cat $TMPFILE
     rm -rf $TMPFILE
   '';
