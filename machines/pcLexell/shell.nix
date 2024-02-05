@@ -15,6 +15,7 @@
 }: let
   nixlogo = pkgs.writeText "NixOsLogo" (builtins.readFile ./nix_logo);
   notifybyname = pkgs.writeShellScriptBin "notify-by-name" (builtins.readFile ./notify-by-name.sh);
+  notifypy = pkgs.writers.writePython3Bin "notify-desktop-py" {} (builtins.readFile ./notify.py);
   aligner = pkgs.writeShellScriptBin "aligner" (builtins.readFile ./aligner.sh);
   loginer = pkgs.writeShellScriptBin "loginer" (builtins.readFile ./loginer.sh);
   volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);
@@ -248,7 +249,13 @@ in {
 
   services.getty.autologinUser = "moth";
 
-  environment.variables = {HISTCONTROL = "ignoreboth:erasedups";};
+  environment.variables = {
+    HISTCONTROL = "ignoreboth:erasedups";
+    ND_BAR_BEGIN = "";
+    ND_BAR_BODY = "";
+    ND_BAR_END = "";
+    ND_SPINNER = "";
+  };
 
   environment.systemPackages = with pkgs; [
     # Shell tools
@@ -286,6 +293,7 @@ in {
     getscript
     printfiles
     notifybyname
+    notifypy
     volume
     bright
     decolor

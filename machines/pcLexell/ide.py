@@ -17,6 +17,10 @@ def dedup(arr):
     return ret
 
 
+def paths_validate(paths):
+    return paths
+
+
 def read_history():
     try:
         history = []

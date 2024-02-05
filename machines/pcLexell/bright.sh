@@ -3,8 +3,8 @@
 CONFIG=".config/bright"
 
 show () {
-    MSG="<b>Light</b> $1"
-    notify-by-name -n LIGHT_CHANGE -u normal -t 600 -b "$MSG" > /dev/null
+    MSG="Light: $1<br> <bar $1% 20> <spin $1>"
+    notify-desktop-py -n LIGHT_CHANGE -u normal -t 600 -f "<>" "$MSG" > /dev/null
 }
 
 set_back () {
