@@ -79,6 +79,8 @@ in {
   environment.systemPackages = with pkgs; [
     new-emails-count
     new-emails-notify
+    thunderbird
+    #kmail
   ];
   environment.shellAliases."email" = ''fish -C "source /etc/email-shell.fish"'';
   environment.etc."email-shell.fish".text = ''

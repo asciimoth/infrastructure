@@ -37,10 +37,13 @@ in {
         package = pkgs.vscodium;
         enableExtensionUpdateCheck = false;
         enableUpdateCheck = false;
+        #extensions = [];
+        #extensions = extensions;
         extensions = with pkgs.vscode-extensions;
           [
             catppuccin.catppuccin-vsc-icons
             ms-ceintl.vscode-language-pack-ru
+            # https://github.com/ChristianKohler/PathIntellisense
             #stephlin.vscode-tmux-keybinding
             #jamesyang999.vscode-emacs-minimum
             #github.vscode-pull-request-github
@@ -53,7 +56,7 @@ in {
             #ms-vscode-remote.remote-ssh
             #redhat.vscode-yaml
             #bungcip.better-toml
-            #tamasfe.even-better-toml
+            tamasfe.even-better-toml
             #usernamehw.errorlens
             #bbenoist.nix
             #arrterian.nix-env-selector
@@ -68,7 +71,7 @@ in {
             #skyapps.fish-vscode
             #bmalehorn.vscode-fish
             #mads-hartmann.bash-ide-vscode
-            #sumneko.lua
+            sumneko.lua
             #skellock.just
             #ziglang.vscode-zig
             #tiehuis.zig
@@ -91,6 +94,8 @@ in {
             #graphql.vscode-graphql-syntax
             #asciidoctor.asciidoctor-vscode
             #theangryepicbanana.language-pascal
+            ms-python.python
+            ms-python.vscode-pylance
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             #https://marketplace.visualstudio.com/items?itemName=yoshi389111.markdown-table-rainbow
@@ -192,6 +197,9 @@ in {
             };
           };
           # [Etc]
+          "terminal.integrated.tabs.enabled" = true;
+          "graphviz-interactive-preview.renderLockAdditionalTimeout" = -1;
+          "explorer.confirmDelete" = false;
           "workbench.startupEditor" = "none";
           "telemetry.telemetryLevel" = "off";
           "telemetry.enableCrashReporter" = false;
@@ -206,6 +214,9 @@ in {
               "color" = "#997777";
             }
           ];
+          "editor.unicodeHighlight.allowedCharacters" = {
+            "у" = true;
+          };
         };
       };
     };
@@ -219,6 +230,7 @@ in {
       ide-desktop
       nixpkgs-fmt
       nixd
+      vimgolf
     ];
     shellAliases = {
       code = "codium";

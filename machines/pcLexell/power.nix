@@ -20,7 +20,7 @@
     # idle audio card after one second
     "options snd_hda_intel power_save=1"
     # enable wifi power saving (keep uapsd off to maintain low latencies)
-    "options iwlwifi power_save=1 uapsd_disable=1"
+    #"options iwlwifi power_save=1 uapsd_disable=1"
   ];
 
   environment.systemPackages = with pkgs; [
@@ -45,7 +45,7 @@
   powerManagement = {
     enable = true;
     powertop.enable = true;
-    cpuFreqGovernor = lib.mkForce "powersave"; # or performance
+    cpuFreqGovernor = lib.mkForce "ondemand"; # ondemand or performance or powersave
     resumeCommands = ''
       ${pkgs.autorandr}/bin/autorandr -c
     '';

@@ -51,8 +51,8 @@ in {
       trustedInterfaces = lib.mkForce ["lo"]; #open all ports on localhost
       #extraCommands = "ip6tables -A INPUT -s fe80::/10 -j ACCEPT";
     };
-    #nameservers = [ "8.8.8.8"];
-    nameservers = ["127.0.0.1" "::1"];
+    nameservers = ["8.8.8.8"];
+    #nameservers = ["127.0.0.1" "::1"];
   };
 
   services.dnscrypt-proxy2 = {
@@ -110,6 +110,7 @@ in {
       forwarding_rules = "/etc/forwarding-rules";
     };
   };
+  services.tailscale.enable = true;
 
   systemd.services.dnscrypt-proxy2.serviceConfig = {
     StateDirectory = "dnscrypt-proxy";

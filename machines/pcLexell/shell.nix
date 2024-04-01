@@ -190,6 +190,9 @@ in {
     ncollect = "nix-collect-garbage -d && sudo nix-collect-garbage -d";
     noptimise = "sudo nix-store --optimise";
     nfmt = "alejandra";
+    shell = "nix shell --impure";
+    unfree-shell = "unfree nix shell --impure";
+    ushell = "unfree-shell";
 
     #"${config.options.ABC}" = "echo ABC";
 
@@ -207,6 +210,8 @@ in {
     # Pings
     p1 = "ping 1.1.1.1";
     p8 = "ping 8.8.8.8";
+    gp1 = "gping 1.1.1.1";
+    gp8 = "gping 8.8.8.8";
 
     # Abbreviations
     e = "exit";

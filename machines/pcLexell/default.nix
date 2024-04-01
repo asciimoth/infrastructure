@@ -230,6 +230,9 @@ in {
     #zig
     #master.yazi
 
+    wireshark
+    wireguard-tools
+
     # Drawing
     krita
     xournal
