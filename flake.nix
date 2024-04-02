@@ -44,60 +44,69 @@
     sops-nix,
     pre-commit-hooks,
     ...
-  } @ inputs: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {inherit system;};
-    checks = {
-      pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        src = ./.;
-        hooks = {
-          alejandra.enable = true;
-          nixfmt.enable = false;
-          statix.enable = true;
-        };
-      };
-    };
-  in {
+  } @ inputs: {
     nixosConfigurations = {
       # Moth`s PC (Thinkpad P1 G5 Laptop currently)
-      pcLexell = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./machines/pcLexell
-          home-manager.nixosModules.home-manager
-          nur.nixosModules.nur
-          stylix.nixosModules.stylix
-          sops-nix.nixosModules.sops
-          #ags.homeManagerModules.default
-          {
-            nixpkgs.overlays = [nur.overlay];
-            _module.args.master = import inputs.master {inherit (pkgs.stdenv.targetPlatform) system;};
-            _module.args.stable = import inputs.stable {inherit (pkgs.stdenv.targetPlatform) system;};
-          }
-        ];
-        specialArgs = {
-          inherit inputs;
-          hostname = "pcLexell";
+      pcLexell = let
+        system = "x86_64-linux";
+        pkgs = import nixpkgs {inherit system;};
+      in
+        nixpkgs.lib.nixosSystem {
+          modules = [
+            ./machines/pcLexell
+            home-manager.nixosModules.home-manager
+            nur.nixosModules.nur
+            stylix.nixosModules.stylix
+            sops-nix.nixosModules.sops
+            {
+              nixpkgs.overlays = [nur.overlay];
+              _module.args.master = import inputs.master {inherit (pkgs.stdenv.targetPlatform) system;};
+              _module.args.stable = import inputs.stable {inherit (pkgs.stdenv.targetPlatform) system;};
+            }
+          ];
+          specialArgs = {
+            inherit inputs;
+            hostname = "pcLexell";
+          };
         };
-      };
     };
     # idk why I use two devShells for x86 and aarh instead of one crossplatform
-    # I just copy-paste this template
-    devShells.x86_64-linux.default = with nixpkgs.legacyPackages.x86_64-linux;
-      mkShell {
-        inherit (checks.pre-commit-check) shellHook;
-        buildInputs = [
-          alejandra
-          statix
-        ];
-      };
-    devShells.aarch64-linux.default = with nixpkgs.legacyPackages.aarch64-linux;
-      mkShell {
-        inherit (checks.pre-commit-check) shellHook;
-        buildInputs = [
-          alejandra
-          statix
-        ];
-      };
+    # I just copy-paste this template from somewhere
+    devShells = {
+      x86_64-linux.default = with nixpkgs.legacyPackages.x86_64-linux;
+        mkShell {
+          inherit
+            (pre-commit-hooks.lib.x86_64-linux.run {
+              src = ./.;
+              hooks = {
+                alejandra.enable = true;
+                statix.enable = true;
+              };
+            })
+            shellHook
+            ;
+          buildInputs = [
+            alejandra
+            statix
+          ];
+        };
+      aarch64-linux.default = with nixpkgs.legacyPackages.aarch64-linux;
+        mkShell {
+          inherit
+            (pre-commit-hooks.lib.aarch64-linux.run {
+              src = ./.;
+              hooks = {
+                alejandra.enable = true;
+                statix.enable = true;
+              };
+            })
+            shellHook
+            ;
+          buildInputs = [
+            alejandra
+            statix
+          ];
+        };
+    };
   };
 }
