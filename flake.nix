@@ -81,7 +81,17 @@
         };
       };
     };
+    # idk why I use two devShells for x86 and aarh instead of one crossplatform
+    # I just copy-paste this template
     devShells.x86_64-linux.default = with nixpkgs.legacyPackages.x86_64-linux;
+      mkShell {
+        inherit (checks.pre-commit-check) shellHook;
+        buildInputs = [
+          alejandra
+          statix
+        ];
+      };
+    devShells.aarch64-linux.default = with nixpkgs.legacyPackages.aarch64-linux;
       mkShell {
         inherit (checks.pre-commit-check) shellHook;
         buildInputs = [
