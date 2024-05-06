@@ -16,7 +16,7 @@
   constants = import ./constants.nix;
 in {
   imports = [
-    ./awesome
+    ./i3.nix
   ];
 
   services = {
@@ -25,8 +25,8 @@ in {
       autorun = false;
       exportConfiguration = true;
       libinput.enable = true;
-      layout = "us,ru";
-      xkbOptions = "grp:shifts_toggle";
+      xkb.layout = "us,ru";
+      xkb.options = "grp:shifts_toggle";
       dpi = 141; #https://dpi.lv/
       displayManager = {
         lightdm.enable = lib.mkForce false;

@@ -42,17 +42,19 @@ in {
       78.153.130.171 hearty-health
       192.168.1.141 pipebomb.local
     '';
+    # 192.168.1.141 pipebomb.local
+    # 100.66.72.81 pipebomb.local
     firewall = {
       enable = true;
-      allowedTCPPorts = lib.mkForce [5900];
+      allowedTCPPorts = lib.mkForce [5900 5001];
       allowedTCPPortRanges = lib.mkForce [];
-      allowedUDPPorts = lib.mkForce [];
+      allowedUDPPorts = lib.mkForce [5001];
       allowedUDPPortRanges = lib.mkForce [];
       trustedInterfaces = lib.mkForce ["lo"]; #open all ports on localhost
       #extraCommands = "ip6tables -A INPUT -s fe80::/10 -j ACCEPT";
     };
-    nameservers = ["8.8.8.8"];
-    #nameservers = ["127.0.0.1" "::1"];
+    #nameservers = ["8.8.8.8"];
+    nameservers = ["127.0.0.1" "::1"];
   };
 
   services.dnscrypt-proxy2 = {

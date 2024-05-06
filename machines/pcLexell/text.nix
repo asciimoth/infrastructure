@@ -22,6 +22,7 @@ in {
     #sublime4
     ripgrep # Needs for nvim setup
     #helix
+    neovide
   ];
   programs.neovim = {
     enable = true;

@@ -67,6 +67,7 @@
           specialArgs = {
             inherit inputs;
             hostname = "pcLexell";
+            stateVersion = "23.11";
           };
         };
     };

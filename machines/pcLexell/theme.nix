@@ -22,13 +22,14 @@
   fishThemeTemplate = pkgs.writeText "fishThemeTemplate" (builtins.readFile ./fish.mustache);
   terminalTheme = pkgs.runCommand "terminalThemeBuilder" {} ''
     mkdir $out
-    ${pkgs.python312}/bin/python ${terminalThemeBuilderPy} ${jsonTheme} ${fishThemeTemplate} $out/theme.fish | ${pkgs.remarshal}/bin/remarshal --if json --of toml > $out/wezterm
+    ${pkgs.python312}/bin/python ${terminalThemeBuilderPy} ${jsonTheme} 0x05 ${fishThemeTemplate} $out/theme.fish | ${pkgs.remarshal}/bin/remarshal --if json --of toml > $out/wezterm
   '';
-  wallpaper = pkgs.runCommand "image.png" {} ''
-    COLOR=$(${pkgs.yq}/bin/yq -r .base00 ${theme})
-    COLOR="#"$COLOR
-    ${pkgs.imagemagick}/bin/magick convert -size 1x1 xc:$COLOR $out
-  '';
+  #wallpaper = pkgs.runCommand "image.png" {} ''
+  #  COLOR=$(${pkgs.yq}/bin/yq -r .base00 ${theme})
+  #  COLOR="#"$COLOR
+  #  ${pkgs.imagemagick}/bin/magick convert -size 1x1 xc:$COLOR $out
+  #'';
+  wallpaper = config.lib.stylix.pixel "base0A";
   nfonts = pkgs.nerdfonts.override {fonts = ["FiraCode" "FiraMono"];};
 in {
   fonts = {
@@ -46,7 +47,9 @@ in {
     };
   };
   stylix = {
+    # TODO: replace with https://github.com/danth/stylix/blob/master/stylix/pixel.nix
     image = wallpaper;
+    #image = config.lib.stylix.pixel "base0A";
     base16Scheme = theme;
     polarity = "dark";
     fonts = {};

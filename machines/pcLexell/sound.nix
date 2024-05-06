@@ -14,6 +14,7 @@
   ...
 }: let
   mutespeaker = pkgs.writeShellScriptBin "mutespeaker" (builtins.readFile ./mutespeaker.sh);
+  constants = import ./constants.nix;
 in {
   imports = [
     ./mpd.nix
@@ -29,10 +30,17 @@ in {
 
   environment.systemPackages = with pkgs; [
     mutespeaker
+    moc
   ];
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+
+  #home-manager.users."${constants.MainUser}" = {
+  #  programs = {
+  #    mocp.enable = true;
+  #  };
+  #};
 
   systemd.user.services = {
     mutespeaker = {

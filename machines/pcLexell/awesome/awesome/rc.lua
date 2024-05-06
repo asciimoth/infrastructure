@@ -65,7 +65,7 @@ end
 -- }}}
 
 -- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
+-- Themes define colours, icons, font, etc
 beautiful.init(gears.filesystem.get_themes_dir() .. "mytheme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
@@ -176,7 +176,7 @@ local tasklist_buttons = gears.table.join(
 
 local function set_wallpaper(s)
     -- Wallpaper
-    -- beautiful.wallpaper = false
+    --beautiful.wallpaper = false
     if beautiful.wallpaper then
         local wallpaper = beautiful.wallpaper
         -- If wallpaper is a function, call it with the screen
@@ -185,8 +185,9 @@ local function set_wallpaper(s)
         end
         gears.wallpaper.maximized(wallpaper, s, true)
     else
-    gears.wallpaper.set(beautiful.bg_normal)
+        gears.wallpaper.set(beautiful.bg_normal)
     end
+    --gears.wallpaper.set(beautiful.bg_normal)
 end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)

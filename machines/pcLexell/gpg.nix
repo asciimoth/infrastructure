@@ -32,7 +32,7 @@ in {
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
-    pinentryFlavor = "qt";
+    pinentryPackage = pkgs.pinentry-qt;
   };
 
   environment.shellAliases = {

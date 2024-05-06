@@ -1,8 +1,14 @@
+from sys import argv
 import json
-import sys
 import re
 
-STEP = 0x05
+
+# args: b16_theme_file colorstep
+
+def get_default(l, i, d):
+    if i < len(l):
+        return l[i]
+    return d
 
 def read(path):
     with open(path) as f:
@@ -12,28 +18,15 @@ def write(path, text):
     with open(path, "w") as f:
         f.write(text)
 
-def read_theme(file):
+def parse_theme(txt):
     ret = {}
-    parsed = json.loads(read(file))
+    parsed = json.loads(txt)
+    if "palette" in parsed:
+        parsed = parsed["palette"]
     for key in parsed:
         value = parsed[key]
         if key.startswith("base"):
             ret[key] = "#"+str(value) 
-    return ret
-
-def extend_theme(theme):
-    ret = theme.copy()
-    for key in theme:
-        value = theme[key]
-        if key.startswith("base"):
-            code = value[1:]
-            red = code[0:2] 
-            green = code[2:4]
-            blue = code[4:6]
-            ret[key+"-hex-r"] = red
-            ret[key+"-hex-g"] = green
-            ret[key+"-hex-b"] = blue
-            ret[key+"-hex"] = code
     return ret
 
 def mustache(template, subs):
@@ -54,6 +47,26 @@ def mustache(template, subs):
         template = template[:mtch[0]] + value + template[mtch[1]:]
     return template
 
+# For each baseXX theme creates
+# 1. baseXX-hex with same value
+# 2. baseXX-hex-r with only red componenet
+# 3. baseXX-hex-g with only green componenet
+# 4. baseXX-hex-b with only blue componenet
+def extend_theme(theme):
+    ret = theme.copy()
+    for key in theme:
+        value = theme[key]
+        if key.startswith("base"):
+            code = value[1:]
+            red = code[0:2] 
+            green = code[2:4]
+            blue = code[4:6]
+            ret[key+"-hex-r"] = red
+            ret[key+"-hex-g"] = green
+            ret[key+"-hex-b"] = blue
+            ret[key+"-hex"] = code
+    return ret
+
 def increase(color, step):
     red = (color & 0xff0000) >> 0x10
     green = (color & 0x00ff00) >> 0x8
@@ -68,13 +81,13 @@ def increase(color, step):
     color = color | blue
     return color
 
-def brighter(color, step = STEP):
+def brighter(color, step):
     if isinstance(color, int):
         return increase(color, step)
     else:
         return "#"+hex(increase(int(color[1:].lower(), 16), step))[2:]
 
-def brighter_compare(basics, step = STEP):
+def brighter_compare(basics, step):
     nom = 0
     def next(color):
         nonlocal nom
@@ -86,65 +99,86 @@ def brighter_compare(basics, step = STEP):
         return ret
     return next
 
+def main():
+    b16_theme_file = argv[1]
+    colorstep = int(get_default(argv, 2, "0x05"), 16)
+    output_file = get_default(argv, 4, None)
+    mustache_template = get_default(argv, 3, None)
+    theme = parse_theme(read(b16_theme_file))
+    theme = extend_theme(theme)
+    basic   = [
+        theme["base00"],
+        theme["base08"],
+        theme["base0B"],
+        theme["base0A"],
+        theme["base0D"],
+        theme["base0E"],
+        theme["base0C"],
+        theme["base05"]
+    ]
+    brights = [
+        theme["base03"],
+        theme["base08"],
+        theme["base0B"],
+        theme["base0A"],
+        theme["base0D"],
+        theme["base0E"],
+        theme["base0C"],
+        theme["base07"]
+    ]
+    comp = brighter_compare(basic, colorstep)
+    brights = list(map(comp, brights))
+    theme = {**theme, **extend_theme({
+        "base-bright0": brights[0],
+        "base-bright1": brights[1],
+        "base-bright2": brights[2],
+        "base-bright3": brights[3],
+        "base-bright4": brights[4],
+        "base-bright5": brights[5],
+        "base-bright6": brights[6],
+        "base-bright7": brights[7],
+    })}
+    outTheme = {"colors": {
+        "ansi": basic,
+        "brights": brights,
+        "background": theme["base00"],
+        "cursor_bg": theme["base05"],
+        "cursor_fg": theme["base00"],
+        "compose_cursor": theme["base06"],
+        "foreground": theme["base05"],
+        "scrollbar_thumb": theme["base01"],
+        "selection_bg": theme["base05"],
+        "selection_fg": theme["base00"],
+        "split": theme["base03"],
+        "visual_bell": theme["base09"],
+        "tab_bar": {
+            "background": theme["base01"],
+            "inactive_tab_edge": theme["base01"],
+            "active_tab": {
+              "bg_color": theme["base03"],
+              "fg_color": theme["base05"],
+            },
+            "inactive_tab": {
+              "bg_color": theme["base00"],
+              "fg_color": theme["base05"],
+            },
+            "inactive_tab_hover": {
+              "bg_color": theme["base05"],
+              "fg_color": theme["base00"],
+            },
+            "new_tab": {
+              "bg_color": theme["base00"],
+              "fg_color": theme["base05"],
+            },
+            "new_tab_hover": {
+              "bg_color": theme["base05"],
+              "fg_color": theme["base00"],
+            },
+        }
+    }}
+    print(json.dumps(outTheme))
+    write(output_file, mustache(read(mustache_template), theme))
 
-theme = read_theme(sys.argv[1])
-theme = extend_theme(theme)
-locals().update(theme)
 
-basic   = [base00, base08, base0B, base0A, base0D, base0E, base0C, base05]
-brights = [base03, base08, base0B, base0A, base0D, base0E, base0C, base07]
-brights = list(map(brighter_compare(basic), brights))
-
-theme = {**theme, **extend_theme({
-    "base-bright0": brights[0],
-    "base-bright1": brights[1],
-    "base-bright2": brights[2],
-    "base-bright3": brights[3],
-    "base-bright4": brights[4],
-    "base-bright5": brights[5],
-    "base-bright6": brights[6],
-    "base-bright7": brights[7],
-})}
-
-outTheme = {"colors": {
-    "ansi": basic,
-    "brights": brights,
-    "background": base00,
-    "cursor_bg": base05,
-    "cursor_fg": base00,
-    "compose_cursor": base06,
-    "foreground": base05,
-    "scrollbar_thumb": base01,
-    "selection_bg": base05,
-    "selection_fg": base00,
-    "split": base03,
-    "visual_bell": base09,
-    "tab_bar": {
-        "background": base01,
-        "inactive_tab_edge": base01,
-        "active_tab": {
-          "bg_color": base03,
-          "fg_color": base05,
-        },
-        "inactive_tab": {
-          "bg_color": base00,
-          "fg_color": base05,
-        },
-        "inactive_tab_hover": {
-          "bg_color": base05,
-          "fg_color": base00,
-        },
-        "new_tab": {
-          "bg_color": base00,
-          "fg_color": base05,
-        },
-        "new_tab_hover": {
-          "bg_color": base05,
-          "fg_color": base00,
-        },
-    }
-}}
-
-print(json.dumps(outTheme))
-
-write(sys.argv[3], mustache(read(sys.argv[2]), theme))
+if __name__ == "__main__":
+    main()

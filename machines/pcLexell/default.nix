@@ -134,9 +134,9 @@ in {
       defaultNetwork.settings.dns_enabled = true;
       autoPrune.enable = true;
       #defaultNetwork.settings.dns_enabled = true;
-      enableNvidia = true; # Enable use of NVidia GPUs from within containers
       #extraOptions = "--iptables=false"; # Makes shure that Podman/Docker doesn't alter the firewall
     };
+    containers.cdi.dynamic.nvidia.enable = true;
   };
 
   nixpkgs.config.permittedInsecurePackages = [
@@ -150,7 +150,7 @@ in {
   environment.systemPackages = with pkgs; [
     htop
     btop
-    nvtop
+    nvtopPackages.full
     glances
     age
     rage
@@ -235,7 +235,25 @@ in {
 
     # Drawing
     krita
+    inkscape
     xournal
+
+    skrooge
+    libreoffice-fresh
+
+    iperf2
+    inetutils
+
+    uget
+
+    # Ai
+    llama-cpp
+    ollama
+    # Term clients
+    oterm # Ollama terminal client
+    aichat # Terminal frontend for ollama, ChatGPT, etc
+    gpt4all
+    jan # Jan is an open source alternative to ChatGPT that runs 100% offline on your computer
   ];
 
   console = {
