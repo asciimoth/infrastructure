@@ -40,8 +40,9 @@ in {
     # https://code.visualstudio.com/docs/setup/network#_common-hostnames
     extraHosts = ''
       78.153.130.171 hearty-health
-      192.168.1.141 pipebomb.local
+      100.83.35.101 pinas
     '';
+    # 192.168.1.141 pinas
     # 192.168.1.141 pipebomb.local
     # 100.66.72.81 pipebomb.local
     firewall = {
@@ -53,8 +54,8 @@ in {
       trustedInterfaces = lib.mkForce ["lo"]; #open all ports on localhost
       #extraCommands = "ip6tables -A INPUT -s fe80::/10 -j ACCEPT";
     };
-    #nameservers = ["8.8.8.8"];
-    nameservers = ["127.0.0.1" "::1"];
+    nameservers = ["8.8.8.8"];
+    #nameservers = ["127.0.0.1" "::1"];
   };
 
   services.dnscrypt-proxy2 = {

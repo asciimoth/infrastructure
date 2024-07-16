@@ -94,6 +94,7 @@ in {
           "sound"
           "video"
           "docker"
+          "fuse"
           #"input"
           #"tty"
           "power" # For shutdown/reboot immideatly without sudo
@@ -246,6 +247,22 @@ in {
 
     uget
 
+    # Typing traning
+    #smassh
+    typespeed
+    #gtypist
+    #typer
+    #ttyper
+    #toipe
+    #klavaro
+    #typioca
+    #amphetype
+    #tipp10
+    #wpm
+    #thokr
+
+    unzip
+
     # Ai
     llama-cpp
     ollama
@@ -254,6 +271,7 @@ in {
     aichat # Terminal frontend for ollama, ChatGPT, etc
     gpt4all
     jan # Jan is an open source alternative to ChatGPT that runs 100% offline on your computer
+    zathura
   ];
 
   console = {
@@ -273,7 +291,7 @@ in {
     home.file.".config/micro/settings.json".source = ./micro/settings.json;
     home.file.".config/micro/bindings.json".source = ./micro/bindings.json;
     programs = {
-      zathura.enable = true;
+      zathura.enable = false;
     };
   };
 
@@ -299,12 +317,12 @@ in {
 
   # Need for faster builds
   documentation = {
-    dev.enable = false;
-    doc.enable = false;
-    info.enable = false;
+    dev.enable = true;
+    doc.enable = true;
+    info.enable = true;
     man = {
-      enable = false;
-      man-db.enable = false;
+      enable = true;
+      man-db.enable = true;
     };
   };
 

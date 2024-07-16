@@ -231,6 +231,7 @@ in {
       nixpkgs-fmt
       nixd
       vimgolf
+      helix
     ];
     shellAliases = {
       code = "codium";

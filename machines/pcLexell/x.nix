@@ -26,7 +26,8 @@ in {
       exportConfiguration = true;
       libinput.enable = true;
       xkb.layout = "us,ru";
-      xkb.options = "grp:shifts_toggle";
+      xkb.options = "grp:caps_toggle";
+      #xkb.options = "grp:shifts_toggle";
       dpi = 141; #https://dpi.lv/
       displayManager = {
         lightdm.enable = lib.mkForce false;

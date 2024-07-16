@@ -217,5 +217,5 @@ end
 
 string match -q "$TERM_PROGRAM" "vscode"
 and . (codium --locate-shell-integration-path fish)
-
+#nas pinas
 

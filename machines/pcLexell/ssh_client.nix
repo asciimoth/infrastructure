@@ -12,7 +12,9 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  constants = import ./constants.nix;
+in {
   programs.ssh = {
     knownHostsFiles = [
       ../../known_hosts
@@ -20,6 +22,51 @@
     extraConfig = ''
       Host hearty-health
           User toast
+      Host nas
+          HostName pinas
+          IdentityFile /home/${constants.MainUser}/.ssh/pinas_id
+          IdentitiesOnly yes
     '';
   };
+  environment.systemPackages = with pkgs; [sshfs];
+  #fileSystems."/home/${constants.MainUser}/nas_priv" = {
+  #  device = "sftp${constants.MainUser}@pinas:/${constants.MainUser}";
+  #  fsType = "sshfs";
+  #  options =
+  #    [ # Filesystem options
+  #      "allow_other"          # for non-root access
+  #      "default_permissions"
+  #      "user"
+  #      "idmap=user"
+  #      "follow_symlinks"
+  #      "uid=1000"
+  #      "_netdev"              # this is a network fs
+  #      "x-systemd.automount"  # mount on demand
+  #     # SSH options
+  #      "reconnect"              # handle connection drops
+  #      "ServerAliveInterval=15" # keep connections alive
+  #      "IdentityFile=/etc/pinas_id"
+  #      #"subdir=${constants.MainUser}"
+  #    ];
+  #};
+  #fileSystems."/home/${constants.MainUser}/nas_shared" = {
+  #  device = "sftpshared@pinas:/shared";
+  #  fsType = "sshfs";
+  #  options =
+  #    [ # Filesystem options
+  #      "allow_other"          # for non-root access
+  #      "default_permissions"
+  #      "user"
+  #      "idmap=user"
+  #      "follow_symlinks"
+  #      "uid=1000"
+  #      "_netdev"              # this is a network fs
+  #      "x-systemd.automount"  # mount on demand
+  #     # SSH options
+  #      "reconnect"              # handle connection drops
+  #      "ServerAliveInterval=15" # keep connections alive
+  #      "IdentityFile=/etc/pinas_id"
+  #      #"subdir=${constants.MainUser}"
+  #    ];
+  #};
 }

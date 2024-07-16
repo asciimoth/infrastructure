@@ -21,8 +21,17 @@
   volume = pkgs.writeShellScriptBin "volume" (builtins.readFile ./volume.sh);
   bright = pkgs.writeShellScriptBin "bright" (builtins.readFile ./bright.sh);
   arraydedup = pkgs.writeShellScriptBin "arraydedup" (builtins.readFile ./arraydedup.sh);
+  restarter = pkgs.writeShellScriptBin "restarter" (builtins.readFile ./restarter.sh);
   printlogo = pkgs.writeShellScriptBin "printlogo" ''
     cat ${nixlogo} | aligner -b $@
+  '';
+  nas = pkgs.writeShellScriptBin "nas" ''
+    set -o noclobber -o noglob -o nounset -o pipefail
+    if [[ "$1 is a mountpoint" == "$(mountpoint $1)" ]]; then
+      exit 0
+    fi
+    echo "mounting $1"
+    sshfs $1:/ $HOME/$1 -C -o idmap=user -o "ssh_command=ssh -i $HOME/.ssh/$1_id"
   '';
   where = pkgs.writeShellScriptBin "where" (builtins.readFile ./where.sh);
   uclip = pkgs.writeShellScriptBin "uclip" ''
@@ -221,6 +230,20 @@ in {
     ll = "${myexa}/bin/exa --oneline -L -T -F --group-directories-first -l --icons";
     la = "${myexa}/bin/exa --oneline -L -T -F --group-directories-first -la --icons";
     l = "${myexa}/bin/exa --oneline -L -T -F --group-directories-first --icons";
+    md = "mkdir";
+    #~ = "cd ~";
+    projects = "cd ~/projects";
+    v = "restarter nvim";
+    vc = "cd ~/.config/nvim && restarter nvim init.lua"; # Vim config
+
+    # Git
+    g = "git";
+    gi = "git init";
+    gip = "cd ~/projects && git init";
+    ga = "git add .";
+    gc = "git commit -am";
+    gac = "git add . && git commit -am";
+    gp = "git push";
 
     # Etc
     whereis = "where";
@@ -313,5 +336,7 @@ in {
     myexa
     arraydedup
     unfree
+    nas
+    restarter
   ];
 }
