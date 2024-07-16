@@ -70,6 +70,29 @@
             stateVersion = "23.11";
           };
         };
+      # Laptop used as VPN router
+      istvaan = let
+        system = "x86_64-linux";
+        pkgs = import nixpkgs {inherit system;};
+      in
+        nixpkgs.lib.nixosSystem {
+          modules = [
+            ./machines/istvaan
+            home-manager.nixosModules.home-manager
+            nur.nixosModules.nur
+            sops-nix.nixosModules.sops
+            {
+              nixpkgs.overlays = [nur.overlay];
+              _module.args.master = import inputs.master {inherit (pkgs.stdenv.targetPlatform) system;};
+              _module.args.stable = import inputs.stable {inherit (pkgs.stdenv.targetPlatform) system;};
+            }
+          ];
+          specialArgs = {
+            inherit inputs;
+            hostname = "istvaan";
+            stateVersion = "23.11";
+          };
+        };
     };
     # idk why I use two devShells for x86 and aarh instead of one crossplatform
     # I just copy-paste this template from somewhere
