@@ -81,7 +81,7 @@ in {
           "networkmanager"
           #"vboxusers"
         ];
-        #hashedPassword = "$6$ORI3ESpCJxOGlGYG$ophduthBXVVkUU7SOAZoWD.OuhyUPzJ07ZyoccH2Sc9.Ef45MJfUG9HBcO8KEgKhmi4h9ZcSdyHmRXrNGdmaH0";
+        hashedPassword = "$6$RA/nDk6DCG8Yw27q$u6p47jv5e3LP/IUp.KUi8WdB5Zb92F257gDRcKonGU8aD3jUEnVNQF1uZf4md9tdydrlVMm2Zo5CQK5p7l/Wu/";
       };
     };
   };
