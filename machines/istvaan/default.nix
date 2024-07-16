@@ -89,6 +89,7 @@ in {
   security = {
     sudo = {
       enable = true;
+      wheelNeedsPassword = false;
       configFile = ''
         %wheel ALL=(ALL) ALL
       '';
