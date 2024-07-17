@@ -135,4 +135,9 @@ in {
       ExecStart = "${meshnamed}/bin/meshnamed -listenaddr 127.0.0.1:5353";
     };
   };
+
+  services.tor = {
+    enable = true;
+    client.enable = true;
+  };
 }
