@@ -185,4 +185,27 @@ in {
     text = "${constants.MainUser} ${constants.ConfigRoot}";
     mode = "744";
   };
+
+  services.tor = {
+    enable = true;
+    relay.onionServices = {
+      ssh = {
+        version = 3;
+        map = [
+          {
+            port = 22;
+            target = {
+              addr = "127.0.0.1";
+              port = 22;
+            };
+          }
+        ];
+      };
+    };
+    settings = {
+      #ClientUseIPv4 = false;
+      #ClientUseIPv6 = true;
+      #ClientPreferIPv6ORPort = true;
+    };
+  };
 }
