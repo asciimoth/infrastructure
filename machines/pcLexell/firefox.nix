@@ -92,7 +92,7 @@ in {
           #"browser.search.openintab" = true;
 
           # Set theme
-          #"extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
+          "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
 
           # Alfis, I2P, tor TLD's
           "browser.fixup.domainsuffixwhitelist.mirror" = true;

@@ -18,7 +18,7 @@
     };
     nur = {
       url = "github:nix-community/NUR";
-      #inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
       url = "github:danth/stylix";
@@ -71,6 +71,7 @@
           };
         };
       # Laptop used as VPN router
+      /*
       istvaan = let
         system = "x86_64-linux";
         pkgs = import nixpkgs {inherit system;};
@@ -93,6 +94,7 @@
             stateVersion = "23.11";
           };
         };
+      */
     };
     # idk why I use two devShells for x86 and aarh instead of one crossplatform
     # I just copy-paste this template from somewhere

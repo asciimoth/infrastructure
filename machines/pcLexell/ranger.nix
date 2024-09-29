@@ -77,7 +77,7 @@ in {
     exiftool
     mupdf
     poppler_utils
-    transmission
+    #transmission4
     jq
     pandoc
     djvulibre

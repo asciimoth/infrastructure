@@ -20,7 +20,7 @@ in {
     ./mpd.nix
   ];
 
-  sound.enable = true;
+  #sound.enable = true; # Deprecated
   services.pipewire = {
     enable = true;
     alsa.enable = true;

@@ -65,7 +65,7 @@ in {
 
   networking.hostName = hostname;
 
-  nix.package = pkgs.nixUnstable;
+  nix.package = pkgs.nixVersions.latest;
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
@@ -137,18 +137,19 @@ in {
       #defaultNetwork.settings.dns_enabled = true;
       #extraOptions = "--iptables=false"; # Makes shure that Podman/Docker doesn't alter the firewall
     };
-    containers.cdi.dynamic.nvidia.enable = true;
   };
 
   nixpkgs.config.permittedInsecurePackages = [
     "python3.10-certifi-2022.12.7"
     "electron-25.9.0"
-    "openssl-1.1.1w" # For sublime text
+    # "openssl-1.1.1w" # For sublime text
+    "olm-3.2.16"
   ];
 
   boot.supportedFilesystems = ["ntfs"];
 
   environment.systemPackages = with pkgs; [
+    alacritty
     htop
     btop
     nvtopPackages.full
@@ -168,6 +169,8 @@ in {
     alejandra
 
     nix-tree
+
+    smartmontools
 
     tmate
     thefuck
@@ -313,7 +316,10 @@ in {
     memoryPercent = 50;
   };
 
-  hardware.ksm.enable = true;
+  hardware = {
+    ksm.enable = true;
+    nvidia-container-toolkit.enable = true;
+  };
 
   # Need for faster builds
   documentation = {

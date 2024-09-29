@@ -20,11 +20,12 @@ in {
   ];
 
   services = {
+    libinput.enable = true;
     xserver = {
       enable = true;
       autorun = false;
       exportConfiguration = true;
-      libinput.enable = true;
+      #libinput.enable = true;
       xkb.layout = "us,ru";
       xkb.options = "grp:caps_toggle";
       #xkb.options = "grp:shifts_toggle";
@@ -36,6 +37,8 @@ in {
         #  enable = true;
         #  user = "moth";
         #};
+        sessionCommands = ''
+        '';
       };
       videoDrivers = [
         "nvidia"
@@ -59,10 +62,10 @@ in {
   };
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      #driSupport = true; # Deprecated
+      enable32Bit = true;
       #extraPackages = with pkgs; [
       #  vaapiVdpau
       #  libvdpau-va-gl
@@ -71,7 +74,7 @@ in {
       #setLdLibraryPath = true;
     };
     nvidia = {
-      #open = false;
+      open = true;
       modesetting.enable = true;
       nvidiaSettings = true;
       #forceFullCompositionPipeline = true;
