@@ -45,11 +45,11 @@ in {
           auto-tab-discard
         ];
         # Custom CSS
-        userChrome = ''
-          #TabsToolbar {
-            visibility: collapse;
-          }
-        '';
+        # userChrome = ''
+        #   #TabsToolbar {
+        #     visibility: collapse;
+        #   }
+        # '';
         settings = {
           # Disable "about:config" warn
           "browser.aboutConfig.showWarning" = false;

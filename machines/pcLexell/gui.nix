@@ -14,12 +14,6 @@
   ...
 }: let
   constants = import ./constants.nix;
-  wezterm-desktop = pkgs.makeDesktopItem {
-    name = "wezterm";
-    desktopName = "wezterm";
-    exec = "${pkgs.wezterm}/bin/wezterm";
-    terminal = false;
-  };
   copyscreen = pkgs.writeShellScriptBin "copyscreen" ''
     TMPFILE="/tmp/copyscreen-$(${pkgs.openssl}/bin/openssl rand 40 | base32).png"
     ${pkgs.flameshot}/bin/flameshot gui -r > $TMPFILE
@@ -81,8 +75,8 @@ in {
           desktop = "ranger";
         };
         terminal = {
-          cmd = "${pkgs.wezterm}/bin/wezterm";
-          desktop = "WezTerm";
+          cmd = "${pkgs.alacritty}/bin/alacritty";
+          desktop = "";
         };
       };
     in {
@@ -138,11 +132,7 @@ in {
       rofi = {
         enable = true;
         font = lib.mkForce "FiraCode Nerd Font Mono 14";
-        #terminal = "wezterm";
-      };
-      wezterm = {
-        enable = true;
-        extraConfig = builtins.readFile ./wezTerm.lua;
+        terminal = "alacritty";
       };
     };
     home.packages = [
@@ -150,8 +140,8 @@ in {
     ];
     home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
     home.sessionVariables = {
-      TERMINAL = "wezterm";
-      TERM = "wezterm";
+      TERMINAL = "alacritty";
+      TERM = "alacritty";
     };
   };
 }

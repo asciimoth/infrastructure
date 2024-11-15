@@ -47,8 +47,8 @@
     rm -rf $TMPDIR
   '';
   oneshot-chromium-desktop = pkgs.makeDesktopItem {
-    name = "Chromium";
-    desktopName = "Chromium";
+    name = "OneshotChromium";
+    desktopName = "OneshotChromium";
     exec = "${oneshot-chromium-ungoogled}/bin/oneshot-chromium-ungoogled";
     terminal = false;
   };
@@ -57,5 +57,6 @@ in {
     oneshot-chromium-ungoogled
     oneshot-chromium
     oneshot-chromium-desktop
+    ungoogled-chromium
   ];
 }

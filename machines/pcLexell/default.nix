@@ -149,6 +149,11 @@ in {
   boot.supportedFilesystems = ["ntfs"];
 
   environment.systemPackages = with pkgs; [
+    luajitPackages.jsregexp
+    gh
+    zoxide
+    skim
+    fd
     alacritty
     htop
     btop
@@ -265,6 +270,8 @@ in {
     #thokr
 
     unzip
+
+    goxel
 
     # Ai
     llama-cpp

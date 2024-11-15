@@ -25,7 +25,7 @@
   fishThemeTemplate = pkgs.writeText "fishThemeTemplate" (builtins.readFile ./fish.mustache);
   terminalTheme = pkgs.runCommand "terminalThemeBuilder" {} ''
     mkdir $out
-    ${pkgs.python312}/bin/python ${terminalThemeBuilderPy} ${jsonTheme} 0x05 ${fishThemeTemplate} $out/theme.fish | ${pkgs.remarshal}/bin/remarshal --if json --of toml > $out/wezterm
+    ${pkgs.python312}/bin/python ${terminalThemeBuilderPy} ${jsonTheme} 0x05 ${fishThemeTemplate} $out/theme.fish
   '';
   #wallpaper = pkgs.runCommand "image.png" {} ''
   #  COLOR=$(${pkgs.yq}/bin/yq -r .base00 ${theme})
@@ -67,6 +67,5 @@ in {
   home-manager.users."${constants.MainUser}".home.file = {
     ".b16theme.yaml".source = yamlTheme;
     ".b16theme.json".source = jsonTheme;
-    ".config/wezterm/colors/custom.toml".source = "${terminalTheme}/wezterm";
   };
 }

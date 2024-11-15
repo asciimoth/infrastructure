@@ -219,3 +219,7 @@ string match -q "$TERM_PROGRAM" "vscode"
 and . (codium --locate-shell-integration-path fish)
 #nas pinas
 
+zoxide init fish | source
+
+cat $HOME/.config/nvim/shell/intergration.fish | source
+
