@@ -1,3 +1,6 @@
+I live NixOS due to bad security practices in nixpkgs and regular drama.  
+But anyway nix itself is still the best tool for dev env management.
+-----------
 <h1 align="center">
   ASCIIMoth's infrastructure 
 </h1>
